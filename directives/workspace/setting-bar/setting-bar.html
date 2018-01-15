@@ -1,0 +1,17 @@
+<div class="list-reporting">
+    <ul class="nav navbar-nav">
+        <li ng-click="vm.showReportList()">
+            <a href="#">
+                <i class="fa fa-list-ol" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li ng-click="vm.saveReportJsonModal()">
+            <a href="#">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="settingBarModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="dive" ng-include="vm.template"></div>
+</div>

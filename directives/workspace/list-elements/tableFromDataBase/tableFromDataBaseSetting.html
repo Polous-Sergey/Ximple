@@ -1,0 +1,150 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="gridSystemModalLabel">Columns table</h4>
+        </div>
+        <div class="modal-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#DataSetColumns" aria-controls="home" role="tab"
+                                                          data-toggle="tab">Columns</a></li>
+                <li role="presentation"><a href="#DataSetFilters" aria-controls="profile" role="tab" data-toggle="tab">Filters</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="DataSetColumns">
+                    <!--<ul class="list-group">-->
+                        <!--<li class="list-group-item" ng-repeat="row in vm.tableColumns">{{row.columnName}}</li>-->
+                    <!--</ul>-->
+                    <table class="table table-hover">
+                        <tr>
+                            <th class="col-sm-1">Position</th>
+                            <th class="col-sm-4">Selected</th>
+                            <th class="col-sm-7">Name</th>
+                        </tr>
+                        <tr ng-repeat="row in vm.tableColumns">
+                            <td>
+                                <div class="position-container">
+                                    <div class="up-position" ng-click="vm.upRowPosition($index)" ng-hide="$first">
+                                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="down-position" ng-click="vm.downRowPosition($index)" ng-hide="$last">
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td ng-click="row.selected = !row.selected">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="row.selected"> Selected row
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="margin-bottom: 0">
+                                    <input type="text" class="form-control" id="exampleInputEmail3"
+                                           ng-model="row.displayName">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="container-button-select-all">
+                        <button type="button" ng-click="vm.selectAllRow()" class="btn btn-default">Select All</button>
+                        <button type="button" ng-click="vm.selectNoneRow()" class="btn btn-default">Select None</button>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="DataSetFilters">
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-sm-8">
+                            <div class="form-group form-group-sm col-sm-6">
+                                <label class="control-label">Rows</label>
+
+                                <select class="form-control input-sm"
+                                        ng-init="vm.dataSetFilters.curentFilter.expression = vm.tableColumns[0].columnName"
+                                        ng-model="vm.dataSetFilters.curentFilter.expression"
+                                        ng-options="row.columnName as  row.columnName for row in vm.tableColumns">
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-sm-6">
+                                <label class="control-label">Operator</label>
+                                <select class="form-control input-sm"
+                                        ng-init="vm.dataSetFilters.curentFilter.operation = vm.dataSetFilters.filterList"
+                                        ng-model="vm.dataSetFilters.curentFilter.operation"
+                                        ng-options="operation for operation in vm.dataSetFilters.filterList"
+                                        ng-change="vm.dataSetFilters.changeOperator()">
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-sm-12">
+                                <button type="button" class="btn btn-primary btn-block" ng-click="vm.dataSetFilters.addFilter()">Add
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" ng-if="vm.dataSetFilters.flagTemplateValue === 0">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">Value</label>
+                                <input class="form-control" type="text"
+                                       ng-model="vm.dataSetFilters.curentFilter.firstPropertyList[0]"
+                                       placeholder="Value 1">
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <input class="form-control" type="text"
+                                       ng-model="vm.dataSetFilters.curentFilter.secondPropertyList[0]"
+                                       placeholder="Value 2">
+                            </div>
+                        </div>
+                        <div class="col-sm-4" ng-if="vm.dataSetFilters.flagTemplateValue === 1">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">Value</label>
+                                <input class="form-control" type="text"
+                                       ng-model="vm.dataSetFilters.tempFirstFilter"
+                                       placeholder="Value">
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <button type="button" class="btn btn-default" ng-click="vm.dataSetFilters.addInValue()">
+                                    Add value
+                                </button>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item"
+                                    ng-repeat="item in vm.dataSetFilters.curentFilter.firstPropertyList track by $index">
+                                    {{item}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="vm.dataSetFilters.filters.length > 0">
+                        <table class="table">
+                            <caption>List of filters</caption>
+                            <thead>
+                            <tr>
+                                <th>Expression</th>
+                                <th>Operator</th>
+                                <th>Value 1</th>
+                                <th>Value 2</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="filter in vm.dataSetFilters.filters track by $index">
+                                <th>{{filter.expression}}</th>
+                                <td>{{filter.operation}}</td>
+                                <td>{{filter.firstPropertyList}}</td>
+                                <td>{{filter.secondPropertyList}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.backPopup(1)">Back
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="vm.createTableFromDataBase()">Finish</button>
+            </div>
+        </div>
+    </div>
+</div>

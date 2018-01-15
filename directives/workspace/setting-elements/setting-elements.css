@@ -1,0 +1,94 @@
+.setting-element-container{
+    width: 300px;
+    background: #c9c9c9;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+.container-style-manipulated{
+    padding:10px;
+}
+
+.setting-element-container .panel-heading{
+    cursor: pointer;
+}
+.setting-element-container .header-setting-element{
+    line-height: 53px;
+    padding: 0 20px 0;
+    text-align: center;
+    margin: 0;
+    font-size: 20px;
+    cursor: default;
+    background: #ccc;
+    background: -webkit-linear-gradient(left, #DDD, #BBB); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, #DDD, #BBB); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left, #DDD, #BBB); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(left, #DDD, #BBB); /* Standard syntax */
+}
+/*.margin-block h4,*/
+/*.padding-block h4{*/
+    /*margin-top: 15px;*/
+    /*text-align: center;*/
+    /*font-weight: 700;*/
+/*}*/
+.setting-element-container .panel-body{
+    padding: 10px;
+}
+.setting-element-container input[type='number']{
+    padding: 0 0 0 5px;
+}
+.font-align-block > .row{
+    margin: 0;
+}
+.element-border-block .row{
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+.element-border-block .btn{
+    display: block;
+    padding: 6px;
+}
+.element-border-block .dropdown-toggle{
+    width: 60px;
+}
+.element-border-block .border-span{
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px dotted #224367;
+}
+.element-border-block .top-border{
+    border-top: 2px solid;
+}
+.element-border-block .right-border{
+    border-right: 2px solid;
+}
+.element-border-block .bottom-border{
+    border-bottom: 2px solid;
+}
+.element-border-block .left-border{
+     border-left: 2px solid;
+ }
+
+.button-color-background{
+    padding: 6px 0;
+}
+
+.gridRow .form-control,
+.gridColumn .form-control
+{
+    text-align: center;
+}
+
+.element-border-block > .row > .col-sm-4,
+.element-border-block > .row > .col-sm-3,
+.element-border-block > .row > .col-sm-2
+{
+    padding: 0;
+}
+.element-border-block .btn-border{
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}

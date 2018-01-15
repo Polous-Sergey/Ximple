@@ -1,0 +1,53 @@
+<div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="gridSystemModalLabel">Join tables</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-sm-12">
+                        <label>Tables: </label>
+                        <select class="form-control"
+                                ng-model="vm.joinDataSet.firstTable"
+                                ng-options="option as option.tableName for option in vm.fromJoinTablesList"
+                                ng-change="vm.getColumnsJoinTable(vm.joinDataSet.firstTable,'first')">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-sm-12">
+                        <label>Tables: </label>
+                        <select class="form-control"
+                                ng-model="vm.joinDataSet.secondTable"
+                                ng-change="vm.getColumnsJoinTable(vm.joinDataSet.secondTable, 'second')"
+                                ng-options="option.tableName for option in vm.toJoinTablesList">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-offset-3 col-sm-6 columns-join">
+                    <div class="col-sm-12">
+                        <ul class="list-group">
+                            <li ng-click="vm.changeJoinColumn($index)"
+                                ng-class="row.joinColumn === vm.joinDataSet.selectFirstColumn ? 'active': ''"
+                                class="list-group-item"
+                                ng-repeat="row in vm.columnsJoin">
+                                <h4><span class="label label-default">{{row.joinColumn}}</span><i class="fa fa-angle-double-right" aria-hidden="true"></i><span class="label label-default">{{row.inverseJoinColumn}}</span></h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button"
+                    ng-disabled="vm.joinDataSet.selectFirstColumn === null || vm.joinDataSet.selectSecondColumn === null"
+                    class="btn btn-primary" ng-click="vm.openJoinTablesSettingPopup()">
+                Next
+            </button>
+        </div>
+    </div>
+</div>

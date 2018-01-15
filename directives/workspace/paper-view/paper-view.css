@@ -1,0 +1,84 @@
+.content-design{
+    width: 100%;
+}
+.tab-container {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 64px; /* Position the navbar at the top of the page */
+    width: calc(100% - 450px); /* Full width */
+}
+.list-tab {
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: auto;
+}
+.list-tab li {
+    line-height: 30px;
+    padding: 0 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.list-tab li i {
+    line-height: 40px;
+    margin-left: 5px;
+    color: #ddd;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.list-tab input {
+    width: 75px !important;
+    margin: 0 !important;
+    border: none !important;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.list-tab input:focus {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.list-tab .add-new-tab{
+    width: 30px;
+    height: 30px;
+    border-radius: 10%;
+}
+.list-tab .add-new-tab i{
+    line-height: 30px;
+}
+.selected-tab {
+    border-bottom: 3px solid #26A69A;
+    background: #444444;
+}
+.selected-tab input{
+    color: #fff;
+}
+
+.block-paper {
+    padding: 0px 20px;
+    /*position: absolute;*/
+    /*top: 65px;*/
+    width: 100%;
+    /*height: calc( 100vh - 139px);*/
+    height: calc( 100vh - 51px);
+    overflow-y: auto;
+}
+
+.content-paper {
+    display: block;
+    margin: auto;
+    width: 8.267in;
+    height: 11.692in;
+    background: #fff;
+    padding: 10px;
+    overflow: hidden !important;
+}
+
+
+#paperList input{
+    margin: 0;
+}

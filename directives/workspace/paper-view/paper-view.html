@@ -1,0 +1,20 @@
+<div class="content-design">
+    <!--<div class="tab-container">-->
+        <!--<ul class="list-tab scrollbar-default">-->
+            <!--<li ng-repeat="item in vm.tabsList" ng-click="vm.selectTab($index)"-->
+                <!--ng-class="item.selected ? 'selected-tab': ''">-->
+                <!--<input value="{{item.name}}" ng-blur="$event.target.readOnly = true" readonly>-->
+                <!--<i ng-click="vm.closeTab($index)" class="material-icons right">close</i>-->
+                <!--<i ng-click="vm.editName($event)" class="material-icons right">create</i>-->
+            <!--</li>-->
+            <!--<a class="btn-floating waves-effect add-new-tab" ng-click="vm.addTab()"><i class="material-icons">add</i></a>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <div class="block-paper scrollbar-default" ng-if="vm.tabsList.length > 0">
+        <div id="paperList" class="content-paper">
+            <container ng-repeat="container in vm.model.container track by $index" data-number="$index" data-model="vm.model.container" data-element="container"></container>
+            </div>
+        </div>
+    </div>
+</div>
+

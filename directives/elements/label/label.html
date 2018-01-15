@@ -1,0 +1,38 @@
+<div ng-click="vm.focusContainer(); $event.stopPropagation();" style="position: relative">
+    <button class="btn btn-default btn-delete-element" type="button"><i class="fa fa-times" aria-hidden="true"></i>
+</button>
+    <input class="label-input" ng-class="vm.element.selected ? 'selectedContainer' : ''" ng-model="vm.element.value"
+           type="text"
+           ng-style="{
+                'width':'100%',
+                'margin-top': vm.element.style['marginTop'] + 'px',
+                'margin-right': vm.element.style['marginRight'] + 'px',
+                'margin-bottom': vm.element.style['marginBottom'] + 'px',
+                'margin-left': vm.element.style['marginLeft'] + 'px',
+                'padding-top': vm.element.style['paddingTop'] + 'px',
+                'padding-right': vm.element.style['paddingRight'] + 'px',
+                'padding-bottom': vm.element.style['paddingBottom'] + 'px',
+                'padding-left': vm.element.style['paddingLeft'] + 'px',
+                'text-align': vm.element.style['textAlign'],
+                'border': vm.element.style['border'],
+                'background-color': vm.element.style['backgroundColor'],
+                'color': vm.element.style['color'],
+                'font-weight': vm.element.style['fontWeight'],
+                'font-style': vm.element.style['fontStyle'],
+                'font-size': vm.element.style['fontSize'] + vm.element.style['fontSizeUnit'],
+                'border-top-width': vm.element.style['borderTopWidth'],
+                'border-top-color': vm.element.style['borderTopColor'],
+                'border-top-style': vm.element.style['borderTopStyle'],
+                'border-right-width': vm.element.style['borderRightWidth'],
+                'border-right-color': vm.element.style['borderRightColor'],
+                'border-right-style': vm.element.style['borderRightStyle'],
+                'border-bottom-width': vm.element.style['borderBottomWidth'],
+                'border-bottom-color': vm.element.style['borderBottomColor'],
+                'border-bottom-style': vm.element.style['borderBottomStyle'],
+                'border-left-width': vm.element.style['borderLeftWidth'],
+                'border-left-color': vm.element.style['borderLeftColor'],
+                'border-left-style': vm.element.style['borderLeftStyle']}">
+</div>
+
+
+<!--class="text-box-input {{vm.element.type}}" -->

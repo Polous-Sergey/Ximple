@@ -1,0 +1,97 @@
+.container-list-elements{
+    height: 100%;
+    background: #080808;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.container-list-elements .list-elements {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+
+.container-list-elements .list-elements>li>a {
+    display: block;
+    color: #555;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 14px;
+}
+.container-list-elements .list-elements>li {
+    border-top: 1px #e5e5e5 solid;
+}
+.list-elements>li>a>.fa{
+    float: right;
+}
+/* Change the link color on hover */
+.container-list-elements .list-elements li a:hover {
+    color: #000;
+    background-color: #fff;
+}
+
+
+.container-list-elements .header-list-box {
+    line-height: 53px;
+    padding: 0 20px 0;
+    text-align: center;
+    margin: 0;
+    font-size: 20px;
+    cursor: default;
+    background: #ccc;
+    background: -webkit-linear-gradient(left, #BBB, #DDD); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, #BBB, #DDD); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left, #BBB, #DDD); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(left, #BBB, #DDD); /* Standard syntax */
+}
+
+#modal-table{
+    position: absolute;
+    top: 100px;
+    left: 50%;
+}
+
+.container-button-select-all{
+    margin-left: 25px;
+}
+.list-elements #table-element a{
+    line-height: 2em;
+    padding:5px 0 5px 25px;
+    color:#000;
+    text-decoration: none;
+    display: block;
+    border-top: 1px #e5e5e5 solid;
+}
+.list-elements #table-element a:hover{
+    color:#777;
+}
+.columns-join{
+    margin-top: 20px;
+}
+.columns-join .list-group-item{
+    cursor: pointer;
+    padding: 0 15px;
+}
+.columns-join .list-group-item > h4{
+    display: flex;
+    justify-content: space-around;
+}
+.columns-join .list-group-item > h4 > .label{
+    font-size: 100%;
+}
+.footer-list{
+    background: #ccc;
+    background: -webkit-linear-gradient(left, #BBB, #DDD); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, #BBB, #DDD); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left, #BBB, #DDD); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(left, #BBB, #DDD); 
+}
+.list-reporting > .navbar-nav a{
+    padding: 0px 10px;
+} 
+.list-reporting > .navbar-nav a> .fa{
+    line-height: 30px;
+    font-size: 20px;
+}

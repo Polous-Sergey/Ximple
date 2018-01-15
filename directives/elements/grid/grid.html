@@ -1,0 +1,25 @@
+<div class="container-grid" style="position: relative">
+    <button class="btn btn-default btn-delete-element" type="button"><i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    <div class="row-grid" ng-repeat="row in vm.element.gridStructure.rows  track by $index"
+         ng-style="{}">
+        <div class="cell-grid" ng-repeat="cell in row.cells track by $index"
+             ng-click="vm.focusContainer(cell, vm.element.gridStructure.column[$index], row, vm.element); $event.stopPropagation();"
+             tabindex="{{$index}}"
+             ng-style="
+              {'width': vm.element.gridStructure.column[$index].style['width'] +
+                        vm.element.gridStructure.column[$index].style['widthUnit'],
+               'min-height': row.style['height'] + row.style['heightUnit'],
+                'padding-top': cell.style['paddingTop'] + 'px',
+                'padding-right': cell.style['paddingRight'] + 'px',
+                'padding-bottom': cell.style['paddingBottom'] + 'px',
+                'padding-left': cell.style['paddingLeft'] + 'px'
+                }">
+            <label-block  ng-if="cell.childrens[0].type === 'label'" parent="vm.element.gridStructure.rows" data-id="cell.childrens[0].id"
+                         data-model="cell.childrens" data-element="cell.childrens[0]"></label-block>
+            <table-element ng-if="cell.childrens[0].type === 'table'" data-number="$index" data-model="cell.childrens[0]"
+                           data-element="cell.childrens[0]"></table-element>
+
+        </div>
+    </div>
+</div>

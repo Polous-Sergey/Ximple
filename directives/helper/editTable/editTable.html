@@ -1,0 +1,55 @@
+
+
+<div class="modal" id="edit-table" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">Columns table</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3><span class="label label-default">New columns</span></h3>
+                        <ul class="list-group">
+                            <li class="list-group-item column-table new-table-element"
+                                ng-repeat="item in vm.element.deleteColumns track by $index">
+                                <div class="content">
+                                    <span class="value">
+                                        {{item.displayName}}
+                                    </span>
+                                </div>
+                                <button class=" btn btn-default add-column-icon"
+                                        ng-click="vm.addColumn($index)">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3><span class="label label-default">Current columns</span></h3>
+                        <ul class="list-group">
+                            <li class="list-group-item column-table current-table-element"
+                                ng-repeat="item in vm.element.tableStructure.head[0] track by $index">
+                                <div class="content">
+                                    <span class="value">
+                                    {{item.value}}
+                                    </span>
+                                    <!--<input type="text" ng-model="{{item.value}}">-->
+                                </div>
+                                <button class=" btn btn-default delete-column-icon"
+                                        ng-click="vm.deleteColumn($index)">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="vm.closePopup()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

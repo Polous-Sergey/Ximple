@@ -1,0 +1,47 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="gridSystemModalLabel">Select Table</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>DateSet: </label>
+                    <select class="form-control" ng-model="vm.dataSetTable">
+                        <option value="" disabled selected>Selected DataSet</option>
+                        <option ng-repeat="i in vm.dataset" value="{{$index}}">{{i.dataSetName}}</option>
+                    </select>
+                </div>
+                <div class="modal-footer" >
+                    <button type="button" style="margin-top: 10px;" class="btn btn-primary" ng-click="vm.settingTableDataSet()"
+                            ng-disabled="!vm.dataSetTable">Create
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Row Table</label>
+                    <select class="form-control" ng-model="vm.table.row">
+                        <option value="" disabled selected>Selected row</option>
+                        <option ng-repeat="i in vm.maxRow" value="{{i}}">{{i}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label>Column Table</label>
+                    <select class="form-control" ng-model="vm.table.column">
+                        <option value="" disabled selected>Selected column</option>
+                        <option ng-repeat="i in vm.maxColumn" value="{{i}}">{{i}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="vm.addTable()"
+                    ng-disabled="!vm.table.row || !vm.table.column">Create
+            </button>
+        </div>
+    </div>
+</div>

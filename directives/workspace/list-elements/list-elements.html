@@ -1,0 +1,23 @@
+<div class="container-list-elements">
+    <div class="body-list">
+        <h3 class="header-list-box">Elements</h3>
+        <ul class="list-elements" id="list-elements">
+            <li ng-click="vm.addLabel()"><a href="#"><i class="fa fa-tag" aria-hidden="true"></i>Label</a></li>
+            <li><a data-toggle="collapse" data-parent="#list-elements" href="#table-element"><i class="fa fa-table" aria-hidden="true"></i>Table</a>
+                <ul id="table-element" class="collapse">
+                    <li ng-click="vm.openCustomTablePopup()"><a href="#">Custom Table</a></li>
+                    <li ng-click="vm.openTableFromDataBasePopup()"><a href="#">Table From DataBase</a></li>
+                    <li ng-click="vm.openJoinTablePopup()"><a href="#">Join Table</a></li>
+                </ul>
+            </li>
+            <li ng-click="vm.openGridPopup()"><a href="#"><i class="fa fa-th" aria-hidden="true"></i>Grid</a></li>
+        </ul>
+        <div id="tablesModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="dive" ng-include="vm.template"></div>
+        </div>
+    </div>
+    <div class="footer-list">
+            <setting-bar></setting-bar>
+    </div>
+</div>
+

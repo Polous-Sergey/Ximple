@@ -1,0 +1,30 @@
+
+
+.container-app {
+    margin-top: 51px;
+    display:flex;
+    height: calc(100vh - 51px);
+}
+/*.container-app section {*/
+    /*height: calc(100vh - 64px);*/
+    /*overflow-y: auto;*/
+/*}*/
+
+
+/*.container-list-element{*/
+    /*width: 150px;*/
+    /*background: #fff;*/
+
+/*}*/
+.container-paper {
+    flex: 1 auto;
+    height: calc(100vh - 50px);
+    background: #555D6B;
+    position: relative;
+}
+
+.container-parameters{
+    height: calc(100vh - 50px);
+}
+
+

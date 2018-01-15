@@ -1,0 +1,25 @@
+.login {
+    padding-top:200px;
+    height:100%;
+    width: 100%;
+}
+
+.login__body {
+    background: #fff;
+    margin: 0 auto;
+
+    width: 50%;
+    max-width:400px;
+    padding: 20px;
+    border-radius:2px;
+}
+
+.login__body h3 {
+    margin:0;
+    padding-bottom:20px;
+}
+
+.login__submit {
+    width:25%;
+    float: right;
+}

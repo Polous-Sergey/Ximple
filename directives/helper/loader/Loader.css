@@ -1,0 +1,52 @@
+.loader-container {
+    height: 0px;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.loader-view{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    background: black;
+    opacity: .8;
+}
+.loader-container > h2 {
+    font-size: 3em;
+    width: 200px;
+    padding-right: 25px;
+    margin: 0 0 50px;
+    border-bottom: 1px dashed;
+    line-height: 50px;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.dotLoader {
+    display: inline-block;
+    width: 2px;
+}
+
+.loader {
+    margin: 0 0 2em;
+    width: 100%;
+    height: 400px;
+    text-align: center;
+    padding: 1em;
+}
+
+/*
+  Set the color of the icon
+*/
+svg path,
+svg rect {
+    fill: #4CAF50;
+}

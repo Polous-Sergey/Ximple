@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="startApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/normalize-css/normalize.css">
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/angular-bootstrap-colorpicker/css/colorpicker.min.css">
+    <link rel="stylesheet" href="libs/angular-toastr/dist/angular-toastr.min.css">
+    <link rel="stylesheet" href="libs/angular-loading-bar/src/loading-bar.css">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="content/main.css">
+    <link rel="stylesheet" href="content/elements.css">
+    <link rel="stylesheet" href="templates/editor/editor.css">
+    <link rel="stylesheet" href="directives/workspace/header/header-container.css">
+    <link rel="stylesheet" href="directives/workspace/list-elements/list-elements.css">
+    <link rel="stylesheet" href="directives/workspace/paper-view/paper-view.css">
+    <link rel="stylesheet" href="directives/workspace/setting-elements/setting-elements.css">
+    <link rel="stylesheet" href="directives/helper/loader/Loader.css">
+    <link rel="stylesheet" href="directives/helper/editTable/editTable.css">
+    <link rel="stylesheet" href="templates/login/login.css">
+</head>
+<body>
+
+<ui-view></ui-view>
+
+<!--Libs-->
+<script src="libs/jquery/dist/jquery.min.js"></script>
+<script src="libs/jquery-ui/jquery-ui.min.js"></script>
+<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="libs/angular/angular.min.js"></script>
+
+<script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="libs/angular-loading-bar/src/loading-bar.js"></script>
+<script src="libs/angular-animate/angular-animate.min.js"></script>
+<script src="libs/angular-toastr/dist/angular-toastr.min.js"></script>
+<script type="text/javascript" src="libs/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
+
+<!--app-->
+<script src="app.js"></script>
+<script src="app.config.js"></script>
+
+<!-- Ctrl -->
+<script src="templates/editor/EditorCtrl.js"></script>
+<script src="templates/reportShow/reportShow.js"></script>
+<script src="templates/login/login.ctrl.js"></script>
+
+<!-- Directives -->
+<script src="directives/workspace/header/headerDir.js"></script>
+<script src="directives/workspace/header/headerCtrl.js"></script>
+<script src="directives/workspace/list-elements/list-elements.dir.js"></script>
+<script src="directives/workspace/list-elements/list-elements.ctrl.js"></script>
+<script src="directives/workspace/paper-view/paper-view.dir.js"></script>
+<script src="directives/workspace/paper-view/paper-view.ctrl.js"></script>
+<script src="directives/workspace/setting-elements/setting-elements.dir.js"></script>
+<script src="directives/workspace/setting-elements/setting-elements.ctrl.js"></script>
+<script src="directives/workspace/setting-bar/setting-bar.dir.js"></script>
+<script src="directives/workspace/setting-bar/setting-bar.ctrl.js"></script>
+<script src="directives/elements/container/container,dir.js"></script>
+<script src="directives/elements/container/container.ctrl.js"></script>
+<script src="directives/elements/label/label.dir.js"></script>
+<script src="directives/elements/label/label.ctrl.js"></script>
+<script src="directives/elements/table/table.dir.js"></script>
+<script src="directives/elements/table/table.ctrl.js"></script>
+<script src="directives/elements/grid/grid.dir.js"></script>
+<script src="directives/elements/grid/grid.ctrl.js"></script>
+<script src="directives/helper/loader/LoaderDir.js"></script>
+<script src="directives/helper/loader/LoaderCtrl.js"></script>
+<script src="directives/helper/editTable/editTable.js"></script>
+<script src="directives/helper/editTable/editTable.Ctrl.js"></script>
+
+
+<!--Services-->
+<!--Services Initialize app-->
+<script src="services/initializeData/initializeData.js"></script>
+<!--Services dataSources-->
+<script src="services/initializeData/dataSourcesParams.js"></script>
+<!--Services storage tables-->
+<script src="services/storage/storage.js"></script>
+<!--Services dataSet-->
+<!--<script src="services/dataSet/dataSet.js"></script>-->
+<!--Services addElements-->
+<script src="services/addElements/addElements.js"></script>
+<!--Services modelReport-->
+<script src="services/modelReport/modelReport.js"></script>
+
+<script src="services/elements-models/elements-models.js"></script>
+<script src="services/elements-models/defaultStyleElement.js"></script>
+<script src="services/helpers/style-helper.js"></script>
+<script src="services/helpers/element-helper.js"></script>
+<script src="services/request/url.js"></script>
+<script src="services/request/request.js"></script>
+<script src="services/helpers/delete-element.js"></script>
+<script src="services/helpers/save-service.js"></script>
+<script src="services/helpers/refactor_obj.js"></script>
+<script src="services/reportList/reportList.js"></script>
+</body>
+</html>

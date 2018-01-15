@@ -1,0 +1,49 @@
+<div style="position: relative;">
+    <edit-table element="vm.element" class="edit-table-template"></edit-table>
+    <button class="btn btn-default btn-edit-element" type="button"><i class="fa fa-pencil" aria-hidden="true"></i>
+    </button>
+    <button class="btn btn-default btn-delete-element" type="button"><i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    <table class="table-element">
+        <!--Table Head -->
+        <tr ng-repeat="row in vm.element.tableStructure.head track by $index">
+            <th ng-repeat="cell in row  track by $index"
+                ng-style="{'width': cell.style['width'] + cell.style['widthUnit'],
+                       'height': cell.style['height']  + cell.style['heightUnit'],
+                       'margin-top': cell.style['margin-top'] + 'px',
+                       'margin-right': cell.style['margin-right'] + 'px',
+                       'margin-bottom': cell.style['margin-bottom'] + 'px',
+                       'margin-left': cell.style['margin-left'] + 'px',
+                       'border': cell.style['border'],
+                       'background-color': cell.style['background-color']}">
+                <input ng-model="cell.value" type="text"
+                        ng-focus="vm.selectCell(cell)"
+                        ng-blur="vm.changeLabel(cell)"
+                       ng-click="vm.focusContainer(cell, vm.element); $event.stopPropagation();"
+                       ng-style="{'text-align': cell.style['text-align'],
+                              'color': cell.style['color'],
+                              'font-size': cell.style['font-size']}"/>
+            </th>
+        </tr>
+        <!--Table Body -->
+        <tr ng-repeat="row in vm.element.tableStructure.body track by $index">
+            <td ng-repeat="cell in row.row track by $index"
+                ng-click="vm.focusContainer(cell, vm.element);$event.stopPropagation();"
+                ng-style="{  'width': cell.style['width'] + cell.style['widthUnit'],
+                         'height': cell.style['height']  + cell.style['heightUnit'],
+                         'margin-top':cell.style['margin-top'] + 'px',
+                         'margin-right': cell.style['margin-right'] + 'px',
+                         'margin-bottom': cell.style['margin-bottom'] + 'px',
+                         'margin-left': cell.style['margin-left'] + 'px',
+                         'background-color':cell.style['background-color'],
+                         'border-width': cell.style['border-width'],
+                         'border-style': cell.style['border-style'],
+                         'border-color': cell.style['border-color']}">
+                <input ng-model="cell.value" type="text"
+                       ng-style="{ 'text-align': cell.style['text-align'],
+                               'color': cell.style['color'],
+                               'font-size': cell.style['font-size']}" ng-disabled="true"/>
+            </td>
+        </tr>
+    </table>
+</div>

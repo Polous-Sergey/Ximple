@@ -1,0 +1,55 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="gridSystemModalLabel">Setting table</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <table class="table table-hover">
+                    <tr>
+                        <th class="col-sm-1">Position</th>
+                        <th class="col-sm-4">Selected</th>
+                        <th class="col-sm-7">Name</th>
+                    </tr>
+                    <tr ng-repeat="row in vm.selectedTable.columns">
+                        <td>
+                            <div class="position-container">
+                                <div class="up-position" ng-click="vm.upRowPosition($index)" ng-hide="$first">
+                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                </div>
+                                <div class="down-position" ng-click="vm.downRowPosition($index)" ng-hide="$last">
+                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </td>
+                        <td ng-click="row.selected = !row.selected">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="row.selected"> Selected row
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="margin-bottom: 0">
+                                <input type="text" class="form-control" id="exampleInputEmail3"
+                                       ng-model="row.displayName">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="container-button-select-all">
+                    <button type="button" ng-click="vm.selectAllRow()" class="btn btn-default">Select All</button>
+                    <button type="button" ng-click="vm.selectNoneRow()" class="btn btn-default">Select None</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.backPopup(1)">Back
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="vm.Finish()">Finish</button>
+        </div>
+    </div>
+</div>
