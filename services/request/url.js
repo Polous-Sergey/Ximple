@@ -8,7 +8,7 @@
     function url() {
 
         // var proxy = "http://localhost:8080/";
-        var server = window.location.origin + '/XimpleReportWeb/';
+        var server = 'http://localhost:8080/http://10.69.52.15/XimpleReportWeb/';
         // var server = 'http://localhost:9083/XimpleReportWeb/';
         // var server = proxy + serv;
 
