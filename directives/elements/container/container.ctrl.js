@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('ContainerCtrl', ContainerCtrl);
 
     ContainerCtrl.$inject = ['settingHelper'];

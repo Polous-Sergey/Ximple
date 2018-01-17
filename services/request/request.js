@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('factory.request', [])
         .factory('request', request);
 
     request.$inject = ['$http', '$q', 'url', '$httpParamSerializerJQLike'];
@@ -21,7 +21,7 @@
                 withCredentials: true,
                 headers:headers
             }).then(function (dataResult) {
-                console.log('result', dataResult)
+                console.log('result', dataResult);
                 defer.resolve(dataResult);
             }, function (dataError) {
                 defer.reject(dataError);

@@ -2,14 +2,14 @@
     'use strict';
 
     angular
-        .module('model.user', [])
+        .module('service.user', [])
         .service('user', user);
 
-    user.$inject = ['http','$sessionStorage','$localStorage','url'];
+    user.$inject = ['http','$sessionStorage','$localStorage', 'url'];
 
-    function user($sessionStorage, $localStorage, http, url) {
+    function user(http, $sessionStorage, $localStorage, url) {
 
-        var service = {
+         return {
             login : login,
             setUser : setUser,
             getUser : getUser
@@ -22,7 +22,7 @@
         }
 
         function login(data) {
-            console.log('logging in')
+            console.log('logging in');
             return http.post(url.login, data).then(function (res) {
                 return res;
             });
@@ -93,8 +93,5 @@
                 }
             };
         }
-
-        return service;
-
     }
 })();

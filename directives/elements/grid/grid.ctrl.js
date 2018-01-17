@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('gridCtrl', gridCtrl);
 
     gridCtrl.$inject = ['settingHelper'];

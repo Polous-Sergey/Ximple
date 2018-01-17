@@ -1,11 +1,16 @@
 (function () {
-    'use strict';
-    angular.module('startApp', ['startApp.core',
-        'startApp.services',
-        'startApp.request'
-    ]).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
-        cfpLoadingBarProvider.includeSpinner = false;
-    }]).run(['$state',function($state){
+    angular.module('app',
+        [   'app.core',
+            'app.directives',
+            'app.request',
+            'app.services',
+            'app.filters'
+        ])
+
+        .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+            cfpLoadingBarProvider.includeSpinner = false;
+        }])
+        .run(['$state',function($state){
         $state.go('login');
     }]);
 })();

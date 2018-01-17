@@ -1,7 +1,7 @@
 ;(function () {
     'use strict';
 
-    angular.module('startApp.core', [
+    angular.module('app.core', [
         "ui.router",
         "colorpicker.module",
         "angular-loading-bar",

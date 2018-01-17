@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('EditorCtrl', EditorCtrl);
 
     EditorCtrl.$inject = ['$scope', 'elementHelper', 'modelReport','$rootScope', '$state'];

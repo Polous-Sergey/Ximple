@@ -1,8 +1,8 @@
-(function () {
+;(function () {
     'use strict';
 
     angular
-        .module('startApp')
+        .module('factory.dataSet', [])
         .factory('dataSet', dataSet);
 
     dataSet.$inject = ['dataSourcesParams', 'request', 'url'];

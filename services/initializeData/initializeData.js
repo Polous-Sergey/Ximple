@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .factory('initializeData', initializeData);
 
     initializeData.$inject = ['$rootScope', 'request', 'url', 'dataSourcesParams', 'storage'];

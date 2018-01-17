@@ -1,8 +1,8 @@
-(function () {
+;(function () {
     'use strict';
 
     angular
-        .module('startApp')
+        .module('factory.defaultStyleModel', [])
         .factory('defaultStyleModel', defaultStyleModel);
 
     defaultStyleModel.$inject = [];

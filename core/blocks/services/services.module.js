@@ -1,8 +1,8 @@
 ;(function () {
     'use strict';
 
-    angular.module('startApp.services', [
-        'model.user',
+    angular.module('app.services', [
+        'service.user',
 
 
     ]);

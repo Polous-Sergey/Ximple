@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .factory('settingHelper', settingHelper);
 
     settingHelper.$inject = [];

@@ -1,7 +1,7 @@
 ;(function () {
     'use strict';
     angular
-        .module('model.customrrequest', [])
+        .module('factory.customrrequest', [])
         .factory('http', http);
 
     http.$inject = ['$http', '$q', '$localStorage' , 'toastr'];
@@ -14,7 +14,7 @@
                 return request('GET', url, data);
             },
             post: function (url, data) {
-                return request('POST', url, data);
+                return request('POST', url+data);
             },
             put: function (url, data) {
                 return request('PUT', url, data);
@@ -86,7 +86,7 @@
                 toastr.error(err.data.error);
 
             }
-            defer.reject(response.data);
+            defer.reject(err.data);
             return defer.promise;
         }
 

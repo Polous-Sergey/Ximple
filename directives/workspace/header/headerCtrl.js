@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('headerCtrl', headerCtrl);
 
     headerCtrl.$inject = ['request', 'url', '$window', 'saveQueue'];

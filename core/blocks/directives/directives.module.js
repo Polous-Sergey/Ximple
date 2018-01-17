@@ -1,7 +1,7 @@
 ;(function () {
     'use strict';
 
-    angular.module('startApp.directives', [
-
+    angular.module('app.directives', [
     ]);
+
 })();

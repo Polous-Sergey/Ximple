@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('LoginCtrl', LoginCtrl);
 
     LoginCtrl.$inject = ['request', 'url', 'toastr', '$rootScope', '$state', 'reportList', 'user'];
@@ -10,49 +10,57 @@
     function LoginCtrl(request, url, toastr, $rootScope, $state, reportList, user) {
         var vm = this;
         vm.login = login;
-        console.log(user)
-        vm.loginData = {
-            id: "00013",
-            name: "",
-            password: ""
+        console.log(user);
+        vm.data = {
+            userName: "",
+            userPassword: "",
+            companyId: "00013"
         };
 
         function login() {
-            debugger
+            console.log(vm.data)
             if (!checkLoginData()) {
                 return;
             }
 
-            var headers = {
-                'Content-Type': 'application/json'
-            };
-            var data = {
-                userName: vm.loginData.name,
-                userPassword: vm.loginData.password,
-                companyId: "00013"
-            };
-            user.login(data).then(function (res) {
-                console.log(res,'123')
-            })
-            request.request(url.login, "POST", {}, data, headers)
-                .then(function (data) {
-                    if (data.status === 200) {
-                        reportList.setReportList(data.data.reports);
-                        $rootScope.isLogined = true;
-                        $state.go('edit');
-                        return true;
-                    }
-                }, function (dataErr) {
-                    $rootScope.isLogined = false;
-                    toastr.error('Authorization failed', 'Error', {
-                        timeOut: 5000
-                    })
-                });
+            // var headers = {
+            //     'Content-Type': 'application/json'
+            // };
+
+            console.log(vm.data)
+            user.login(vm.data).then(function (res) {
+                reportList.setReportList(res.data.reports);
+                $rootScope.isLogined = true;
+                $state.go('edit');
+                // if(data){
+                //
+                // }else{
+                //     $rootScope.isLogined = false;
+                //     toastr.error('Authorization failed', 'Error', {
+                //         timeOut: 5000
+                //     })
+                // }
+            });
+            // request.request(url.login, "POST", {}, data, headers)
+            //     .then(function (data) {
+            //         if (data.status === 200) {
+            //             reportList.setReportList(data.data.reports);
+            //             $rootScope.isLogined = true;
+            //             $state.go('edit');
+            //             return true;
+            //         }
+            //     }, function (dataErr) {
+            //         $rootScope.isLogined = false;
+            //         toastr.error('Authorization failed', 'Error', {
+            //             timeOut: 5000
+            //         })
+            //     });
         }
 
         function checkLoginData() {
-            if (vm.loginData.name === "" ||
-                vm.loginData.password === "") {
+            if (vm.data.userName === "" ||
+                vm.data.companyId === "" ||
+                vm.data.userPassword === "") {
                 toastr.error("Please input all data", 'Login error', {timeOut: 4000});
                 return false;
             }
