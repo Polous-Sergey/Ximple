@@ -29,11 +29,9 @@
 
             console.log(vm.data)
             user.login(vm.data).then(function (res) {
-                console.log(res)
                 reportList.setReportList(res.reports);
                 $rootScope.isLogined = true;
                 $state.go('edit');
-                return true;
                 // if(data){
                 //
                 // }else{
@@ -43,7 +41,7 @@
                 //     })
                 // }
             });
-            // request.request(url.login, "POST", {}, data, headers)
+            // request.request(url.login, "POST", {}, vm.data, headers)
             //     .then(function (data) {
             //         if (data.status === 200) {
             //             reportList.setReportList(data.data.reports);

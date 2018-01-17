@@ -50,6 +50,7 @@
         }
 
         function requestFailed(err) {
+            err.data.sucsess = false;
             var defer = $q.defer();
             console.info('error', err);
 
@@ -82,6 +83,7 @@
         }
 
         function requestComplete(response) {
+            response.data.success = true;
             var defer = $q.defer();
             console.info('response', response);
             if (response.data.error) {
