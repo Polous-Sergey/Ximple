@@ -1,8 +1,8 @@
-(function() {
+;(function() {
     'use strict';
 
     angular
-        .module('app')
+        .module('factory.storage', [])
         .factory('storage', storage);
 
     storage.$inject = ['$q'];

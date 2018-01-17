@@ -14,7 +14,7 @@
                 return request('GET', url, data);
             },
             post: function (url, data) {
-                return request('POST', url+data);
+                return request('POST', url, data);
             },
             put: function (url, data) {
                 return request('PUT', url, data);
@@ -26,32 +26,23 @@
 
         function request(method, url, data) {
 
-            var token = $localStorage.token;
-
-
             var config = {
                 dataType: 'json',
                 method: method,
+                url: url,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             };
-            if(typeof token != 'undefined') {
-                config.headers.token = token;
-            }
 
-            if (method === 'GET') {
+            if (method === 'GET'  || method === 'POST') {
                 config.params = data;
                 config.timeout = 20000;
             }
             else {
                 config.data = data;
             }
-
-            config.url = url;
-
-            // console.log(config, 'data for sand');
 
             return $http(config)
                 .then(requestComplete)
@@ -75,7 +66,7 @@
                 else if (err.status === 500) {
                     toastr.error('Server error: ' + err.status + ' ' + err.data.message);
                 }
-                else if (response.status === 403) {
+                else if (err.status === 403) {
                     toastr.error('Forbidden');
                 }
                 else {
@@ -92,7 +83,7 @@
 
         function requestComplete(response) {
             var defer = $q.defer();
-            console.info('response', url, response);
+            console.info('response', response);
             if (response.data.error) {
                 toastr.error(response.data.error);
                 defer.reject(response.data.error);

@@ -12,7 +12,7 @@
         // var server = 'http://localhost:9083/XimpleReportWeb/';
         // var server = proxy + serv;
 
-        var url = {
+        return {
             login: server + 'userLogin',
             initializedDataSource: server + 'report/new',
             newDataSources: server + 'dataSource/newDefault',
@@ -64,6 +64,5 @@
                 return server + 'report/table/'+ id + '/columns';
             }
         };
-        return url;
     }
 })();

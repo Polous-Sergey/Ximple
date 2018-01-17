@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('factory.dataServices', [])
         .factory('dataServices', dataServices);
 
     dataServices.$inject = [];

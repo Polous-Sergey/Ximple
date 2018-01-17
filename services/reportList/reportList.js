@@ -1,9 +1,9 @@
-(function () {
+;(function () {
     'use strict'; 
 
     angular
-        .module('app')
-        .factory('reportList', reportList); 
+        .module('factory.reportList', [])
+        .factory('reportList', reportList);
 
         reportList.$inject = []; 
     function reportList() {

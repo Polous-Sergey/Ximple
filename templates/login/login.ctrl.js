@@ -29,9 +29,11 @@
 
             console.log(vm.data)
             user.login(vm.data).then(function (res) {
-                reportList.setReportList(res.data.reports);
+                console.log(res)
+                reportList.setReportList(res.reports);
                 $rootScope.isLogined = true;
                 $state.go('edit');
+                return true;
                 // if(data){
                 //
                 // }else{

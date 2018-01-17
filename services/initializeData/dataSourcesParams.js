@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('factory.dataSourcesParams', [])
         .factory('dataSourcesParams', dataSourcesParams);
 
     dataSourcesParams.$inject = [];
