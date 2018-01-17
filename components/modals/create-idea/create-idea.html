@@ -1,0 +1,92 @@
+<md-dialog class="create-idea">
+    <div>
+        <div class="popup-box">
+            <form name="vm.form" ng-submit="vm.createIdea()" novalidate>
+                <!--header ---------------------------------------------->
+                <div class="popup-box__header">
+                    <div class="popup-box__header-title">
+                        Create idea
+                    </div>
+                    <span class="popup-box__header-close">
+                         <i ng-click="vm.close()"
+                            class="glyphicon glyphicon-remove">
+                         </i>
+                    </span>
+                </div>
+                <!--content --------------------------------------------->
+                <div class="popup-box__divider"></div>
+                <div class="popup-box__content">
+
+                    <ui-select
+                            class="char-count"
+                            search-enabled="false"
+                            ng-model="vm.data.selected_team"
+                            ng-change="vm.makeThemesArr();
+                                        vm.data.team_theme_id = undefined;
+                                        vm.data.client_theme_id = undefined;">
+                        <ui-select-match
+                                placeholder="Select Team">
+                            <span > {{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in vm.items.teams | orderBy: 'name'">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <ui-select
+                            class="char-count"
+                            search-enabled="false"
+                            ng-model="vm.data.theme_id">
+                        <ui-select-match
+                                placeholder="Select Theme">
+                            <span ng-value="item.id" > {{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in vm.themes | orderBy: 'name' track by $index">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <ui-select
+                            class="char-count"
+                            search-enabled="false"
+                            ng-model="vm.data.site_id">
+                        <ui-select-match
+                                placeholder="Select Site">
+                            <span ng-value="item.id" > {{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in vm.items.sites | orderBy: 'name' track by $index">
+                        <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <label>
+                        What have you identified for improvement?
+                    </label>
+                    <textarea cols="30"
+                              class="form-control"
+                              required rows="7"
+                              ng-model="vm.data.subject"
+                              minlength="0"
+                              maxlength="300"></textarea>
+                    <div class="char-count"> Character Count: <span>{{ vm.data.subject.length || '0' }}</span>/300</div>
+                    <label>
+                        How can we improve this, or what improvement have you started?
+                    </label>
+                    <textarea cols="30"
+                              class="form-control"
+                              required rows="7"
+                              ng-model="vm.data.message"
+                              minlength="0"
+                              maxlength="300"></textarea>
+                    <div > Character Count: <span>{{ vm.data.message.length || '0' }}</span>/300</div>
+                </div>
+                <!--control ---------------------------------------------->
+                <div class="popup-box__control clearfix">
+                    <button type="submit" class="default-button inline-btn pull-right">
+                        <span> Create </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</md-dialog>

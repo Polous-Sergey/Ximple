@@ -1,0 +1,27 @@
+<md-dialog class="disclaimer-popup">
+    <div>
+        <div class="popup-box">
+                <!--header ---------------------------------------------->
+                <div class="popup-box__header">
+                    <div class="popup-box__header-title">
+                      Disclaimer
+                    </div>
+                    <span class="popup-box__header-close">
+                         <i ng-click="vm.close()"
+                            class="glyphicon glyphicon-remove">
+                         </i>
+                    </span>
+                </div>
+                <!--content --------------------------------------------->
+                <div class="popup-box__divider"></div>
+                <div class="popup-box__content">
+                    <div class="disclaimer-popup__content"
+                        ng-bind-html="vm.disclaimer_text">
+                    </div>
+                </div>
+                <!--control ---------------------------------------------->
+                <div class="popup-box__control clearfix">
+                </div>
+        </div>
+    </div>
+</md-dialog>

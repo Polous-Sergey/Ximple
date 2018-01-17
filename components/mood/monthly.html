@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-25"></div>
+    <div style="padding:10px;">
+
+        <!--<select-->
+                <!--style="width: 100%"-->
+                <!--ng-change="vm.changeYear()"-->
+                <!--ng-model="vm.selectedYear"-->
+                <!--class="charts-select form-control"-->
+                <!--ng-options="year for year in vm.yearList">-->
+        <!--</select>-->
+
+        <ui-select
+                search-enabled="false"
+                ng-change="vm.changeYear()"
+                ng-model="vm.selectedYear">
+            <ui-select-match>
+                <span > {{$select.selected}}</span>
+            </ui-select-match>
+            <ui-select-choices repeat="item in vm.yearList">
+                <span ng-bind="item"></span>
+            </ui-select-choices>
+        </ui-select>
+
+    </div>
+    <div class="col-25"></div>
+
+</div>

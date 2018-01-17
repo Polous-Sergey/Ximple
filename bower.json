@@ -1,0 +1,19 @@
+{
+  "name": "Ximple Project",
+  "description": "Ximple",
+  "version": "0.0.1",
+  "homepage": "https://bitbucket.org/snmartusenko/elft_frontend",
+  "license": "MIT",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "ngstorage": "ng-storage#^0.4.2"
+  },
+  "resolutions": {
+
+  }
+}

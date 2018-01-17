@@ -1,0 +1,12 @@
+<a class="item" ui-sref="app.message-dialog({id:data.id})">
+    <div class="data-container">
+        <h2>{{data.subject}}</h2>
+        <p>{{data.created_day_row}},</p>
+        <p>{{data.created_month_row}}</p>
+        <div class="icon-container">
+            <div class="glyphicon glyphicon-comment messages-img"></div>
+            <span ng-if="vm.unread>0" class=" badge badge-assertive massages-counter">{{vm.unread}}</span>
+            <span class="glyphicon glyphicon-play arrow-right"></span>
+        </div>
+    </div>
+</a>
