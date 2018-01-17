@@ -37,10 +37,15 @@
 <script src="libs/angular-toastr/dist/angular-toastr.min.js"></script>
 <script type="text/javascript" src="libs/angular-toastr/dist/angular-toastr.tpls.js"></script>
 <script src="libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
+<script src="node_modules/ngstorage/ngStorage.js"></script>
 
 <!--app-->
 <script src="app.js"></script>
 <script src="app.config.js"></script>
+<script src="core/core.module.js"></script>
+<script src="core/blocks/services/services.module.js"></script>
+<script src="core/request.js"></script>
+
 
 <!-- Ctrl -->
 <script src="templates/editor/EditorCtrl.js"></script>
@@ -73,6 +78,7 @@
 
 
 <!--Services-->
+<script src="services/user.service.js"></script>
 <!--Services Initialize app-->
 <script src="services/initializeData/initializeData.js"></script>
 <!--Services dataSources-->

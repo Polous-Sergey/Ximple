@@ -1,11 +1,7 @@
 (function () {
     'use strict';
-    angular.module('startApp', [
-        "ui.router",
-        "colorpicker.module",
-        "angular-loading-bar",
-        "ngAnimate",
-        "toastr"
+    angular.module('startApp', ['startApp.core',
+        'startApp.services',
     ]).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
     }]).run(['$state',function($state){

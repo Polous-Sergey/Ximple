@@ -1,7 +1,7 @@
-(function () {
+;(function () {
     'use strict';
     angular
-        .module('factory.request', [])
+        .module('model.customrrequest', [])
         .factory('http', http);
 
     http.$inject = ['$http', '$q', '$localStorage' , 'toastr'];

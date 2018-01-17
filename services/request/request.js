@@ -21,6 +21,7 @@
                 withCredentials: true,
                 headers:headers
             }).then(function (dataResult) {
+                console.log('result', dataResult)
                 defer.resolve(dataResult);
             }, function (dataError) {
                 defer.reject(dataError);
