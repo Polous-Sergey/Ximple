@@ -7,7 +7,7 @@
 
     function mainConfig($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.otherwise('/login');
+        // $urlRouterProvider.otherwise('/login');
 
         $stateProvider
 

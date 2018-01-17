@@ -50,7 +50,7 @@
         }
 
         function requestFailed(err) {
-            err.data.sucsess = false;
+            // err.data.sucsess = false;
             var defer = $q.defer();
             console.info('error', err);
 

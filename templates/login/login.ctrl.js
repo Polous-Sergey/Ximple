@@ -21,39 +21,21 @@
             if (!checkLoginData()) {
                 return;
             }
-
-            // var headers = {
-            //     'Content-Type': 'application/json'
-            // };
-
             console.log(vm.data)
             user.login(vm.data).then(function (res) {
-                reportList.setReportList(res.reports);
-                $rootScope.isLogined = true;
-                $state.go('edit');
-                // if(data){
-                //
-                // }else{
-                //     $rootScope.isLogined = false;
-                //     toastr.error('Authorization failed', 'Error', {
-                //         timeOut: 5000
-                //     })
-                // }
+                console.log(res)
+                if(res.success){
+                    reportList.setReportList(res.reports);
+                    $rootScope.isLogined = true;
+                    $state.go('edit');
+                }else{
+                    $rootScope.isLogined = false;
+                    toastr.error('Authorization failed', 'Error', {
+                        timeOut: 5000
+                    })
+                }
             });
-            // request.request(url.login, "POST", {}, vm.data, headers)
-            //     .then(function (data) {
-            //         if (data.status === 200) {
-            //             reportList.setReportList(data.data.reports);
-            //             $rootScope.isLogined = true;
-            //             $state.go('edit');
-            //             return true;
-            //         }
-            //     }, function (dataErr) {
-            //         $rootScope.isLogined = false;
-            //         toastr.error('Authorization failed', 'Error', {
-            //             timeOut: 5000
-            //         })
-            //     });
+
         }
 
         function checkLoginData() {
