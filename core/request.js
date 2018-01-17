@@ -86,7 +86,7 @@
                 toastr.error(err.data.error);
 
             }
-            defer.reject(response.data);
+            defer.reject(err.data);
             return defer.promise;
         }
 

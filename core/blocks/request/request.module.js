@@ -4,9 +4,10 @@
     angular.module('app.request', [
         'factory.url',
         'factory.request',
+        'factory.customrrequest',
         'factory.addElements',
         // 'factory.dataSet'
-        // 'factory.defaultStyleModel',
+        'factory.defaultStyleModel',
         // 'factory.elementsModel',
         // 'factory.dataServices',
         // 'factory.deleteFac',

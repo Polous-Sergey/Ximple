@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('factory.defaultStyleModel', [])
         .factory('defaultStyleModel', defaultStyleModel);
 
     defaultStyleModel.$inject = [];

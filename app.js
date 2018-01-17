@@ -13,5 +13,4 @@
         .run(['$state',function($state){
         $state.go('login');
     }]);
-
 })();
