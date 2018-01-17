@@ -1,8 +1,8 @@
-(function () {
+;(function () {
     'use strict';
 
     angular
-        .module('app')
+        .module('factory.modelReport', [])
         .factory('modelReport', modelReport);
 
     modelReport.$inject = [];

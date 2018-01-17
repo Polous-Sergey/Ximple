@@ -1,7 +1,7 @@
 ;(function () {
     'use strict';
     angular
-        .module('factory.request', [])
+        .module('factory.customrrequest', [])
         .factory('http', http);
 
     http.$inject = ['$http', '$q', '$localStorage' , 'toastr'];
@@ -26,20 +26,15 @@
 
         function request(method, url, data) {
 
-            var token = $localStorage.token;
-
-
             var config = {
                 dataType: 'json',
                 method: method,
+                url: url,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             };
-            if(typeof token != 'undefined') {
-                config.headers.token = token;
-            }
 
             if (method === 'GET') {
                 config.params = data;
@@ -48,10 +43,6 @@
             else {
                 config.data = data;
             }
-
-            config.url = url;
-
-            // console.log(config, 'data for sand');
 
             return $http(config)
                 .then(requestComplete)

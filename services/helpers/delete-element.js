@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('factory.deleteFac', [])
         .factory('deleteFac', deleteFac);
 
     deleteFac.$inject = [];

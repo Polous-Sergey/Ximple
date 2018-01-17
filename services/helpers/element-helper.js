@@ -1,8 +1,8 @@
-(function () {
+;(function () {
     'use strict';
 
     angular
-        .module('app')
+        .module('factory.elementHelper', [])
         .factory('elementHelper', elementHelper);
 
     elementHelper.$inject = [];

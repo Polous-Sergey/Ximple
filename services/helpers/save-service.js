@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('factory.saveQueue', [])
         .factory('saveQueue', saveQueue);
 
     saveQueue.$inject = ['request', 'url'];
