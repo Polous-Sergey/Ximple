@@ -13,8 +13,7 @@
         console.log(user);
         vm.data = {
             userName: "",
-            userPassword: "",
-            companyId: "00013"
+            userPassword: ""
         };
 
         function login() {
