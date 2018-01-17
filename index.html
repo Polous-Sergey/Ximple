@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="startApp">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ximple</title>
     <link rel="stylesheet" href="libs/normalize-css/normalize.css">
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/angular-bootstrap-colorpicker/css/colorpicker.min.css">
@@ -34,17 +34,51 @@
 <script src="libs/angular-loading-bar/src/loading-bar.js"></script>
 <script src="libs/angular-animate/angular-animate.min.js"></script>
 <script src="libs/angular-toastr/dist/angular-toastr.min.js"></script>
-<script type="text/javascript" src="libs/angular-toastr/dist/angular-toastr.tpls.js"></script>
 <script src="libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
 
 <!--app-->
-<script src="app.js"></script>
-<script src="app.config.js"></script>
+<!--<script src="app.js"></script>-->
+<!--<script src="app.config.js"></script>-->
 
-<!-- Ctrl -->
-<script src="templates/editor/EditorCtrl.js"></script>
-<script src="templates/reportShow/reportShow.js"></script>
-<script src="templates/login/login.ctrl.js"></script>
+<!--///////////////////-->
+<script src="app.js"></script>
+<script src="core/core.module.js"></script>
+<script src="core/core.config.js"></script>
+<script src="core/blocks/directives/directives.module.js"></script>
+<script src="core/blocks/filters/filters.module.js"></script>
+<script src="core/blocks/request/request.module.js"></script>
+<script src="core/blocks/services/services.module.js"></script>
+<!--/////////////////////////-->
+
+<!--Services-->
+<!--Services Initialize app-->
+<script src="services/initializeData/initializeData.js"></script>
+<!--Services dataSources-->
+<script src="services/initializeData/dataSourcesParams.js"></script>
+<!--Services storage tables-->
+<script src="services/storage/storage.js"></script>
+<!--Services dataSet-->
+<!--<script src="services/dataSet/dataSet.js"></script>-->
+<!--Services addElements-->
+<script src="services/addElements/addElements.js"></script>
+<!--Services modelReport-->
+<script src="services/modelReport/modelReport.js"></script>
+
+<script src="services/elements-models/elements-models.js"></script>
+<script src="services/elements-models/defaultStyleElement.js"></script>
+<script src="services/helpers/style-helper.js"></script>
+<script src="services/helpers/element-helper.js"></script>
+
+<!--//////////-->
+<script src="core/url.js"></script>
+<script src="core/request.js"></script>
+<!--//////////-->
+
+
+<script src="services/helpers/delete-element.js"></script>
+<script src="services/helpers/save-service.js"></script>
+<script src="services/helpers/refactor_obj.js"></script>
+<script src="services/reportList/reportList.js"></script>
 
 <!-- Directives -->
 <script src="directives/workspace/header/headerDir.js"></script>
@@ -70,30 +104,12 @@
 <script src="directives/helper/editTable/editTable.js"></script>
 <script src="directives/helper/editTable/editTable.Ctrl.js"></script>
 
+<!-- Ctrl -->
+<script src="templates/editor/EditorCtrl.js"></script>
+<script src="templates/reportShow/reportShow.js"></script>
+<script src="templates/login/login.ctrl.js"></script>
 
-<!--Services-->
-<!--Services Initialize app-->
-<script src="services/initializeData/initializeData.js"></script>
-<!--Services dataSources-->
-<script src="services/initializeData/dataSourcesParams.js"></script>
-<!--Services storage tables-->
-<script src="services/storage/storage.js"></script>
-<!--Services dataSet-->
-<!--<script src="services/dataSet/dataSet.js"></script>-->
-<!--Services addElements-->
-<script src="services/addElements/addElements.js"></script>
-<!--Services modelReport-->
-<script src="services/modelReport/modelReport.js"></script>
 
-<script src="services/elements-models/elements-models.js"></script>
-<script src="services/elements-models/defaultStyleElement.js"></script>
-<script src="services/helpers/style-helper.js"></script>
-<script src="services/helpers/element-helper.js"></script>
-<script src="services/request/url.js"></script>
-<script src="services/request/request.js"></script>
-<script src="services/helpers/delete-element.js"></script>
-<script src="services/helpers/save-service.js"></script>
-<script src="services/helpers/refactor_obj.js"></script>
-<script src="services/reportList/reportList.js"></script>
+
 </body>
 </html>

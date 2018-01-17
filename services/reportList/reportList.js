@@ -2,7 +2,7 @@
     'use strict'; 
 
     angular
-        .module('startApp')
+        .module('app')
         .factory('reportList', reportList); 
 
         reportList.$inject = []; 
@@ -11,8 +11,8 @@
 
         return {
             addReportName: addReportName,
-            setReportList:setReportList, 
-            getReportList:getReportList
+            setReportList: setReportList,
+            getReportList: getReportList
         };
 
         function addReportName(item) {

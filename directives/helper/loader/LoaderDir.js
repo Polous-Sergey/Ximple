@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .directive('loader', loader);
 
     loader.$inject = ['$rootScope'];

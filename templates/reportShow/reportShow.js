@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('ReportShowCtrl', ReportShowCtrl);
 
     ReportShowCtrl.$inject = ['$scope', '$rootScope'];

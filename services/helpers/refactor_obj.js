@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .factory('refactorObj', refactorObj);
 
     refactorObj.$inject = ['settingHelper', 'request', 'url'];

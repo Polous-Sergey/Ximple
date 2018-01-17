@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['request','url','toastr','$rootScope', '$state', 'reportList'];
-    function LoginCtrl(request,url,toastr,$rootScope, $state, reportList) {
+    LoginCtrl.$inject = ['url', 'toastr', '$rootScope', '$state', 'reportList'];
+    function LoginCtrl(url, toastr, $rootScope, $state, reportList) {
         var vm = this;
         vm.login = login;
 
@@ -29,7 +29,7 @@
                 companyId:vm.loginData.id
             };
 
-            request.request(url.login, "POST",{},data,headers)
+            request.get(url.login, "POST",{},data,headers)
                 .then(function (data) {
                 if (data.status === 200) {
                     reportList.setReportList(data.data.reports);

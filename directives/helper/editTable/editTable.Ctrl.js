@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('editTableCtrl', editTableCtrl);
 
     editTableCtrl.$inject = ['request', 'url', 'elementsModel'];

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .directive('paperDesign', paperDesign);
 
     paperDesign.$inject = [];

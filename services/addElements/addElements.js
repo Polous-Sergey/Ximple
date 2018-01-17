@@ -1,8 +1,8 @@
-(function () {
+;(function () {
     'use strict';
 
     angular
-        .module('startApp')
+        .module('factory.addElements', [])
         .factory('addElements', addElements);
 
     addElements.$inject = ['settingHelper', 'request', 'url', 'elementsModel', 'modelReport', 'dataSourcesParams', 'refactorObj'];

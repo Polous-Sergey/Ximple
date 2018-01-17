@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('settingBarCtrl', settingBarCtrl);
 
     settingBarCtrl.$inject = ['reportList', 'request', 'url', 'modelReport'];

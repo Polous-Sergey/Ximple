@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .factory('request', request);
 
     request.$inject = ['$http', '$q', 'url', '$httpParamSerializerJQLike'];

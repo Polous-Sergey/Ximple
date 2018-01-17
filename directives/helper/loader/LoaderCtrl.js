@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('LoaderCtrl', LoaderCtrl);
 
     LoaderCtrl.$inject = ['$interval'];

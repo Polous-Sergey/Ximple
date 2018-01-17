@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('startApp')
+        .module('app')
         .controller('SettingCtrl', SettingCtrl);
 
     SettingCtrl.$inject = ['$scope', 'settingHelper', 'deleteFac', 'request', 'url', 'saveQueue'];
