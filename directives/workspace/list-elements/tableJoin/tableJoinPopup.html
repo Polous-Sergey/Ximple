@@ -13,7 +13,8 @@
                         <select class="form-control"
                                 ng-model="vm.joinDataSet.firstTable"
                                 ng-options="option as option.tableName for option in vm.fromJoinTablesList"
-                                ng-change="vm.getColumnsJoinTable(vm.joinDataSet.firstTable,'first')">
+                                ng-change="vm.getColumnsJoinTable(vm.joinDataSet.firstTable,'first');">
+                            <option value="" disabled selected>Select your option</option>
                         </select>
                     </div>
                 </div>
@@ -24,10 +25,11 @@
                                 ng-model="vm.joinDataSet.secondTable"
                                 ng-change="vm.getColumnsJoinTable(vm.joinDataSet.secondTable, 'second')"
                                 ng-options="option.tableName for option in vm.toJoinTablesList">
+                            <option value="" disabled selected>Select your option</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-offset-3 col-sm-6 columns-join">
+                <div class="col-sm-offset-3 col-sm-6 columns-join" ng-show="vm.showJoinCollums">
                     <div class="col-sm-12">
                         <ul class="list-group">
                             <li ng-click="vm.changeJoinColumn($index)"

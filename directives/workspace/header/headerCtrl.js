@@ -5,9 +5,9 @@
         .module('app')
         .controller('headerCtrl', headerCtrl);
 
-    headerCtrl.$inject = ['request', 'url', '$window', 'saveQueue'];
+    headerCtrl.$inject = ['request', 'url', '$window', 'saveQueue','user'];
 //'dataServices',
-    function headerCtrl(request, url, $window, saveQueue) {
+    function headerCtrl(request, url, $window, saveQueue, user) {
         this.$onInit = function () {
             var vm = this;
             vm.fileName = '';
@@ -21,6 +21,7 @@
             vm.saveReport = saveReport;
             vm.showReports = showReports;
             vm.showSaveReportPopup = showSaveReportPopup;
+            vm.logout = logout;
 
 
 
@@ -95,6 +96,10 @@
             function showReports() {
                 console.log(vm.saveReportObj);
                 $window.open(url.showReport(vm.saveReportObj.reportName, vm.saveReportObj.reportFormat), '_blank');
+            }
+
+            function logout() {
+                user.logout()
             }
         }
     }

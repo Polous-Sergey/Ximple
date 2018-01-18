@@ -5,12 +5,13 @@
         .module('service.user', [])
         .service('user', user);
 
-    user.$inject = ['http','$sessionStorage','$localStorage', 'url'];
+    user.$inject = ['http','$sessionStorage','$localStorage', 'url','$state'];
 
-    function user(http, $sessionStorage, $localStorage, url) {
+    function user(http, $sessionStorage, $localStorage, url,$state) {
 
          return {
             login : login,
+            logout : logout,
             setUser : setUser,
             getUser : getUser
         };
@@ -26,6 +27,11 @@
             return http.post(url.login, data).then(function (res) {
                 return res;
             });
+        }
+
+        function logout() {
+            $localStorage.$reset();
+            $state.go('login');
         }
 
         function setUser(data) {

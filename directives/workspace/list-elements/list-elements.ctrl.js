@@ -12,6 +12,7 @@
         this.$onInit = function () {
             var vm = this;
             vm.selectTableName = "";
+            vm.showJoinCollums = false;
             vm.templates = [
                 'directives/workspace/list-elements/table/table.html',
                 'directives/workspace/list-elements/tableFromDataBase/tableFromDataBase.html',
@@ -156,18 +157,30 @@
             }
 
             function getColumnsJoinTable(tableName, table) {
-                debugger
+
+                vm.joinDataSet.selectFirstColumn = null;
+                vm.joinDataSet.selectSecondColumn = null;
+
                 switch (table) {
                     case 'first':
                         vm.toJoinTablesList = tableName.joinTables;
+                        vm.joinDataSet.secondTable = null;
+                        vm.showJoinCollums = false;
                         break;
                     case 'second':
                         createDisplayName(tableName);
+                        vm.showJoinCollums = true;
                         break;
                 }
                 function createDisplayName(data) {
-                    vm.columnsJoin = data.joinColumns;
+                    if (data !== null){
+                        vm.columnsJoin = data.joinColumns;
+                    }else{
+                        vm.columnsJoin ='';
+                    }
+
                 }
+
             }
 
             function changeJoinColumn(index) {
@@ -176,6 +189,12 @@
             }
 
             function openJoinTablesSettingPopup() {
+                if(vm.joinDataSet.firstTable == null ||
+                    vm.joinDataSet.secondTable == null ||
+                vm.joinDataSet.selectFirstColumn == null||
+                vm.joinDataSet.selectSecondColumn == null){
+                    return;
+                }
                 getColumnsTable(vm.joinDataSet.firstTable.tableName).then(function (data) {
                     vm.joinDataSet.firstColumns = data;
                 }).then(function () {
@@ -188,13 +207,16 @@
                 });
             }
             function getColumnsTable(tableName) {
-                return request.request(url.tableMetadata + tableName, 'GET').then(function (data) {
-                    return createDisplayName(data.data);
-                    // switch (table){
-                    //     case 'first': vm.joinDataSet.firstColumns = createDisplayName(data.data);break;
-                    //     case 'second': vm.joinDataSet.secondColumns = createDisplayName(data.data);break;
-                    // }
-                });
+                if (tableName !== null) {
+                    return request.request(url.tableMetadata + tableName, 'GET').then(function (data) {
+                        return createDisplayName(data.data);
+                        // switch (table){
+                        //     case 'first': vm.joinDataSet.firstColumns = createDisplayName(data.data);break;
+                        //     case 'second': vm.joinDataSet.secondColumns = createDisplayName(data.data);break;
+                        // }
+                    });
+                }
+
                 function createDisplayName(data) {
                     data.forEach(function (item) {
                         item.displayName = item.columnName;
@@ -205,8 +227,10 @@
             }
 
             function finishJoinTable() {
+                vm.joinDataSet.filters = vm.dataSetFilters.filters;
                 vm.joinDataSet.firstTable = vm.joinDataSet.firstTable.tableName;
                 vm.joinDataSet.secondTable = vm.joinDataSet.secondTable.tableName;
+                console.log(vm.joinDataSet);
                 addElements.tableJoin(vm.joinDataSet);
                 $('#DataSetTablesModal').modal('hide');
             }
