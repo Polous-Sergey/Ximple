@@ -10,7 +10,12 @@
         .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
             cfpLoadingBarProvider.includeSpinner = false;
         }])
-        .run(['$state',function($state){
-        $state.go('login');
+        .run(['$state','user',function($state, user){
+            if(user.getUser() !== undefined){
+                $state.go('edit');
+            }else{
+                $state.go('login');
+            }
+
     }]);
 })();

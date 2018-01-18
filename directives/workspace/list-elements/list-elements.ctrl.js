@@ -156,6 +156,7 @@
             }
 
             function getColumnsJoinTable(tableName, table) {
+                debugger
                 switch (table) {
                     case 'first':
                         vm.toJoinTablesList = tableName.joinTables;
