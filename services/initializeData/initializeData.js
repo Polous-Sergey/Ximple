@@ -34,8 +34,15 @@
         }
         function loadTables(){
             request.request(url.dataSet, "GET").then(function (data) {
-                storage.setTables(data.data);
-                $rootScope.loaderFlag = false;
+                debugger
+                if(typeof(data.data)=== 'object'){
+                    storage.setTables(data.data);
+                    $rootScope.loaderFlag = false;
+                }else{
+                    storage.setTables([]);
+                    $rootScope.loaderFlag = false;
+                }
+
                 //return true;
             }, function (data) {
                 console.log(data);

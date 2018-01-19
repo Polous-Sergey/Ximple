@@ -89,6 +89,12 @@
                 column: '',
                 row: ''
             };
+            vm.joinType = [
+                'Inner join',
+                'Join left',
+                'Join right',
+                'Full join'
+            ]
             vm.tableColumns = [];
             vm.gridModel = {
                 countColumn: 2,
@@ -99,6 +105,7 @@
                 secondTable: null,
                 firstColumns: [],
                 secondColumns: [],
+                type: null,
                 name: "",
                 selectSecondColumn: null,
                 selectFirstColumn: null
@@ -172,11 +179,12 @@
                         vm.showJoinCollums = true;
                         break;
                 }
+
                 function createDisplayName(data) {
-                    if (data !== null){
+                    if (data !== null) {
                         vm.columnsJoin = data.joinColumns;
-                    }else{
-                        vm.columnsJoin ='';
+                    } else {
+                        vm.columnsJoin = '';
                     }
 
                 }
@@ -189,10 +197,10 @@
             }
 
             function openJoinTablesSettingPopup() {
-                if(vm.joinDataSet.firstTable == null ||
+                if (vm.joinDataSet.firstTable == null ||
                     vm.joinDataSet.secondTable == null ||
-                vm.joinDataSet.selectFirstColumn == null||
-                vm.joinDataSet.selectSecondColumn == null){
+                    vm.joinDataSet.selectFirstColumn == null ||
+                    vm.joinDataSet.selectSecondColumn == null) {
                     return;
                 }
                 getColumnsTable(vm.joinDataSet.firstTable.tableName).then(function (data) {
@@ -206,6 +214,7 @@
                     });
                 });
             }
+
             function getColumnsTable(tableName) {
                 if (tableName !== null) {
                     return request.request(url.tableMetadata + tableName, 'GET').then(function (data) {

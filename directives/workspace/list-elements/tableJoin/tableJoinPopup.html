@@ -29,6 +29,18 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="col-sm-12">
+                        <label>Join type: </label>
+                        <select class="form-control"
+                                ng-model="vm.joinDataSet.type"
+                                ng-options="item as item for item in vm.joinType">
+                            <option value="" disabled selected>Select table joining type</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="col-sm-offset-3 col-sm-6 columns-join" ng-show="vm.showJoinCollums">
                     <div class="col-sm-12">
                         <ul class="list-group">
@@ -36,7 +48,9 @@
                                 ng-class="row.joinColumn === vm.joinDataSet.selectFirstColumn ? 'active': ''"
                                 class="list-group-item"
                                 ng-repeat="row in vm.columnsJoin">
-                                <h4><span class="label label-default">{{row.joinColumn}}</span><i class="fa fa-angle-double-right" aria-hidden="true"></i><span class="label label-default">{{row.inverseJoinColumn}}</span></h4>
+                                <h4><span class="label label-default">{{row.joinColumn}}</span><i
+                                        class="fa fa-angle-double-right" aria-hidden="true"></i><span
+                                        class="label label-default">{{row.inverseJoinColumn}}</span></h4>
                             </li>
                         </ul>
                     </div>
@@ -46,7 +60,8 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button"
-                    ng-disabled="vm.joinDataSet.selectFirstColumn === null || vm.joinDataSet.selectSecondColumn === null"
+                    ng-disabled="vm.joinDataSet.selectFirstColumn === null || vm.joinDataSet.selectSecondColumn === null ||
+vm.joinDataSet.type === null"
                     class="btn btn-primary" ng-click="vm.openJoinTablesSettingPopup()">
                 Next
             </button>

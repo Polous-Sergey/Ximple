@@ -5,9 +5,9 @@
         .module('factory.request', [])
         .factory('request', request);
 
-    request.$inject = ['$http', '$q', 'url', '$httpParamSerializerJQLike'];
+    request.$inject = ['$http', '$q', 'url', '$httpParamSerializerJQLike','$state'];
 
-    function request($http, $q, url, $httpParamSerializerJQLike) {
+    function request($http, $q, url, $httpParamSerializerJQLike,$state) {
         return {
             request:request
         };
@@ -24,6 +24,9 @@
                 console.log('result', dataResult);
                 defer.resolve(dataResult);
             }, function (dataError) {
+                if(dataError.status == 401){
+                    $state.go('login');
+                }
                 defer.reject(dataError);
             });
             return defer.promise;

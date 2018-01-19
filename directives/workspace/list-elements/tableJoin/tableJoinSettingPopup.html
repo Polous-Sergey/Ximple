@@ -17,6 +17,14 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="DataSetColumns">
+                    <div class="container-button-select-all">
+                        <button type="button" ng-click="vm.selectAllRow(true)" class="btn btn-default">Select All
+                        </button>
+                        <button type="button" ng-click="vm.selectNoneRow(true)" class="btn btn-default">Select
+                            None
+                        </button>
+                    </div>
+                    <div class="table-scroll">
                     <table class="table table-hover">
                         <tr>
                             <th class="col-sm-1">Position</th>
@@ -76,13 +84,8 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="container-button-select-all">
-                        <button type="button" ng-click="vm.selectAllRow(true)" class="btn btn-default">Select All
-                        </button>
-                        <button type="button" ng-click="vm.selectNoneRow(true)" class="btn btn-default">Select
-                            None
-                        </button>
                     </div>
+
                 </div>
                 <div role="tabpanel" class="tab-pane" id="DataSetFilters">
                     <div class="row" style="margin-top: 10px;">
@@ -147,6 +150,7 @@
                         </div>
                     </div>
                     <div class="row" ng-if="vm.dataSetFilters.filters.length > 0">
+                        <div class="table-scroll" style="max-height: 300px">
                         <table class="table">
                             <caption>List of filters</caption>
                             <thead>
@@ -166,6 +170,7 @@
                             </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
