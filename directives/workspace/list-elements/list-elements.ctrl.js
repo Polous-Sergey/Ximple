@@ -192,6 +192,7 @@
             }
 
             function changeJoinColumn(index) {
+                 console.log(vm.columnsJoin,'123')
                 vm.joinDataSet.selectFirstColumn = vm.columnsJoin[index].joinColumn;
                 vm.joinDataSet.selectSecondColumn = vm.columnsJoin[index].inverseJoinColumn;
             }
