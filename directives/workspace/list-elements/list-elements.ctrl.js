@@ -155,8 +155,15 @@
             }
 
             function openJoinTablePopup() {
+                vm.joinDataSet.firstTable = null;
+                vm.joinDataSet.secondTable = null;
+                vm.joinDataSet.selectFirstColumn = null;
+                vm.joinDataSet.selectSecondColumn = null;
+                vm.showJoinCollums = false;
+                vm.joinDataSet.type = null;
+                vm.toJoinTablesList =[];
+
                 request.request(url.getConfigJoin, 'GET').then(function (data) {
-                    console.log(data);
                     vm.fromJoinTablesList = data.data;
                 });
                 vm.template = vm.templates[3];
@@ -183,6 +190,10 @@
                 function createDisplayName(data) {
                     if (data !== null) {
                         vm.columnsJoin = data.joinColumns;
+                        vm.columnsJoin.map(function (item) {
+                            item.checked = false;
+                        })
+                        console.log(vm.columnsJoin,'qweqweqe');
                     } else {
                         vm.columnsJoin = '';
                     }
@@ -192,7 +203,7 @@
             }
 
             function changeJoinColumn(index) {
-                 console.log(vm.columnsJoin,'123')
+                console.log(vm.columnsJoin,'123')
                 vm.joinDataSet.selectFirstColumn = vm.columnsJoin[index].joinColumn;
                 vm.joinDataSet.selectSecondColumn = vm.columnsJoin[index].inverseJoinColumn;
             }

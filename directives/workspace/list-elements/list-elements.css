@@ -72,7 +72,8 @@
     color:#777;
 }
 .columns-join{
-    margin-top: 20px;
+    margin: 3% 20%;
+    /*margin-top: 20px;*/
 }
 .columns-join .list-group-item{
     cursor: pointer;
@@ -98,4 +99,13 @@
 .list-reporting > .navbar-nav a> .fa{
     line-height: 30px;
     font-size: 20px;
+}
+input[type=checkbox], input[type=radio] {
+    margin-top: 6px;
+}
+@media screen and (max-width: 980px)  {
+    .columns-join {
+        margin: 10px 0;
+    }
+
 }

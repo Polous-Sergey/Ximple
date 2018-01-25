@@ -82,7 +82,10 @@
 
             function saveReportFinish() {
                 saveQueue.saveLastElement();
-                request.request(url.saveReport, 'POST', null, {fileName: vm.fileName}).then(function (data) {
+                //todo remake company id field
+                request.request(url.saveReport, 'POST', null, {
+                    companyId: '00013',
+                    fileName: vm.fileName}).then(function (data) {
                     vm.fileName = '';
                     $('#DataSetTablesModal').modal('hide');
                 });
