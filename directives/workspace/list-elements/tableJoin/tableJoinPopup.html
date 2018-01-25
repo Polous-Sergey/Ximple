@@ -7,7 +7,7 @@
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-5">
                     <label>First tables: </label>
                     <select class="form-control"
                             ng-model="vm.joinDataSet.firstTable"
@@ -16,9 +16,19 @@
                         <option value="" disabled selected>Select your option</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <!--</div>-->
+
+                <div class="col-xs-2">
+                    <label>Join type: </label>
+                    <select class="form-control"
+                            ng-model="vm.joinDataSet.type"
+                            ng-options="item as item for item in vm.joinType">
+                        <option value="" disabled selected>Joining type</option>
+                    </select>
+                </div>
+
+                <!--<div class="row">-->
+                <div class="col-xs-5">
                     <label>Second table: </label>
                     <select class="form-control"
                             ng-model="vm.joinDataSet.secondTable"
@@ -28,14 +38,7 @@
                     </select>
                 </div>
 
-                <div class="col-md-6">
-                    <label>Join type: </label>
-                    <select class="form-control"
-                            ng-model="vm.joinDataSet.type"
-                            ng-options="item as item for item in vm.joinType">
-                        <option value="" disabled selected>Select table joining type</option>
-                    </select>
-                </div>
+
             </div>
             <div class="row">
                 <div class="col-sm-offset-3 col-sm-6 columns-join" ng-show="vm.showJoinCollums"
@@ -43,7 +46,7 @@
                     <div class="col-sm-12">
                         <ul class="list-group">
                             <li ng-click="vm.changeJoinColumn($index)"
-
+                                ng-class="row.checked ? 'active' : ''"
                                 class="list-group-item"
                                 ng-repeat="row in vm.columnsJoin"
                                 style="width: 500px;">

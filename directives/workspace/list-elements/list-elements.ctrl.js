@@ -165,6 +165,7 @@
 
                 request.request(url.getConfigJoin, 'GET').then(function (data) {
                     vm.fromJoinTablesList = data.data;
+                    console.log(vm.fromJoinTablesList,'vm.fromJoinTablesList')
                 });
                 vm.template = vm.templates[3];
                 $('#tablesModal').modal('show');
