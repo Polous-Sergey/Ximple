@@ -100,7 +100,7 @@
                 countColumn: 2,
                 countRow: 2
             };
-            vm.joinDataSet = {
+            vm.joinDataSet = [{
                 firstTable: null,
                 secondTable: null,
                 firstColumns: [],
@@ -108,8 +108,9 @@
                 type: null,
                 name: "",
                 selectSecondColumn: null,
-                selectFirstColumn: null
-            };
+                selectFirstColumn: null,
+                showJoinCollums: false
+            }];
             vm.fromJoinTablesList = [];
             vm.toJoinTablesList = [];
             vm.columnsJoin = [];
@@ -165,37 +166,74 @@
 
                 request.request(url.getConfigJoin, 'GET').then(function (data) {
                     vm.fromJoinTablesList = data.data;
+                    console.log('aaaaaaaaaaaaaaaaaaa', data.data)
+                    addNewJoin();
                 });
                 vm.template = vm.templates[3];
                 $('#tablesModal').modal('show');
+
+
+                /////////////////////////
+                ///////////////////////////////
+
+                vm.joinPopapMainData = [];
+
+                vm.addNewJoin = addNewJoin;
+
+
+                function addNewJoin() {
+                    var tmpObj = {
+                        firstTable: vm.fromJoinTablesList,
+                        secondTable: vm.fromJoinTablesList,
+                        joinType: vm.joinType,
+                        fieldsData: []
+                    };
+
+                    vm.joinPopapMainData.push(tmpObj);
+
+                    var tmpJoinDataSet = {
+                        firstTable: null,
+                        secondTable: null,
+                        firstColumns: [],
+                        secondColumns: [],
+                        type: null,
+                        name: "",
+                        selectSecondColumn: null,
+                        selectFirstColumn: null,
+                        showJoinCollums: false
+                    };
+
+                    vm.joinDataSet.push(tmpJoinDataSet);
+                }
+
             }
 
-            function getColumnsJoinTable(tableName, table) {
+            function getColumnsJoinTable(tableName, table, mainKey) {
 
                 vm.joinDataSet.selectFirstColumn = null;
                 vm.joinDataSet.selectSecondColumn = null;
 
                 switch (table) {
                     case 'first':
-                        vm.toJoinTablesList = tableName.joinTables;
-                        vm.joinDataSet.secondTable = null;
-                        vm.showJoinCollums = false;
+                        vm.joinDataSet[mainKey].secondTable = null;
+                        vm.joinDataSet[mainKey].showJoinCollums = false;
+                        vm.joinPopapMainData[mainKey].secondTable = tableName.joinTables;
                         break;
                     case 'second':
                         createDisplayName(tableName);
-                        vm.showJoinCollums = true;
+                        vm.joinDataSet[mainKey].showJoinCollums = true;
                         break;
                 }
 
                 function createDisplayName(data) {
                     if (data !== null) {
-                        vm.columnsJoin = data.joinColumns;
-                        vm.columnsJoin.map(function (item) {
+                        vm.joinPopapMainData[mainKey].fieldsData = data.joinColumns;
+                        vm.joinPopapMainData[mainKey].fieldsData.map(function (item) {
                             item.checked = false;
-                        })
+                        });
                         console.log(vm.columnsJoin,'qweqweqe');
                     } else {
-                        vm.columnsJoin = '';
+                        vm.joinPopapMainData[mainKey].fieldsData = '';
                     }
 
                 }
@@ -316,6 +354,10 @@
                 vm.tablesList = storage.getTables();
                 //vm.dataset = dataServices.dataSet;
             }
+
+
+
+
         }
     }
 })();
