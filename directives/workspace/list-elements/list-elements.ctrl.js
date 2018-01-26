@@ -264,23 +264,22 @@
                 //     return;
                 // }
                 vm.tableColumns.length = 0;
-                debugger
                 vm.joinDataSet.forEach(function (el, index) {
 
                     getColumnsTable(vm.joinDataSet[index].firstTable.tableName).then(function (data) {
-                        debugger
                         vm.joinDataSet[index].firstColumns = data;
                     }).then(function () {
                         getColumnsTable(vm.joinDataSet[index].secondTable.tableName).then(function (data) {
                             vm.joinDataSet[index].secondColumns = data;
-                            vm.tableColumns = vm.tableColumns.concat(vm.joinDataSet[index].firstColumns, vm.joinDataSet[index].secondColumns);
+                            var newArr = vm.tableColumns.concat(vm.joinDataSet[index].firstColumns, vm.joinDataSet[index].secondColumns);
+                            vm.tableColumns = vm.tableColumns.concat(newArr);
                             debugger
                             vm.template = vm.templates[4];
                         });
                     });
 
                 })
-                debugger
+                console.log(vm.tableColumns)
             }
 
             function getColumnsTable(tableName) {

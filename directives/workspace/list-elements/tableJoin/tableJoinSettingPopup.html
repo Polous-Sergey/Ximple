@@ -31,7 +31,7 @@
                             <th class="col-sm-4">Selected</th>
                             <th class="col-sm-7">Name</th>
                         </tr>
-                        <tr ng-repeat="row in vm.joinDataSet.firstColumns track by $index">
+                        <tr ng-repeat="row in vm.tableColumns track by $index">
                             <td>
                                 <div class="position-container">
                                     <div class="up-position" ng-click="vm.upRowPosition($index)" ng-hide="$first">
