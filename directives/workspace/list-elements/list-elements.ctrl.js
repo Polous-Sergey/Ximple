@@ -265,15 +265,16 @@
                 // }
                 vm.tableColumns.length = 0;
                 debugger
-                vm.joinDataSet.forEach(function (el) {
+                vm.joinDataSet.forEach(function (el, index) {
 
-                    getColumnsTable(vm.joinDataSet[el].firstTable.tableName).then(function (data) {
+                    getColumnsTable(vm.joinDataSet[index].firstTable.tableName).then(function (data) {
                         debugger
-                        vm.joinDataSet[el].firstColumns = data;
+                        vm.joinDataSet[index].firstColumns = data;
                     }).then(function () {
-                        getColumnsTable(vm.joinDataSet[el].secondTable.tableName).then(function (data) {
-                            vm.joinDataSet[el].secondColumns = data;
-                            vm.tableColumns = vm.tableColumns.concat(vm.joinDataSet[el].firstColumns, vm.joinDataSet[el].secondColumns);
+                        getColumnsTable(vm.joinDataSet[index].secondTable.tableName).then(function (data) {
+                            vm.joinDataSet[index].secondColumns = data;
+                            vm.tableColumns = vm.tableColumns.concat(vm.joinDataSet[index].firstColumns, vm.joinDataSet[index].secondColumns);
+                            debugger
                             vm.template = vm.templates[4];
                         });
                     });
