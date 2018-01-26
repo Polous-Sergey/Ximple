@@ -326,30 +326,30 @@
             }
 
             function selectAllRow(joinFlag) {
-                if (joinFlag) {
-                    vm.joinDataSet.firstColumns.forEach(function (item) {
-                        item.selected = true;
-                    });
-                    vm.joinDataSet.secondColumns.forEach(function (item) {
-                        item.selected = true;
-                    });
-                    return;
-                }
+                // if (joinFlag) {
+                //     vm.joinDataSet.firstColumns.forEach(function (item) {
+                //         item.selected = true;
+                //     });
+                //     vm.joinDataSet.secondColumns.forEach(function (item) {
+                //         item.selected = true;
+                //     });
+                //     return;
+                // }
                 vm.tableColumns.forEach(function (item, i) {
                     item.selected = true;
                 });
             }
 
             function selectNoneRow(joinFlag) {
-                if (joinFlag) {
-                    vm.joinDataSet.firstColumns.forEach(function (item) {
-                        item.selected = false;
-                    });
-                    vm.joinDataSet.secondColumns.forEach(function (item) {
-                        item.selected = false;
-                    });
-                    return;
-                }
+                // if (joinFlag) {
+                //     vm.joinDataSet.firstColumns.forEach(function (item) {
+                //         item.selected = false;
+                //     });
+                //     vm.joinDataSet.secondColumns.forEach(function (item) {
+                //         item.selected = false;
+                //     });
+                //     return;
+                // }
                 vm.tableColumns.forEach(function (item, i) {
                     item.selected = false;
                 });
