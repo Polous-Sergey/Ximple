@@ -88,76 +88,122 @@
         }
 
         function tableJoin(joinData) {
-            debugger
-            var firstDatasetName;
-            var secondDatasetName;
-            var firstDataSetId;
-            var secondDataSetId;
+            debugger;
+            console.log('joinData', joinData);
+            var firstDatasetName = [];
+            var secondDatasetName = [];
+            var firstDataSetId = [];
+            var secondDataSetId = [];
             var joinDataSetName = 'jds' + (++dataSetCnt);
             var joinDataSetId;
             var arrColumns = [];
-            newDataSet().then(function (data) {
-                firstDatasetName = data.dataSetName;
-                firstDataSetId = data.dataSetId;
-                return null;
-            }).then(function (data) {
-                return dataSetCreate(joinData.firstTable, joinData.firstColumns);
-            }).then(function () {
-                return newDataSet().then(function (data) {
-                    secondDatasetName = data.dataSetName;
-                    secondDataSetId = data.dataSetId;
+
+            var couter = 0;
+
+            joinData.forEach(function (item, index) {
+                newDataSet().then(function (data) {
+                    firstDatasetName[index] = data.dataSetName;
+                    firstDataSetId[index] = data.dataSetId;
                     return null;
+                }).then(function (data) {
+                    return dataSetCreate(joinData[index].firstTable.tableName, joinData[index].firstColumns);
+                }).then(function () {
+                    return newDataSet().then(function (data) {
+                        secondDatasetName[index] = data.dataSetName;
+                        secondDataSetId[index] = data.dataSetId;
+                        return null;
+                    })
+                }).then(function (data) {
+                    return dataSetCreate(joinData[index].secondTable.tableName, joinData[index].secondColumns).then(function () {couter++; next()});
                 })
-            }).then(function (data) {
-                return dataSetCreate(joinData.secondTable, joinData.secondColumns);
-            }).then(function () {
-                var joinObj = {
-                    joinType: "inner",
-                    joinOperator: "eq",
-                    rowFetchLimit: 50,
-                    name: joinDataSetName,
-                    firstDsID: firstDataSetId,
-                    secondDsID: secondDataSetId,
-                    leftColumn: joinData.selectFirstColumn,
-                    rightColumn: joinData.selectSecondColumn
-                };
-                debugger
-                return request.request(url.joinDataSet, 'POST', joinObj).then(function (data) {
-                    return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
-                });
-            }).then(function (data) {
+            });
 
-                arrColumns = joinData.firstColumns.concat(joinData.secondColumns);
-                var tempColumns = [];
-                data.columns.forEach(function (item, i) {
-                    item.displayName = arrColumns[i].displayName;
-                    item.selected = arrColumns[i].selected;
-                    if(item.selected){
-                        tempColumns.push(item);
-                    }
-                });
+            function next() {
+                if(couter != joinData.length){
+                  return
+                }
+                var joinObj = {};
+                newDataSet().then(function (data) {
+                    debugger;
+                    joinObj = {
+                        id: data.dataSetId,
+                        rowFetchLimit: 50,
+                        lictTables: [],
+                        joinCondition: []
+                    };
+                    joinData.forEach(function (item, index) {
+                        var firstSelectedColumns = item.firstColumns.filter(function (item) {
+                            if(item.selected){
+                                return true
+                            }
+                        });
+                        var secondSelectedColumns = item.secondColumns.filter(function (item) {
+                            if(item.selected){
+                                return true
+                            }
+                        });
+                        var tmpObj1 = [
+                            {
+                                name: item.firstTable.tableName,
+                                columns: item.firstColumns
+                            },{
+                                name: item.secondTable.tableName,
+                                columns: item.secondColumns
+                            }
+                        ];
+                        var tmpObj2 = {
+                            firstTable: index,
+                            secondTable: index + 1,
+                            type: joinData[index].type,
+                            firstColumns: firstSelectedColumns,
+                            secondColumns: secondSelectedColumns,
+                            causes: ['AND'],
+                            operators: [' = ']
+                        };
+                        joinObj.lictTables.push(tmpObj1[0]);
+                        joinObj.lictTables.push(tmpObj1[1]);
+                        joinObj.joinCondition.push(tmpObj2);
+                    })
 
-                return createTable(data.dataSetName, "", tempColumns);
-            }).then(function (data) {
-                joinDataSetId = data.data.id;
-                showTable(data);
-                function showTable(data) {
-                    var table = elementsModel.tableModelDataSet(data.data, data.data.id, arrColumns);
-                    if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
-                        settingHelper.element.childrens.push(table);
-                    }
-                    else {
-                        for (var i = 0; i < modelReport.models.container.length; i++) {
-                            if (modelReport.models.container[i].selected) {
-                                modelReport.models.container[i].elements.push(table);
-                                break;
+                }).then(function () {
+                    return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
+                        return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
+                    })
+                }).then(function (data) {
+
+                    arrColumns = joinData.firstColumns.concat(joinData.secondColumns);
+                    var tempColumns = [];
+                    data.columns.forEach(function (item, i) {
+                        item.displayName = arrColumns[i].displayName;
+                        item.selected = arrColumns[i].selected;
+                        if(item.selected){
+                            tempColumns.push(item);
+                        }
+                    });
+
+                    return createTable(data.dataSetName, "", tempColumns);
+                }).then(function (data) {
+                    joinDataSetId = data.data.id;
+                    showTable(data);
+                    function showTable(data) {
+                        var table = elementsModel.tableModelDataSet(data.data, data.data.id, arrColumns);
+                        if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
+                            settingHelper.element.childrens.push(table);
+                        }
+                        else {
+                            for (var i = 0; i < modelReport.models.container.length; i++) {
+                                if (modelReport.models.container[i].selected) {
+                                    modelReport.models.container[i].elements.push(table);
+                                    break;
+                                }
                             }
                         }
                     }
-                }
 
-                $('#tablesModal').modal('hide');
-            });
+                    $('#tablesModal').modal('hide');
+                })
+            }
+
         }
 
         function newDataSet() {

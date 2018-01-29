@@ -90,11 +90,10 @@
                 row: ''
             };
             vm.joinType = [
-                'Inner join',
-                'Join left',
-                'Join right',
-                'Full join'
-            ]
+                'INNER JOIN',
+                'RIGHT JOIN',
+                'LEFT JOIN'
+            ];
             vm.tableColumns = [];
             vm.gridModel = {
                 countColumn: 2,
@@ -304,17 +303,6 @@
             }
 
             function finishJoinTable() {
-                vm.joinDataSet.filters = vm.dataSetFilters.filters;
-                var tmpArrofFirstTableNames = [];
-                var tmpArrofSecondTableNames = [];
-                vm.joinDataSet.forEach(function (el,index) {
-                    tmpArrofFirstTableNames.push(vm.joinDataSet[index].firstTable.tableName);
-                    tmpArrofSecondTableNames.push(vm.joinDataSet[index].secondTable.tableName);
-                });
-                debugger
-                vm.joinDataSet.firstTable = tmpArrofFirstTableNames;
-                vm.joinDataSet.secondTable = tmpArrofSecondTableNames;
-                console.log(vm.joinDataSet);
                 addElements.tableJoin(vm.joinDataSet);
                 $('#DataSetTablesModal').modal('hide');
             }
