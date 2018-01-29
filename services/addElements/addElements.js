@@ -145,12 +145,37 @@
                         var tmpObj1 = [
                             {
                                 name: item.firstTable.tableName,
-                                columns: item.firstColumns
+                                columns: []
                             },{
                                 name: item.secondTable.tableName,
                                 columns: item.secondColumns
                             }
                         ];
+
+                        item.firstColumns.forEach(function (item, index) {
+                            var obj = {};
+                            obj.name = item.columnName;
+                            obj.dataType = item.columnType;
+                            obj.analysis = "dimension";
+                            obj.nativeName = item.columnName;
+                            obj.displayName = item.displayName;
+                            obj.position = String(index + 1);
+                            obj.nativeColumnType = String(item.nativeColumnType);
+
+                            tmpObj1[0].columns.push(obj);
+                        });
+                        item.secondColumns.forEach(function (item, index) {
+                            var obj = {};
+                            obj.name = item.columnName;
+                            obj.dataType = item.columnType;
+                            obj.analysis = "dimension";
+                            obj.nativeName = item.columnName;
+                            obj.displayName = item.displayName;
+                            obj.position = String(index + 1);
+                            obj.nativeColumnType = String(item.nativeColumnType);
+
+                            tmpObj1[1].columns.push(obj);
+                        });
                         var tmpObj2 = {
                             firstTable: index,
                             secondTable: index + 1,
