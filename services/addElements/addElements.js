@@ -88,6 +88,7 @@
         }
 
         function tableJoin(joinData) {
+            debugger
             var firstDatasetName;
             var secondDatasetName;
             var firstDataSetId;
@@ -120,6 +121,7 @@
                     leftColumn: joinData.selectFirstColumn,
                     rightColumn: joinData.selectSecondColumn
                 };
+                debugger
                 return request.request(url.joinDataSet, 'POST', joinObj).then(function (data) {
                     return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
                 });

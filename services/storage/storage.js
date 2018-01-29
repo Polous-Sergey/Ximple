@@ -18,7 +18,7 @@
         }
 
         function setTables(newTable) {
-            debugger
+            // debugger
             tables.length = 0;
             tables.push.apply(tables, newTable);
         }

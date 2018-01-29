@@ -34,7 +34,7 @@
         }
         function loadTables(){
             request.request(url.dataSet, "GET").then(function (data) {
-                debugger
+                // debugger
                 if(typeof(data.data)=== 'object'){
                     storage.setTables(data.data);
                     $rootScope.loaderFlag = false;

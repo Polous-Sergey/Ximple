@@ -279,10 +279,11 @@
                     });
 
                 })
-                console.log(vm.tableColumns)
+                console.log(vm.tableColumns,'collumns')
             }
 
             function getColumnsTable(tableName) {
+                debugger
                 if (tableName !== null) {
                     return request.request(url.tableMetadata + tableName, 'GET').then(function (data) {
                         return createDisplayName(data.data);
@@ -304,8 +305,15 @@
 
             function finishJoinTable() {
                 vm.joinDataSet.filters = vm.dataSetFilters.filters;
-                vm.joinDataSet.firstTable = vm.joinDataSet.firstTable.tableName;
-                vm.joinDataSet.secondTable = vm.joinDataSet.secondTable.tableName;
+                var tmpArrofFirstTableNames = [];
+                var tmpArrofSecondTableNames = [];
+                vm.joinDataSet.forEach(function (el,index) {
+                    tmpArrofFirstTableNames.push(vm.joinDataSet[index].firstTable.tableName);
+                    tmpArrofSecondTableNames.push(vm.joinDataSet[index].secondTable.tableName);
+                });
+                debugger
+                vm.joinDataSet.firstTable = tmpArrofFirstTableNames;
+                vm.joinDataSet.secondTable = tmpArrofSecondTableNames;
                 console.log(vm.joinDataSet);
                 addElements.tableJoin(vm.joinDataSet);
                 $('#DataSetTablesModal').modal('hide');
