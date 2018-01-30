@@ -170,10 +170,10 @@
                         secondSelectedColumns = foreacerFunc2(secondSelectedColumns);
                         var tmpObj1 = [
                             {
-                                name: item.firstTable.tableName,
+                                tableName: item.firstTable.tableName,
                                 columns: []
                             },{
-                                name: item.secondTable.tableName,
+                                tableName: item.secondTable.tableName,
                                 columns: item.secondColumns
                             }
                         ];
