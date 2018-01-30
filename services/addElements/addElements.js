@@ -87,6 +87,30 @@
             });
         }
 
+        function foreacerFunc(data) {
+            var result = [];
+            data.forEach(function (item, index) {
+                var obj = {};
+                obj.name = item.columnName;
+                obj.dataType = item.columnType;
+                obj.analysis = "dimension";
+                obj.nativeName = item.columnName;
+                obj.displayName = item.displayName;
+                obj.position = String(index + 1);
+                obj.nativeColumnType = String(item.nativeColumnType);
+
+                result.push(obj);
+            });
+            return result
+        }
+        function foreacerFunc2(data) {
+            var result = [];
+            data.forEach(function (item, index) {
+                result.push(item.columnName);
+            });
+            return result
+        }
+
         function tableJoin(joinData) {
             debugger;
             console.log('joinData', joinData);
@@ -137,11 +161,13 @@
                                 return true
                             }
                         });
+                        firstSelectedColumns = foreacerFunc2(firstSelectedColumns);
                         var secondSelectedColumns = item.secondColumns.filter(function (item) {
                             if(item.selected){
                                 return true
                             }
                         });
+                        secondSelectedColumns = foreacerFunc2(secondSelectedColumns);
                         var tmpObj1 = [
                             {
                                 name: item.firstTable.tableName,
@@ -152,30 +178,32 @@
                             }
                         ];
 
-                        item.firstColumns.forEach(function (item, index) {
-                            var obj = {};
-                            obj.name = item.columnName;
-                            obj.dataType = item.columnType;
-                            obj.analysis = "dimension";
-                            obj.nativeName = item.columnName;
-                            obj.displayName = item.displayName;
-                            obj.position = String(index + 1);
-                            obj.nativeColumnType = String(item.nativeColumnType);
-
-                            tmpObj1[0].columns.push(obj);
-                        });
-                        item.secondColumns.forEach(function (item, index) {
-                            var obj = {};
-                            obj.name = item.columnName;
-                            obj.dataType = item.columnType;
-                            obj.analysis = "dimension";
-                            obj.nativeName = item.columnName;
-                            obj.displayName = item.displayName;
-                            obj.position = String(index + 1);
-                            obj.nativeColumnType = String(item.nativeColumnType);
-
-                            tmpObj1[1].columns.push(obj);
-                        });
+                        tmpObj1[0].columns = foreacerFunc(item.firstColumns);
+                        // item.firstColumns.forEach(function (item, index) {
+                        //     var obj = {};
+                        //     obj.name = item.columnName;
+                        //     obj.dataType = item.columnType;
+                        //     obj.analysis = "dimension";
+                        //     obj.nativeName = item.columnName;
+                        //     obj.displayName = item.displayName;
+                        //     obj.position = String(index + 1);
+                        //     obj.nativeColumnType = String(item.nativeColumnType);
+                        //
+                        //     tmpObj1[0].columns.push(obj);
+                        // });
+                        tmpObj1[1].columns = foreacerFunc(item.secondColumns);
+                        // item.secondColumns.forEach(function (item, index) {
+                        //     var obj = {};
+                        //     obj.name = item.columnName;
+                        //     obj.dataType = item.columnType;
+                        //     obj.analysis = "dimension";
+                        //     obj.nativeName = item.columnName;
+                        //     obj.displayName = item.displayName;
+                        //     obj.position = String(index + 1);
+                        //     obj.nativeColumnType = String(item.nativeColumnType);
+                        //
+                        //     tmpObj1[1].columns.push(obj);
+                        // });
                         var tmpObj2 = {
                             firstTable: index,
                             secondTable: index + 1,
