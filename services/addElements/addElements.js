@@ -152,8 +152,8 @@
                     joinObj = {
                         id: data.dataSetId,
                         rowFetchLimit: 50,
-                        lictTables: [],
-                        joinCondition: []
+                        listTables: [],
+                        joinConditions: []
                     };
                     joinData.forEach(function (item, index) {
                         var firstSelectedColumns = item.firstColumns.filter(function (item) {
@@ -213,9 +213,9 @@
                             causes: ['AND'],
                             operators: [' = ']
                         };
-                        joinObj.lictTables.push(tmpObj1[0]);
-                        joinObj.lictTables.push(tmpObj1[1]);
-                        joinObj.joinCondition.push(tmpObj2);
+                        joinObj.listTables.push(tmpObj1[0]);
+                        joinObj.listTables.push(tmpObj1[1]);
+                        joinObj.joinConditions.push(tmpObj2);
                     })
 
                 }).then(function () {

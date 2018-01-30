@@ -9,6 +9,7 @@
 
         // var proxy = "http://localhost:8080/";
         var server = 'http://localhost:8080/http://10.69.52.15/XimpleReportWeb/';
+        // var server = 'http://localhost:8080/http://192.168.1.123:9080/XimpleReportWeb/';
         // var server = 'http://localhost:9083/XimpleReportWeb/';
         // var server = proxy + serv;
 
