@@ -156,18 +156,32 @@
                         joinConditions: []
                     };
                     joinData.forEach(function (item, index) {
-                        var firstSelectedColumns = item.firstColumns.filter(function (item) {
-                            if(item.selected){
-                                return true
-                            }
-                        });
-                        firstSelectedColumns = foreacerFunc2(firstSelectedColumns);
-                        var secondSelectedColumns = item.secondColumns.filter(function (item) {
-                            if(item.selected){
-                                return true
-                            }
-                        });
-                        secondSelectedColumns = foreacerFunc2(secondSelectedColumns);
+
+                        var firstSelectedColumns = [];
+                        var secondSelectedColumns = [];
+                        var causesForSelectedColumns = [];
+                            item.selectColumns.forEach(function (el) {
+                                firstSelectedColumns.push(el.joinColumn);
+                                secondSelectedColumns.push(el.inverseJoinColumn);
+                                causesForSelectedColumns.push(el.type);
+
+                        })
+                        //
+                        //     item.firstColumns.filter(function (item) {
+                        //     if(item.selected){
+                        //         return true
+                        //     }
+                        // });
+                        // firstSelectedColumns = foreacerFunc2(firstSelectedColumns);
+
+
+
+                        //     = item.secondColumns.filter(function (item) {
+                        //     if(item.selected){
+                        //         return true
+                        //     }
+                        // });
+                        // secondSelectedColumns = foreacerFunc2(secondSelectedColumns);
                         var tmpObj1 = [
                             {
                                 tableName: item.firstTable.tableName,
@@ -210,7 +224,8 @@
                             type: joinData[index].type,
                             firstColumns: firstSelectedColumns,
                             secondColumns: secondSelectedColumns,
-                            causes: ['AND'],
+                            // causes: ['AND'],
+                            causes: causesForSelectedColumns,
                             operators: [' = ']
                         };
                         joinObj.listTables.push(tmpObj1[0]);

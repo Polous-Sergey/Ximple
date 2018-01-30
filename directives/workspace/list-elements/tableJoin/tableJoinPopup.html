@@ -39,7 +39,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-offset-3 col-sm-6 columns-join" ng-show="vm.joinDataSet[mainKey].showJoinCollums">
+                    <div class="col-sm-offset-3 col-sm-6 columns-join"
+                         ng-show="vm.joinDataSet[mainKey].showJoinCollums">
                         <div class="col-sm-12">
                             <ul class="list-group">
                                 <li ng-click="vm.changeJoinColumn(mainKey,$index,row.checked)"
@@ -49,10 +50,16 @@
                                     style="width: 500px;">
                                     <h4 class="row">
                                         <input type="checkbox" class="col-sm-1" ng-model="row.checked">
-                                        <span class="label label-default col-sm-5">{{row.joinColumn}}</span><i
-                                            class="fa fa-angle-double-right col-sm-1" aria-hidden="true"></i><span
-                                            class="label label-default col-sm-5"
-                                            style="margin-right: 2px">{{row.inverseJoinColumn}}</span>
+                                        <span class="label label-default col-sm-5">{{row.joinColumn}}</span>
+                                        <!--<i class="fa fa-angle-double-right col-sm-1" aria-hidden="true"></i>-->
+                                        <select class="form-control"
+                                                ng-model="row.type">
+                                            <option value="AND" selected>AND</option>
+                                            <option value="OR">OR</option>
+                                        </select>
+                                        <span
+                                                class="label label-default col-sm-5"
+                                                style="margin-right: 2px">{{row.inverseJoinColumn}}</span>
                                     </h4>
                                 </li>
                             </ul>
