@@ -231,6 +231,7 @@
                         vm.joinPopapMainData[mainKey].fieldsData = data.joinColumns;
                         vm.joinPopapMainData[mainKey].fieldsData.map(function (item) {
                             item.checked = false;
+                            item.type = 'AND';
                         });
                         console.log(vm.columnsJoin,'qweqweqe');
                     } else {

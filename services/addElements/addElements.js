@@ -156,66 +156,43 @@
                         joinConditions: []
                     };
                     joinData.forEach(function (item, index) {
-                        var firstSelectedColumns = item.firstColumns.filter(function (item) {
-                            if(item.selected){
-                                return true
-                            }
+
+                        var firstSelectedColumns = [];
+                        var secondSelectedColumns = [];
+                        var causesForSelectedColumns = [];
+                        var neznayu = [];
+                            item.selectColumns.forEach(function (el) {
+                                firstSelectedColumns.push(el.joinColumn);
+                                secondSelectedColumns.push(el.inverseJoinColumn);
+                                causesForSelectedColumns.push(el.type);
+                                neznayu.push(' = ');
+
                         });
-                        firstSelectedColumns = foreacerFunc2(firstSelectedColumns);
-                        var secondSelectedColumns = item.secondColumns.filter(function (item) {
-                            if(item.selected){
-                                return true
-                            }
-                        });
-                        secondSelectedColumns = foreacerFunc2(secondSelectedColumns);
                         var tmpObj1 = [
                             {
-                                name: item.firstTable.tableName,
+                                tableName: item.firstTable.tableName,
                                 columns: []
                             },{
-                                name: item.secondTable.tableName,
+                                tableName: item.secondTable.tableName,
                                 columns: item.secondColumns
                             }
                         ];
 
                         tmpObj1[0].columns = foreacerFunc(item.firstColumns);
-                        // item.firstColumns.forEach(function (item, index) {
-                        //     var obj = {};
-                        //     obj.name = item.columnName;
-                        //     obj.dataType = item.columnType;
-                        //     obj.analysis = "dimension";
-                        //     obj.nativeName = item.columnName;
-                        //     obj.displayName = item.displayName;
-                        //     obj.position = String(index + 1);
-                        //     obj.nativeColumnType = String(item.nativeColumnType);
-                        //
-                        //     tmpObj1[0].columns.push(obj);
-                        // });
                         tmpObj1[1].columns = foreacerFunc(item.secondColumns);
-                        // item.secondColumns.forEach(function (item, index) {
-                        //     var obj = {};
-                        //     obj.name = item.columnName;
-                        //     obj.dataType = item.columnType;
-                        //     obj.analysis = "dimension";
-                        //     obj.nativeName = item.columnName;
-                        //     obj.displayName = item.displayName;
-                        //     obj.position = String(index + 1);
-                        //     obj.nativeColumnType = String(item.nativeColumnType);
-                        //
-                        //     tmpObj1[1].columns.push(obj);
-                        // });
+
                         var tmpObj2 = {
                             firstTable: index,
                             secondTable: index + 1,
                             type: joinData[index].type,
                             firstColumns: firstSelectedColumns,
                             secondColumns: secondSelectedColumns,
-                            causes: ['AND'],
-                            operators: [' = ']
+                            causes: causesForSelectedColumns,
+                            operators: neznayu
                         };
-                        joinObj.lictTables.push(tmpObj1[0]);
-                        joinObj.lictTables.push(tmpObj1[1]);
-                        joinObj.joinCondition.push(tmpObj2);
+                        joinObj.listTables.push(tmpObj1[0]);
+                        joinObj.listTables.push(tmpObj1[1]);
+                        joinObj.joinConditions.push(tmpObj2);
                     })
 
                 }).then(function () {
