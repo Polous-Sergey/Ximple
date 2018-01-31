@@ -111,7 +111,7 @@
             return result
         }
 
-        function tableJoin(joinData) {
+        function tableJoin(joinData, filters) {
             debugger;
             console.log('joinData', joinData);
             var firstDatasetName = [];
@@ -130,7 +130,7 @@
                     firstDataSetId[index] = data.dataSetId;
                     return null;
                 }).then(function (data) {
-                    return dataSetCreate(joinData[index].firstTable.tableName, joinData[index].firstColumns);
+                    return dataSetCreate(joinData[index].firstTable.tableName, joinData[index].firstColumns, filters);
                 }).then(function () {
                     return newDataSet().then(function (data) {
                         secondDatasetName[index] = data.dataSetName;
@@ -138,7 +138,7 @@
                         return null;
                     })
                 }).then(function (data) {
-                    return dataSetCreate(joinData[index].secondTable.tableName, joinData[index].secondColumns).then(function () {couter++; next()});
+                    return dataSetCreate(joinData[index].secondTable.tableName, joinData[index].secondColumns, filters).then(function () {couter++; next()});
                 })
             });
 

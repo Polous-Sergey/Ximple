@@ -304,7 +304,7 @@
             }
 
             function finishJoinTable() {
-                addElements.tableJoin(vm.joinDataSet);
+                addElements.tableJoin(vm.joinDataSet, vm.dataSetFilters.filters);
                 $('#DataSetTablesModal').modal('hide');
             }
 
