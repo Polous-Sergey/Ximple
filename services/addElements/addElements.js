@@ -151,113 +151,85 @@
             function next() {
                 var joinObj = {};
                 newDataSet().then(function (data) {
-                    filters = filters.concat(standartFilters);
-                    request.request(url.filtersForDataSet(data.dataSetId), 'POST', filters).then(function () {
-                        joinObj = {
-                            id: data.dataSetId,
-                            rowFetchLimit: 50,
-                            listTables: [],
-                            joinConditions: []
-                        };
-                        joinData.forEach(function (item, index) {
+                    joinObj = {
+                        id: data.dataSetId,
+                        rowFetchLimit: 50,
+                        listTables: [],
+                        joinConditions: []
+                    };
+                    joinData.forEach(function (item, index) {
+                        var firstSelectedColumns = [];
+                        var secondSelectedColumns = [];
+                        var causesForSelectedColumns = [];
+                        var neznayu = [];
+                        item.selectColumns.forEach(function (el, index) {
+                            firstSelectedColumns.push(el.joinColumn);
+                            secondSelectedColumns.push(el.inverseJoinColumn);
+                            if (index !== 0) {
+                                causesForSelectedColumns.push(el.type);
+                            }
+                            if (index === item.selectColumns.length - 1) {
+                                causesForSelectedColumns.push('');
+                            }
+                            neznayu.push(' = ');
 
-                            var firstSelectedColumns = [];
-                            var secondSelectedColumns = [];
-                            var causesForSelectedColumns = [];
-                            var neznayu = [];
-                            item.selectColumns.forEach(function (el, index) {
-                                firstSelectedColumns.push(el.joinColumn);
-                                secondSelectedColumns.push(el.inverseJoinColumn);
-                                if(index !== 0){
-                                    causesForSelectedColumns.push(el.type);
-                                }
-                                if(index === item.selectColumns.length - 1){
-                                    causesForSelectedColumns.push('');
-                                }
-                                neznayu.push(' = ');
-
-                            });
-                            var tmpObj1 = [
-                                {
-                                    tableName: item.firstTable.tableName,
-                                    columns: []
-                                },{
-                                    tableName: item.secondTable.tableName,
-                                    columns: item.secondColumns
-                                }
-                            ];
-
-                            tmpObj1[0].columns = foreacerFunc(item.firstColumns);
-                            tmpObj1[1].columns = foreacerFunc(item.secondColumns);
-
-                            var tmpObj2 = {
-                                firstTable: index,
-                                secondTable: index + 1,
-                                type: joinData[index].type,
-                                firstColumns: firstSelectedColumns,
-                                secondColumns: secondSelectedColumns,
-                                causes: causesForSelectedColumns,
-                                operators: neznayu
-                            };
-                            joinObj.listTables.push(tmpObj1[0]);
-                            joinObj.listTables.push(tmpObj1[1]);
-                            joinObj.joinConditions.push(tmpObj2);
                         });
-                        request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
-                            return createTable(joinDataSetName, "", joinData);
-                        }).then(function (data) {
-                            joinDataSetId = data.data.id;
-                            showTable(data);
-                            function showTable(data) {
-                                var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
-                                if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
-                                    settingHelper.element.childrens.push(table);
-                                }
-                                else {
-                                    for (var i = 0; i < modelReport.models.container.length; i++) {
-                                        if (modelReport.models.container[i].selected) {
-                                            modelReport.models.container[i].elements.push(table);
-                                            break;
+                        var tmpObj1 = [
+                            {
+                                tableName: item.firstTable.tableName,
+                                columns: []
+                            }, {
+                                tableName: item.secondTable.tableName,
+                                columns: item.secondColumns
+                            }
+                        ];
+
+                        tmpObj1[0].columns = foreacerFunc(item.firstColumns);
+                        tmpObj1[1].columns = foreacerFunc(item.secondColumns);
+
+                        var tmpObj2 = {
+                            firstTable: index,
+                            secondTable: index + 1,
+                            type: joinData[index].type,
+                            firstColumns: firstSelectedColumns,
+                            secondColumns: secondSelectedColumns,
+                            causes: causesForSelectedColumns,
+                            operators: neznayu
+                        };
+                        joinObj.listTables.push(tmpObj1[0]);
+                        joinObj.listTables.push(tmpObj1[1]);
+                        joinObj.joinConditions.push(tmpObj2);
+                    });
+
+                    return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
+                        return createTable(joinDataSetName, "", joinData).then(function () {
+                            filters = filters.concat(standartFilters);
+                            request.request(url.filtersForDataSet(joinObj.id), 'POST', filters).then(function (data) {
+                                joinDataSetId = data.data.id;
+                                showTable(data);
+
+                                function showTable(data) {
+                                    var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
+                                    if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
+                                        settingHelper.element.childrens.push(table);
+                                    }
+                                    else {
+                                        for (var i = 0; i < modelReport.models.container.length; i++) {
+                                            if (modelReport.models.container[i].selected) {
+                                                modelReport.models.container[i].elements.push(table);
+                                                break;
+                                            }
                                         }
                                     }
                                 }
-                            }
 
-                            $('#tablesModal').modal('hide');
+                                $('#tablesModal').modal('hide');
+                            })
                         })
-                    });
+                    })
 
-
-                // }).then(function () {
-                //
-                //
-                //
-                // }).then(function () {
-                //     return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {})
-                // }).then(function (data) {
-                //     return createTable(joinDataSetName, "", joinData);
-                // }).then(function (data) {
-                //     joinDataSetId = data.data.id;
-                //     showTable(data);
-                //     function showTable(data) {
-                //         var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
-                //         if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
-                //             settingHelper.element.childrens.push(table);
-                //         }
-                //         else {
-                //             for (var i = 0; i < modelReport.models.container.length; i++) {
-                //                 if (modelReport.models.container[i].selected) {
-                //                     modelReport.models.container[i].elements.push(table);
-                //                     break;
-                //                 }
-                //             }
-                //         }
-                //     }
-                //
-                //     $('#tablesModal').modal('hide');
-                // })
+                });
             }
-
         }
 
         function newDataSet() {
