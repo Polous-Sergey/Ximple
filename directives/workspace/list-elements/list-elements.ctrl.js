@@ -252,7 +252,6 @@
                         vm.joinDataSet[mainKey].selectColumns.splice(vm.joinDataSet[mainKey].selectColumns.indexOf(el), 1)
                     }});
                 }
-                console.log(vm.joinDataSet,'12312132')
                 // vm.joinDataSet.selectFirstColumn = vm.columnsJoin[index].joinColumn;
                 // vm.joinDataSet.selectSecondColumn = vm.columnsJoin[index].inverseJoinColumn;
             }
@@ -305,7 +304,7 @@
             }
 
             function finishJoinTable() {
-                addElements.tableJoin(vm.joinDataSet);
+                addElements.tableJoin(vm.joinDataSet, vm.dataSetFilters.filters);
                 $('#DataSetTablesModal').modal('hide');
             }
 

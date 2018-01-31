@@ -30,9 +30,8 @@
             createGrid: server + 'report/grid',
             loadReport: server + 'report/open',
             saveReportJson: server + 'report/save',
-            odajoinDataSet: function () {
-                // return server + 'report/odaJoinDataSet/' + id + '/fillBaseData'
-                return server + 'report/joinSqlDataSet/fillBaseData';
+            odajoinDataSet: function (id) {
+                return  server + 'report/joinSqlDataSet/fillBaseData'
             },
             setDataSetCreate: function (id) {
                 if (!id) {

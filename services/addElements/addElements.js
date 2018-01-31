@@ -111,7 +111,7 @@
             return result
         }
 
-        function tableJoin(joinData) {
+        function tableJoin(joinData, filters) {
             debugger;
             console.log('joinData', joinData);
             var firstDatasetName = [];
@@ -130,7 +130,7 @@
                     firstDataSetId[index] = data.dataSetId;
                     return null;
                 }).then(function (data) {
-                    return dataSetCreate(joinData[index].firstTable.tableName, joinData[index].firstColumns);
+                    return dataSetCreate(joinData[index].firstTable.tableName, joinData[index].firstColumns, filters);
                 }).then(function () {
                     return newDataSet().then(function (data) {
                         secondDatasetName[index] = data.dataSetName;
@@ -138,7 +138,7 @@
                         return null;
                     })
                 }).then(function (data) {
-                    return dataSetCreate(joinData[index].secondTable.tableName, joinData[index].secondColumns).then(function () {couter++; next()});
+                    return dataSetCreate(joinData[index].secondTable.tableName, joinData[index].secondColumns, filters).then(function () {couter++; next()});
                 })
             });
 
@@ -161,10 +161,12 @@
                         var secondSelectedColumns = [];
                         var causesForSelectedColumns = [];
                         var neznayu = [];
-                            item.selectColumns.forEach(function (el) {
+                            item.selectColumns.forEach(function (el, index) {
                                 firstSelectedColumns.push(el.joinColumn);
                                 secondSelectedColumns.push(el.inverseJoinColumn);
-                                causesForSelectedColumns.push(el.type);
+                                if(index !== 0){
+                                    causesForSelectedColumns.push(el.type);
+                                }
                                 neznayu.push(' = ');
 
                         });
@@ -196,27 +198,33 @@
                     })
 
                 }).then(function () {
-                    return request.request(url.odajoinDataSet(), 'POST', joinObj).then(function (data) {
-                        return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
+                    return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
+                        // return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
                     })
                 }).then(function (data) {
 
-                    arrColumns = joinData.firstColumns.concat(joinData.secondColumns);
-                    var tempColumns = [];
-                    data.columns.forEach(function (item, i) {
-                        item.displayName = arrColumns[i].displayName;
-                        item.selected = arrColumns[i].selected;
-                        if(item.selected){
-                            tempColumns.push(item);
-                        }
-                    });
+                    //
+                    // arrColumns = [];
+                    //
+                    // joinData.forEach(function (item) {
+                    //     arrColumns.concat(item.firstColumns.concat(item.secondColumns));
+                    // });
 
-                    return createTable(data.dataSetName, "", tempColumns);
+                    // var tempColumns = [];
+                    // data.columns.forEach(function (item, i) {
+                    //     item.displayName = arrColumns[i].displayName;
+                    //     item.selected = arrColumns[i].selected;
+                    //     if(item.selected){
+                    //         tempColumns.push(item);
+                    //     }
+                    // });
+
+                    return createTable(joinDataSetName, "", joinData);
                 }).then(function (data) {
                     joinDataSetId = data.data.id;
                     showTable(data);
                     function showTable(data) {
-                        var table = elementsModel.tableModelDataSet(data.data, data.data.id, arrColumns);
+                        var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
                         if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
                             settingHelper.element.childrens.push(table);
                         }
@@ -291,15 +299,28 @@
                 computedColumns: []
             };
             tableColumns.forEach(function (item) {
-                if (item.selected) {
-                    var row = {
-                        name: item.columnName,
-                        displayName: item.displayName,
-                        nativeDataType: item.nativeColumnType
-                    };
-                    res.computedColumns.push(row);
-                }
+                item.firstColumns.forEach(function (item) {
+                    if (item.selected) {
+                        var row = {
+                            name: item.columnName,
+                            displayName: item.displayName,
+                            nativeDataType: item.nativeColumnType
+                        };
+                        res.computedColumns.push(row);
+                    }
+                });
+                item.secondColumns.forEach(function (item) {
+                    if (item.selected) {
+                        var row = {
+                            name: item.columnName,
+                            displayName: item.displayName,
+                            nativeDataType: item.nativeColumnType
+                        };
+                        res.computedColumns.push(row);
+                    }
+                })
             });
+
             res.col = res.computedColumns.length;
             if (settingHelper.element !== null && (settingHelper.container !== null && settingHelper.container.name === 'grid')) {
                 res.parentId = settingHelper.element.id;
