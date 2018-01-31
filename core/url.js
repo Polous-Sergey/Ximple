@@ -41,6 +41,9 @@
                 this.dataSetCreate = server + 'report/odaDataSet/' + id + '/fillBaseData';
                 this.dataSetFilters = server + 'report/filters/' + id;
             },
+            filtersForDataSet: function (id) {
+                return server + 'filters/' + id
+            },
             showReport: function (reportName, reportType) {
                 var showURL =server + "reportShow";
                 if(reportName !== "" || reportType !==""){

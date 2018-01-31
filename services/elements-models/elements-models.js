@@ -68,25 +68,32 @@
                 };
                 var rowBlock = [];
                 if(tableColumns !== undefined){
-                    tableColumns.forEach(function (item) {
-                        item.firstColumns.forEach(function (item) {
-                            if (!item.selected) {
-                                deleteColumns.push(item);
-                            }
-                            else{
-                                rowBlock.push(item);
-                            }
-                        });
-                        item.secondColumns.forEach(function (item) {
-                            if (!item.selected) {
-                                deleteColumns.push(item);
-                            }
-                            else{
-                                rowBlock.push(item);
-                            }
-                        })
+                    tableColumns.forEach(function (item, i) {
+                        if (!item.selected) {
+                            deleteColumns.push(item);
+                        }
+                        else{
+                            rowBlock.push(item);
+                        }
                     });
-                    debugger
+                    // tableColumns.forEach(function (item) {
+                    //     item.firstColumns.forEach(function (item) {
+                    //         if (!item.selected) {
+                    //             deleteColumns.push(item);
+                    //         }
+                    //         else{
+                    //             rowBlock.push(item);
+                    //         }
+                    //     });
+                    //     item.secondColumns.forEach(function (item) {
+                    //         if (!item.selected) {
+                    //             deleteColumns.push(item);
+                    //         }
+                    //         else{
+                    //             rowBlock.push(item);
+                    //         }
+                    //     })
+                    // });
                     obj.header.rows[0].cells.forEach(function (item, i) {
                         rowBlock[i].id = item.id;
                         rowBlock[i].rowType = 'header';

@@ -9,6 +9,7 @@
 
     function addElements(settingHelper, request, url, elementsModel, modelReport, dataSourcesParams, refactorObj) {
         var dataSetCnt = 0;
+        var standartFilters = [];
         return {
             label: label,
             grid: grid,
@@ -103,143 +104,158 @@
             });
             return result
         }
+
+
+
         function foreacerFunc2(data) {
-            var result = [];
-            data.forEach(function (item, index) {
-                result.push(item.columnName);
+
+            var values =  {
+                PWDPRODUCT: {
+                    expression: "PRCOMPANY",
+                    firstPropertyList: ["00013"],
+                    operation: "eq"
+                },
+                PWDPRODID: {
+                    expression: "PICOMPANY",
+                    firstPropertyList: ["00013"],
+                    operation: "eq"
+                },
+                COSTCENTW: {
+                    expression: "COMPANY",
+                    firstPropertyList: ["00013"],
+                    operation: "eq"
+                }
+            };
+
+            return angular.forEach(values, function (value, key) {
+                if(key === data){
+                    standartFilters.push(value);
+                }
             });
-            return result
         }
 
         function tableJoin(joinData, filters) {
-            debugger;
-            console.log('joinData', joinData);
-            var firstDatasetName = [];
-            var secondDatasetName = [];
-            var firstDataSetId = [];
-            var secondDataSetId = [];
-            var joinDataSetName = 'jds' + (++dataSetCnt);
-            var joinDataSetId;
-            var arrColumns = [];
 
-            var couter = 0;
+            standartFilters = [];
 
             joinData.forEach(function (item, index) {
-                newDataSet().then(function (data) {
-                    firstDatasetName[index] = data.dataSetName;
-                    firstDataSetId[index] = data.dataSetId;
-                    return null;
-                }).then(function (data) {
-                    return dataSetCreate(joinData[index].firstTable.tableName, joinData[index].firstColumns, filters);
-                }).then(function () {
-                    return newDataSet().then(function (data) {
-                        secondDatasetName[index] = data.dataSetName;
-                        secondDataSetId[index] = data.dataSetId;
-                        return null;
-                    })
-                }).then(function (data) {
-                    return dataSetCreate(joinData[index].secondTable.tableName, joinData[index].secondColumns, filters).then(function () {couter++; next()});
-                })
+                foreacerFunc2(item.firstTable.tableName);
+                foreacerFunc2(item.secondTable.tableName);
             });
 
+            var joinDataSetName = 'jds' + (++dataSetCnt);
+            var joinDataSetId;
+
+            next();
+
             function next() {
-                if(couter != joinData.length){
-                  return
-                }
                 var joinObj = {};
                 newDataSet().then(function (data) {
-                    debugger;
-                    joinObj = {
-                        id: data.dataSetId,
-                        rowFetchLimit: 50,
-                        listTables: [],
-                        joinConditions: []
-                    };
-                    joinData.forEach(function (item, index) {
+                    filters = filters.concat(standartFilters);
+                    request.request(url.filtersForDataSet(data.dataSetId), 'POST', filters).then(function () {
+                        joinObj = {
+                            id: data.dataSetId,
+                            rowFetchLimit: 50,
+                            listTables: [],
+                            joinConditions: []
+                        };
+                        joinData.forEach(function (item, index) {
 
-                        var firstSelectedColumns = [];
-                        var secondSelectedColumns = [];
-                        var causesForSelectedColumns = [];
-                        var neznayu = [];
+                            var firstSelectedColumns = [];
+                            var secondSelectedColumns = [];
+                            var causesForSelectedColumns = [];
+                            var neznayu = [];
                             item.selectColumns.forEach(function (el, index) {
                                 firstSelectedColumns.push(el.joinColumn);
                                 secondSelectedColumns.push(el.inverseJoinColumn);
                                 if(index !== 0){
                                     causesForSelectedColumns.push(el.type);
                                 }
+                                if(index === item.selectColumns.length - 1){
+                                    causesForSelectedColumns.push('');
+                                }
                                 neznayu.push(' = ');
 
+                            });
+                            var tmpObj1 = [
+                                {
+                                    tableName: item.firstTable.tableName,
+                                    columns: []
+                                },{
+                                    tableName: item.secondTable.tableName,
+                                    columns: item.secondColumns
+                                }
+                            ];
+
+                            tmpObj1[0].columns = foreacerFunc(item.firstColumns);
+                            tmpObj1[1].columns = foreacerFunc(item.secondColumns);
+
+                            var tmpObj2 = {
+                                firstTable: index,
+                                secondTable: index + 1,
+                                type: joinData[index].type,
+                                firstColumns: firstSelectedColumns,
+                                secondColumns: secondSelectedColumns,
+                                causes: causesForSelectedColumns,
+                                operators: neznayu
+                            };
+                            joinObj.listTables.push(tmpObj1[0]);
+                            joinObj.listTables.push(tmpObj1[1]);
+                            joinObj.joinConditions.push(tmpObj2);
                         });
-                        var tmpObj1 = [
-                            {
-                                tableName: item.firstTable.tableName,
-                                columns: []
-                            },{
-                                tableName: item.secondTable.tableName,
-                                columns: item.secondColumns
-                            }
-                        ];
-
-                        tmpObj1[0].columns = foreacerFunc(item.firstColumns);
-                        tmpObj1[1].columns = foreacerFunc(item.secondColumns);
-
-                        var tmpObj2 = {
-                            firstTable: index,
-                            secondTable: index + 1,
-                            type: joinData[index].type,
-                            firstColumns: firstSelectedColumns,
-                            secondColumns: secondSelectedColumns,
-                            causes: causesForSelectedColumns,
-                            operators: neznayu
-                        };
-                        joinObj.listTables.push(tmpObj1[0]);
-                        joinObj.listTables.push(tmpObj1[1]);
-                        joinObj.joinConditions.push(tmpObj2);
-                    })
-
-                }).then(function () {
-                    return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
-                        // return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
-                    })
-                }).then(function (data) {
-
-                    //
-                    // arrColumns = [];
-                    //
-                    // joinData.forEach(function (item) {
-                    //     arrColumns.concat(item.firstColumns.concat(item.secondColumns));
-                    // });
-
-                    // var tempColumns = [];
-                    // data.columns.forEach(function (item, i) {
-                    //     item.displayName = arrColumns[i].displayName;
-                    //     item.selected = arrColumns[i].selected;
-                    //     if(item.selected){
-                    //         tempColumns.push(item);
-                    //     }
-                    // });
-
-                    return createTable(joinDataSetName, "", joinData);
-                }).then(function (data) {
-                    joinDataSetId = data.data.id;
-                    showTable(data);
-                    function showTable(data) {
-                        var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
-                        if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
-                            settingHelper.element.childrens.push(table);
-                        }
-                        else {
-                            for (var i = 0; i < modelReport.models.container.length; i++) {
-                                if (modelReport.models.container[i].selected) {
-                                    modelReport.models.container[i].elements.push(table);
-                                    break;
+                        request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
+                            return createTable(joinDataSetName, "", joinData);
+                        }).then(function (data) {
+                            joinDataSetId = data.data.id;
+                            showTable(data);
+                            function showTable(data) {
+                                var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
+                                if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
+                                    settingHelper.element.childrens.push(table);
+                                }
+                                else {
+                                    for (var i = 0; i < modelReport.models.container.length; i++) {
+                                        if (modelReport.models.container[i].selected) {
+                                            modelReport.models.container[i].elements.push(table);
+                                            break;
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
 
-                    $('#tablesModal').modal('hide');
-                })
+                            $('#tablesModal').modal('hide');
+                        })
+                    });
+
+
+                // }).then(function () {
+                //
+                //
+                //
+                // }).then(function () {
+                //     return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {})
+                // }).then(function (data) {
+                //     return createTable(joinDataSetName, "", joinData);
+                // }).then(function (data) {
+                //     joinDataSetId = data.data.id;
+                //     showTable(data);
+                //     function showTable(data) {
+                //         var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
+                //         if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
+                //             settingHelper.element.childrens.push(table);
+                //         }
+                //         else {
+                //             for (var i = 0; i < modelReport.models.container.length; i++) {
+                //                 if (modelReport.models.container[i].selected) {
+                //                     modelReport.models.container[i].elements.push(table);
+                //                     break;
+                //                 }
+                //             }
+                //         }
+                //     }
+                //
+                //     $('#tablesModal').modal('hide');
+                // })
             }
 
         }
