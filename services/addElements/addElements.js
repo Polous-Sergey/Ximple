@@ -196,7 +196,7 @@
                     })
 
                 }).then(function () {
-                    return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
+                    return request.request(url.odajoinDataSet(), 'POST', joinObj).then(function (data) {
                         return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
                     })
                 }).then(function (data) {

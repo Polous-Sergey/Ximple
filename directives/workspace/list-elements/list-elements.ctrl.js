@@ -200,7 +200,7 @@
                         secondTable: null,
                         firstColumns: [],
                         secondColumns: [],
-                        type: null,
+                        type: 'INNER JOIN',
                         name: "",
                         selectColumns: [],
                         showJoinCollums: false
@@ -252,6 +252,7 @@
                         vm.joinDataSet[mainKey].selectColumns.splice(vm.joinDataSet[mainKey].selectColumns.indexOf(el), 1)
                     }});
                 }
+                console.log(vm.joinDataSet,'12312132')
                 // vm.joinDataSet.selectFirstColumn = vm.columnsJoin[index].joinColumn;
                 // vm.joinDataSet.selectSecondColumn = vm.columnsJoin[index].inverseJoinColumn;
             }
