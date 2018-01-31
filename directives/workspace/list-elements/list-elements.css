@@ -32,6 +32,11 @@
     background-color: #fff;
 }
 
+.select-div {
+    width: 500px;
+
+}
+
 
 .container-list-elements .header-list-box {
     line-height: 53px;
