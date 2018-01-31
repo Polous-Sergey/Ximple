@@ -197,26 +197,32 @@
 
                 }).then(function () {
                     return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
-                        return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
+                        // return refactorObj.joinTablesCreateObj(data.data, joinDataSetName);
                     })
                 }).then(function (data) {
 
-                    arrColumns = joinData.firstColumns.concat(joinData.secondColumns);
-                    var tempColumns = [];
-                    data.columns.forEach(function (item, i) {
-                        item.displayName = arrColumns[i].displayName;
-                        item.selected = arrColumns[i].selected;
-                        if(item.selected){
-                            tempColumns.push(item);
-                        }
-                    });
+                    //
+                    // arrColumns = [];
+                    //
+                    // joinData.forEach(function (item) {
+                    //     arrColumns.concat(item.firstColumns.concat(item.secondColumns));
+                    // });
 
-                    return createTable(data.dataSetName, "", tempColumns);
+                    // var tempColumns = [];
+                    // data.columns.forEach(function (item, i) {
+                    //     item.displayName = arrColumns[i].displayName;
+                    //     item.selected = arrColumns[i].selected;
+                    //     if(item.selected){
+                    //         tempColumns.push(item);
+                    //     }
+                    // });
+
+                    return createTable(joinDataSetName, "", joinData);
                 }).then(function (data) {
                     joinDataSetId = data.data.id;
                     showTable(data);
                     function showTable(data) {
-                        var table = elementsModel.tableModelDataSet(data.data, data.data.id, arrColumns);
+                        var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
                         if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
                             settingHelper.element.childrens.push(table);
                         }
@@ -291,15 +297,28 @@
                 computedColumns: []
             };
             tableColumns.forEach(function (item) {
-                if (item.selected) {
-                    var row = {
-                        name: item.columnName,
-                        displayName: item.displayName,
-                        nativeDataType: item.nativeColumnType
-                    };
-                    res.computedColumns.push(row);
-                }
+                item.firstColumns.forEach(function (item) {
+                    if (item.selected) {
+                        var row = {
+                            name: item.columnName,
+                            displayName: item.displayName,
+                            nativeDataType: item.nativeColumnType
+                        };
+                        res.computedColumns.push(row);
+                    }
+                });
+                item.secondColumns.forEach(function (item) {
+                    if (item.selected) {
+                        var row = {
+                            name: item.columnName,
+                            displayName: item.displayName,
+                            nativeDataType: item.nativeColumnType
+                        };
+                        res.computedColumns.push(row);
+                    }
+                })
             });
+
             res.col = res.computedColumns.length;
             if (settingHelper.element !== null && (settingHelper.container !== null && settingHelper.container.name === 'grid')) {
                 res.parentId = settingHelper.element.id;
