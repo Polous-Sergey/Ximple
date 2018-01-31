@@ -34,7 +34,7 @@
                         <select class="form-control"
                                 ng-model="vm.joinDataSet[mainKey].type"
                                 ng-options="item as item for item in popapMainData.joinType">
-                            <option value="" disabled selected>Select table joining type</option>
+                            <option value="" disabled>Select table joining type</option>
                         </select>
                     </div>
                 </div>
@@ -43,17 +43,20 @@
                          ng-show="vm.joinDataSet[mainKey].showJoinCollums">
                         <div class="col-sm-12">
                             <ul class="list-group">
-                                <li ng-click="vm.changeJoinColumn(mainKey,$index,row.checked)"
+                                <li
                                     class="list-group-item"
                                     ng-class="row.checked ? 'active' : ''"
                                     ng-repeat="row in vm.joinPopapMainData[mainKey].fieldsData"
                                     style="width: 500px;">
                                     <h4 class="row">
-                                        <input type="checkbox" class="col-sm-1" ng-model="row.checked">
+                                        <input
+                                                ng-click="vm.changeJoinColumn(mainKey,$index,row.checked)"
+                                                type="checkbox" class="col-sm-1" ng-model="row.checked">
                                         <span class="label label-default col-sm-5">{{row.joinColumn}}</span>
                                         <!--<i class="fa fa-angle-double-right col-sm-1" aria-hidden="true"></i>-->
                                         <select class="form-control"
-                                                ng-model="row.type">
+                                                ng-model="row.type"
+                                        style="width: 100px; margin: 0 10px;">
                                             <option value="AND" selected>AND</option>
                                             <option value="OR">OR</option>
                                         </select>

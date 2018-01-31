@@ -200,7 +200,7 @@
                         secondTable: null,
                         firstColumns: [],
                         secondColumns: [],
-                        type: null,
+                        type: 'INNER JOIN',
                         name: "",
                         selectColumns: [],
                         showJoinCollums: false
