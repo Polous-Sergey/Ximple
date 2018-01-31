@@ -152,8 +152,8 @@
                     joinObj = {
                         id: data.dataSetId,
                         rowFetchLimit: 50,
-                        lictTables: [],
-                        joinCondition: []
+                        listTables: [],
+                        joinConditions: []
                     };
                     joinData.forEach(function (item, index) {
                         var firstSelectedColumns = item.firstColumns.filter(function (item) {
