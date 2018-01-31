@@ -161,10 +161,12 @@
                         var secondSelectedColumns = [];
                         var causesForSelectedColumns = [];
                         var neznayu = [];
-                            item.selectColumns.forEach(function (el) {
+                            item.selectColumns.forEach(function (el, index) {
                                 firstSelectedColumns.push(el.joinColumn);
                                 secondSelectedColumns.push(el.inverseJoinColumn);
-                                causesForSelectedColumns.push(el.type);
+                                if(index !== 0){
+                                    causesForSelectedColumns.push(el.type);
+                                }
                                 neznayu.push(' = ');
 
                         });
