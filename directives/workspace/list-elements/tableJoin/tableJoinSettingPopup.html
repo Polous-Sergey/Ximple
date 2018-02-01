@@ -26,8 +26,15 @@
                     </div>
                     <div class="table-scroll">
                         <div ng-repeat=" (key,item) in vm.joinDataSet ">
-                            <p>Table {{key + 1}}</p>
+                            <!--<p>Table {{key + 1}}</p>-->
                             <table class="table table-hover">
+
+                                <tr>
+                                    <th class="col-sm-1">Table 1</th>
+                                    <th class="col-sm-4"></th>
+                                    <th class="col-sm-7"></th>
+                                </tr>
+
                                 <tr>
                                     <th class="col-sm-1">Position</th>
                                     <th class="col-sm-4">Selected</th>
@@ -47,10 +54,12 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td ng-click="row.selected = !row.selected">
+                                    <td>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" ng-model="row.selected"> Selected row
+                                                <input
+                                                        type="checkbox" ng-model="row.selected">
+                                                {{::row.displayName}}
                                             </label>
                                         </div>
                                     </td>
@@ -61,6 +70,21 @@
                                         </div>
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <th class="col-sm-1">Table 2</th>
+                                    <th class="col-sm-4"></th>
+                                    <th class="col-sm-7"></th>
+                                </tr>
+
+                                <tr>
+                                    <th class="col-sm-1">Position</th>
+                                    <th class="col-sm-4">Selected</th>
+                                    <th class="col-sm-7">Name</th>
+                                </tr>
+
+
+
                                 <tr ng-repeat="row in item.secondColumns track by $index">
                                     <td>
                                         <div class="position-container">
@@ -74,10 +98,12 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td ng-click="row.selected = !row.selected">
+                                    <td>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" ng-model="row.selected"> Selected row
+                                                <input
+                                                        type="checkbox" ng-model="row.selected">
+                                                {{::row.displayName}}
                                             </label>
                                         </div>
                                     </td>

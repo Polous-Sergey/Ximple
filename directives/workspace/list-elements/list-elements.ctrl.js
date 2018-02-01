@@ -156,7 +156,10 @@
 
             function openJoinTablePopup() {
                 vm.toJoinTablesList = [];
-                vm.joinDataSet = []
+                vm.joinDataSet = [];
+                vm.dataSetFilters.filters = [];
+                vm.dataSetFilters.curentFilter.firstPropertyList = [];
+                vm.dataSetFilters.curentFilter.secondPropertyList = [];
                 // vm.joinDataSet = [{
                 //     firstTable: null,
                 //     secondTable: null,
@@ -263,27 +266,29 @@
                 //     vm.joinDataSet.selectSecondColumn == null) {
                 //     return;
                 // }
+
+                // vm.dataSetFilters.filters = [];
+
                 vm.tableColumns.length = 0;
                 vm.joinDataSet.forEach(function (el, index) {
 
-                    getColumnsTable(vm.joinDataSet[index].firstTable.tableName).then(function (data) {
-                        vm.joinDataSet[index].firstColumns = data;
+
+
+                    getColumnsTable(el.firstTable.tableName).then(function (data) {
+                        el.firstColumns = data;
                     }).then(function () {
-                        getColumnsTable(vm.joinDataSet[index].secondTable.tableName).then(function (data) {
-                            vm.joinDataSet[index].secondColumns = data;
-                            var newArr = vm.tableColumns.concat(vm.joinDataSet[index].firstColumns, vm.joinDataSet[index].secondColumns);
+                        getColumnsTable(el.secondTable.tableName).then(function (data) {
+                            el.secondColumns = data;
+                            var newArr = vm.tableColumns.concat(el.firstColumns, el.secondColumns);
                             vm.tableColumns = vm.tableColumns.concat(newArr);
-                            debugger
                             vm.template = vm.templates[4];
                         });
                     });
 
-                })
-                console.log(vm.tableColumns,'collumns')
+                });
             }
 
             function getColumnsTable(tableName) {
-                debugger
                 if (tableName !== null) {
                     return request.request(url.tableMetadata + tableName, 'GET').then(function (data) {
                         return createDisplayName(data.data);
