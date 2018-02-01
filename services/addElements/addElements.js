@@ -164,9 +164,9 @@
                             item.selectColumns.forEach(function (el, index) {
                                 firstSelectedColumns.push(el.joinColumn);
                                 secondSelectedColumns.push(el.inverseJoinColumn);
-                                if(index !== 0){
+                                // if(index !== 0){
                                     causesForSelectedColumns.push(el.type);
-                                }
+                                // }
                                 neznayu.push(' = ');
 
                         });
