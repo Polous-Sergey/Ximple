@@ -91,7 +91,7 @@
         function foreacerFunc(data) {
             var result = [];
             data.forEach(function (item, index) {
-                if (item.selected) {
+                if(item.selected){
                     var obj = {};
                     obj.name = item.columnName;
                     obj.dataType = item.columnType;
@@ -100,6 +100,7 @@
                     obj.displayName = item.displayName;
                     obj.position = String(index + 1);
                     obj.nativeColumnType = String(item.nativeColumnType);
+
                     result.push(obj);
                 }
             });
@@ -107,23 +108,24 @@
         }
 
 
-
         function foreacerFunc2(data) {
-            // var test = user.getUser().userCompany;
+
+            var companyId =  user.getUser().userCompany;
+
             var values = {
                 PWDPRODUCT: {
                     expression: "PRCOMPANY",
-                    firstPropertyList: [user.getUser().userCompany],
+                    firstPropertyList: [companyId],
                     operation: "eq"
                 },
                 PWDPRODID: {
                     expression: "PICOMPANY",
-                    firstPropertyList: [user.getUser().userCompany],
+                    firstPropertyList: [companyId],
                     operation: "eq"
                 },
                 COSTCENTW: {
                     expression: "COMPANY",
-                    firstPropertyList: [user.getUser().userCompany],
+                    firstPropertyList: [companyId],
                     operation: "eq"
                 }
             };
@@ -145,9 +147,16 @@
             });
 
             filters = filters.concat(standartFilters);
-            // var joinDataSetName = 'jds' + (++dataSetCnt);
             var dataSetName;
-            var allColums = joinData.forEach
+            var allColums = [];
+            joinData.forEach(function (item) {
+               item.firstColumns.forEach(function (item) {
+                   allColums.push(item);
+               });
+                item.secondColumns.forEach(function (item) {
+                    allColums.push(item)
+                })
+            });
 
             next();
 
@@ -206,12 +215,12 @@
                     });
 
                     return request.request(url.odajoinDataSet, 'POST', joinObj).then(function () {
-                        return createTable(dataSetName, "", joinData).then(function (data) {
+                        return createTable(dataSetName, "", allColums).then(function (data) {
                             request.request(url.filtersForDataSet(joinObj.id), 'POST', filters).then(function () {
                                 showTable(data);
 
                                 function showTable(data) {
-                                    var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
+                                    var table = elementsModel.tableModelDataSet(data.data, data.data.id, allColums);
                                     if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
                                         settingHelper.element.childrens.push(table);
                                     }
@@ -287,26 +296,14 @@
                 computedColumns: []
             };
             tableColumns.forEach(function (item) {
-                item.firstColumns.forEach(function (item) {
-                    if (item.selected) {
-                        var row = {
-                            name: item.columnName,
-                            displayName: item.displayName,
-                            nativeDataType: item.nativeColumnType
-                        };
-                        res.computedColumns.push(row);
-                    }
-                });
-                item.secondColumns.forEach(function (item) {
-                    if (item.selected) {
-                        var row = {
-                            name: item.columnName,
-                            displayName: item.displayName,
-                            nativeDataType: item.nativeColumnType
-                        };
-                        res.computedColumns.push(row);
-                    }
-                })
+                if (item.selected) {
+                    var row = {
+                        name: item.columnName,
+                        displayName: item.displayName,
+                        nativeDataType: item.nativeColumnType
+                    };
+                    res.computedColumns.push(row);
+                }
             });
 
             res.col = res.computedColumns.length;
