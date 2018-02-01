@@ -107,22 +107,23 @@
         }
 
 
+
         function foreacerFunc2(data) {
-            var test = user.getUser().userCompany;
+            // var test = user.getUser().userCompany;
             var values = {
                 PWDPRODUCT: {
                     expression: "PRCOMPANY",
-                    firstPropertyList: ["00013"],
+                    firstPropertyList: [user.getUser().userCompany],
                     operation: "eq"
                 },
                 PWDPRODID: {
                     expression: "PICOMPANY",
-                    firstPropertyList: ["00013"],
+                    firstPropertyList: [user.getUser().userCompany],
                     operation: "eq"
                 },
                 COSTCENTW: {
                     expression: "COMPANY",
-                    firstPropertyList: ["00013"],
+                    firstPropertyList: [user.getUser().userCompany],
                     operation: "eq"
                 }
             };
@@ -144,13 +145,16 @@
             });
 
             filters = filters.concat(standartFilters);
-            var joinDataSetName = 'jds' + (++dataSetCnt);
+            // var joinDataSetName = 'jds' + (++dataSetCnt);
+            var dataSetName;
+            var allColums = joinData.forEach
 
             next();
 
             function next() {
                 var joinObj = {};
                 return newDataSet().then(function (data) {
+                    dataSetName = data.dataSetName;
                     joinObj = {
                         id: data.dataSetId,
                         rowFetchLimit: 50,
@@ -158,20 +162,20 @@
                         joinConditions: []
                     };
                     joinData.forEach(function (item, index) {
-                        var firstSelectedColumns = [];
-                        var secondSelectedColumns = [];
-                        var causesForSelectedColumns = [];
-                        var neznayu = [];
+                        var firstColumns = [];
+                        var secondColumns = [];
+                        var causesForColumns = [];
+                        var operators = [];
                         item.selectColumns.forEach(function (el, index) {
-                            firstSelectedColumns.push(el.joinColumn);
-                            secondSelectedColumns.push(el.inverseJoinColumn);
+                            firstColumns.push(el.joinColumn);
+                            secondColumns.push(el.inverseJoinColumn);
                             if (index !== 0) {
-                                causesForSelectedColumns.push(el.type);
+                                causesForColumns.push(el.type);
                             }
                             if (index === item.selectColumns.length - 1) {
-                                causesForSelectedColumns.push('');
+                                causesForColumns.push('');
                             }
-                            neznayu.push(' = ');
+                            operators.push(' = ');
 
                         });
                         var tmpObj1 = [
@@ -191,18 +195,18 @@
                             firstTable: index,
                             secondTable: index + 1,
                             type: joinData[index].type,
-                            firstColumns: firstSelectedColumns,
-                            secondColumns: secondSelectedColumns,
-                            causes: causesForSelectedColumns,
-                            operators: neznayu
+                            firstColumns: firstColumns,
+                            secondColumns: secondColumns,
+                            causes: causesForColumns,
+                            operators: operators
                         };
                         joinObj.listTables.push(tmpObj1[0]);
                         joinObj.listTables.push(tmpObj1[1]);
                         joinObj.joinConditions.push(tmpObj2);
                     });
 
-                    return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function () {
-                        return createTable(joinDataSetName, "", joinData).then(function (data) {
+                    return request.request(url.odajoinDataSet, 'POST', joinObj).then(function () {
+                        return createTable(dataSetName, "", joinData).then(function (data) {
                             request.request(url.filtersForDataSet(joinObj.id), 'POST', filters).then(function () {
                                 showTable(data);
 
@@ -242,8 +246,6 @@
                         dataSetName: paramsSet.dataSetName,
                         dataSetId: data.data
                     };
-                }, function (data) {
-                    console.log(data);
                 });
         }
 
