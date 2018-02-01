@@ -82,8 +82,11 @@
 
             function saveReportFinish() {
                 saveQueue.saveLastElement();
-                request.request(url.saveReport, 'POST', null, {
-                    fileName: vm.fileName}).then(function (data) {
+                var dataForSend = {
+                    reportName: vm.fileName
+                    // report:
+                };
+                request.request(url.saveReport, 'POST', dataForSend).then(function (data) {
                     vm.fileName = '';
                     $('#DataSetTablesModal').modal('hide');
                 });
