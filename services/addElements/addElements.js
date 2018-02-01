@@ -138,19 +138,19 @@
 
             standartFilters = [];
 
-            joinData.forEach(function (item, index) {
+            joinData.forEach(function (item) {
                 foreacerFunc2(item.firstTable.tableName);
                 foreacerFunc2(item.secondTable.tableName);
             });
 
+            filters = filters.concat(standartFilters);
             var joinDataSetName = 'jds' + (++dataSetCnt);
-            var joinDataSetId;
 
             next();
 
             function next() {
                 var joinObj = {};
-                newDataSet().then(function (data) {
+                return newDataSet().then(function (data) {
                     joinObj = {
                         id: data.dataSetId,
                         rowFetchLimit: 50,
@@ -201,13 +201,10 @@
                         joinObj.joinConditions.push(tmpObj2);
                     });
 
-                    return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function (data) {
-                        return createTable(joinDataSetName, "", joinData).then(function () {
-                            filters = filters.concat(standartFilters);
-                            request.request(url.filtersForDataSet(joinObj.id), 'POST', filters).then(function (data) {
-                                joinDataSetId = data.data.id;
+                    return request.request(url.odajoinDataSet(joinObj.id), 'POST', joinObj).then(function () {
+                        return createTable(joinDataSetName, "", joinData).then(function (data) {
+                            request.request(url.filtersForDataSet(joinObj.id), 'POST', filters).then(function () {
                                 showTable(data);
-
                                 function showTable(data) {
                                     var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
                                     if (data.structure.parentId !== null && data.structure.parentId !== undefined) {

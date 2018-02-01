@@ -42,7 +42,7 @@
                 this.dataSetFilters = server + 'report/filters/' + id;
             },
             filtersForDataSet: function (id) {
-                return server + 'filters/' + id
+                return server + 'report/filters/' + id
             },
             showReport: function (reportName, reportType) {
                 var showURL =server + "reportShow";
