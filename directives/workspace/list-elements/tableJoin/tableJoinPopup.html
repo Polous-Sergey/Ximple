@@ -82,10 +82,11 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" ng-click="vm.addNewJoin()" class="btn btn-default pull-left">Another one</button>
+            <button type="button" ng-click="vm.addNewJoin()" class="btn btn-default pull-left" ng-if="">Another one</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button"
                     ng-disabled="vm.joinDataSet[0].firstTable === null ||
+                    vm.joinDataSet[0].selectColumns.length === 0 ||
                     vm.joinDataSet[0].secondTable === null ||
                     vm.joinDataSet[0].type === null"
                     class="btn btn-primary" ng-click="vm.openJoinTablesSettingPopup()">
