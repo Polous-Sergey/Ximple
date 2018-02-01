@@ -25,6 +25,7 @@
 
         function saveLastElement() {
             if (tempElement === undefined || tempElement === null || !tempElement.hasOwnProperty('container')) return;
+            debugger
             switch (tempElement.container.type) {
                 case 'label':
                     labelSave(tempElement);

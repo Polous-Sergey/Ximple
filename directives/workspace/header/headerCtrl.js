@@ -81,6 +81,7 @@
             }
 
             function saveReportFinish() {
+                debugger
                 saveQueue.saveLastElement();
                 request.request(url.saveReport, 'POST', null, {
                     fileName: vm.fileName}).then(function (data) {

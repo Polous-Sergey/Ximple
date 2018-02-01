@@ -5,9 +5,9 @@
         .module('factory.addElements', [])
         .factory('addElements', addElements);
 
-    addElements.$inject = ['settingHelper', 'request', 'url', 'elementsModel', 'modelReport', 'dataSourcesParams', 'refactorObj'];
+    addElements.$inject = ['settingHelper', 'request', 'url', 'elementsModel', 'modelReport', 'dataSourcesParams', 'refactorObj', 'user'];
 
-    function addElements(settingHelper, request, url, elementsModel, modelReport, dataSourcesParams, refactorObj) {
+    function addElements(settingHelper, request, url, elementsModel, modelReport, dataSourcesParams, refactorObj, user) {
         var dataSetCnt = 0;
         var standartFilters = [];
         return {
@@ -91,25 +91,25 @@
         function foreacerFunc(data) {
             var result = [];
             data.forEach(function (item, index) {
-                var obj = {};
-                obj.name = item.columnName;
-                obj.dataType = item.columnType;
-                obj.analysis = "dimension";
-                obj.nativeName = item.columnName;
-                obj.displayName = item.displayName;
-                obj.position = String(index + 1);
-                obj.nativeColumnType = String(item.nativeColumnType);
-
-                result.push(obj);
+                if (item.selected) {
+                    var obj = {};
+                    obj.name = item.columnName;
+                    obj.dataType = item.columnType;
+                    obj.analysis = "dimension";
+                    obj.nativeName = item.columnName;
+                    obj.displayName = item.displayName;
+                    obj.position = String(index + 1);
+                    obj.nativeColumnType = String(item.nativeColumnType);
+                    result.push(obj);
+                }
             });
             return result
         }
 
 
-
         function foreacerFunc2(data) {
-
-            var values =  {
+            var test = user.getUser().userCompany;
+            var values = {
                 PWDPRODUCT: {
                     expression: "PRCOMPANY",
                     firstPropertyList: ["00013"],
@@ -128,7 +128,7 @@
             };
 
             return angular.forEach(values, function (value, key) {
-                if(key === data){
+                if (key === data) {
                     standartFilters.push(value);
                 }
             });
@@ -205,6 +205,7 @@
                         return createTable(joinDataSetName, "", joinData).then(function (data) {
                             request.request(url.filtersForDataSet(joinObj.id), 'POST', filters).then(function () {
                                 showTable(data);
+
                                 function showTable(data) {
                                     var table = elementsModel.tableModelDataSet(data.data, data.data.id, joinData);
                                     if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
