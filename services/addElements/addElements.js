@@ -5,9 +5,9 @@
         .module('factory.addElements', [])
         .factory('addElements', addElements);
 
-    addElements.$inject = ['settingHelper', 'request', 'url', 'elementsModel', 'modelReport', 'dataSourcesParams', 'refactorObj'];
+    addElements.$inject = ['settingHelper', 'request', 'url', 'elementsModel', 'modelReport', 'dataSourcesParams', 'refactorObj', 'user'];
 
-    function addElements(settingHelper, request, url, elementsModel, modelReport, dataSourcesParams, refactorObj) {
+    function addElements(settingHelper, request, url, elementsModel, modelReport, dataSourcesParams, refactorObj, user) {
         var dataSetCnt = 0;
         var standartFilters = [];
         return {
@@ -91,16 +91,18 @@
         function foreacerFunc(data) {
             var result = [];
             data.forEach(function (item, index) {
-                var obj = {};
-                obj.name = item.columnName;
-                obj.dataType = item.columnType;
-                obj.analysis = "dimension";
-                obj.nativeName = item.columnName;
-                obj.displayName = item.displayName;
-                obj.position = String(index + 1);
-                obj.nativeColumnType = String(item.nativeColumnType);
+                if(item.selected){
+                    var obj = {};
+                    obj.name = item.columnName;
+                    obj.dataType = item.columnType;
+                    obj.analysis = "dimension";
+                    obj.nativeName = item.columnName;
+                    obj.displayName = item.displayName;
+                    obj.position = String(index + 1);
+                    obj.nativeColumnType = String(item.nativeColumnType);
 
-                result.push(obj);
+                    result.push(obj);
+                }
             });
             return result
         }
