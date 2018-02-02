@@ -22,7 +22,6 @@
         $scope.$watch(function () {
             return settingHelper
         }, function (newVal, oldVal) {
-            debugger
             if (newVal.element !== null) {
                 vm.style = newVal.element.style;
             }
