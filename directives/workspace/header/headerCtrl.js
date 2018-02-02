@@ -15,10 +15,13 @@
             vm.selectedTable = {};
             vm.templates = [
                 'directives/workspace/header/templatesHtml/saveReport.html',
-                'directives/workspace/header/templatesHtml/showReport.html'
+                'directives/workspace/header/templatesHtml/showReport.html',
+                'directives/workspace/header/templatesHtml/openReport.html'
             ];
             vm.saveReportFinish = saveReportFinish;
             vm.saveReport = saveReport;
+            vm.openReport = openReport;
+            vm.openReportFinish = openReportFinish;
             vm.showReports = showReports;
             vm.showSaveReportPopup = showSaveReportPopup;
             vm.logout = logout;
@@ -80,13 +83,25 @@
                 $('#DataSetTablesModal').modal('show');
             }
 
+            function openReport() {
+                vm.template = vm.templates[2];
+                $('#DataSetTablesModal').modal('show');
+            }
+
+            function openReportFinish() {
+                request.request(url.openReport(vm.fileName), 'POST').then(function (data) {
+                    vm.fileName = '';
+                    $('#DataSetTablesModal').modal('hide');
+                });
+            }
+
             function saveReportFinish() {
-                saveQueue.saveLastElement();
-                var dataForSend = {
-                    reportName: vm.fileName
-                    // report:
-                };
-                request.request(url.saveReport, 'POST', dataForSend).then(function (data) {
+                // saveQueue.saveLastElement();
+                // var dataForSend = {
+                //     reportName: vm.fileName
+                //     // report:
+                // };
+                request.request(url.saveReport(vm.fileName), 'POST').then(function (data) {
                     vm.fileName = '';
                     $('#DataSetTablesModal').modal('hide');
                 });

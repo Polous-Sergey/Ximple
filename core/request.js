@@ -7,7 +7,6 @@
     http.$inject = ['$http', '$q', '$localStorage' , 'toastr'];
 
     function http($http, $q, $localStorage , toastr) {
-        console.log('create request service');
 
         return {
             get: function (url, data) {
