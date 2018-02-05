@@ -5,10 +5,10 @@
         .module('app')
         .controller('listElementsCtrl', listElementsCtrl);
 
-    listElementsCtrl.$inject = ['$scope', 'elementsModel', 'request', 'url', 'settingHelper', 'addElements', 'storage'];
+    listElementsCtrl.$inject = ['$scope', 'elementsModel', 'request', 'url', 'settingHelper', 'addElements', 'storage','toastr'];
 
     //dataServices
-    function listElementsCtrl($scope, elementsModel, request, url, settingHelper, addElements, storage) {
+    function listElementsCtrl($scope, elementsModel, request, url, settingHelper, addElements, storage, toastr) {
         this.$onInit = function () {
             var vm = this;
             vm.selectTableName = "";
@@ -54,13 +54,29 @@
                     }
                 },
                 addInValue: function () {
-                    this.curentFilter.firstPropertyList.push(this.tempFirstFilter);
-                    this.tempFirstFilter = '';
+                    if(this.tempFirstFilter == ''){
+
+                    }else {
+                        this.curentFilter.firstPropertyList.push(this.tempFirstFilter);
+                        this.tempFirstFilter = '';
+                    }
+
                     console.log(this.curentFilter);
                     console.log(vm.tableColumns)
                 },
                 addFilter: function () {
-                    this.filters.push(angular.copy(this.curentFilter));
+                    debugger
+                    if(this.curentFilter.firstPropertyList.length === 0 ||
+                        this.curentFilter.operation === null){
+                        toastr.error('Please check your filter parameters');
+                    }else{
+                        this.filters.push(angular.copy(this.curentFilter));
+                        console.log('true')
+                        vm.dataSetFilters.curentFilter.secondPropertyList=[];
+                        vm.dataSetFilters.curentFilter.firstPropertyList=[];
+                    }
+                    console.log(this.curentFilter);
+
                     console.log(vm.tableColumns)
                 }
             };
@@ -384,8 +400,10 @@
             }
 
             function setFiltersArr () {
+                vm.dataSetFilters.curentFilter.operation = null;
+                vm.dataSetFilters.tempFirstFilter = null;
                 if (vm.curentFilter.columnType === 'CHAR' ){
-                    vm.dataSetFilters.filterList = ['in', 'eq']
+                    vm.dataSetFilters.filterList = ['in', 'eq'];
                     vm.charOnly = false;
                 }else {
                     vm.dataSetFilters.filterList = ['between', 'in', 'bottom-percent', 'bottom-n', 'eq'];
