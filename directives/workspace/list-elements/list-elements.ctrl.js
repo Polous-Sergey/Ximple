@@ -5,10 +5,10 @@
         .module('app')
         .controller('listElementsCtrl', listElementsCtrl);
 
-    listElementsCtrl.$inject = ['$scope', 'elementsModel', 'request', 'url', 'settingHelper', 'addElements', 'storage'];
+    listElementsCtrl.$inject = ['$scope', 'elementsModel', 'request', 'url', 'settingHelper', 'addElements', 'storage','toastr'];
 
     //dataServices
-    function listElementsCtrl($scope, elementsModel, request, url, settingHelper, addElements, storage) {
+    function listElementsCtrl($scope, elementsModel, request, url, settingHelper, addElements, storage, toastr) {
         this.$onInit = function () {
             var vm = this;
             vm.selectTableName = "";
@@ -22,7 +22,7 @@
                 'directives/workspace/list-elements/grid/grid.html'
             ];
             vm.dataSetFilters = {
-                filterList: ['between', 'in', 'bottom-percent', 'bottom-n', 'eq'],
+                filterList: [],
                 filters: [],
                 flagTemplateValue: 0,
                 tempFirstFilter: '',
@@ -52,15 +52,32 @@
                             console.log(4);
                             break;
                     }
-                    console.log(vm.dataSetFilters);
                 },
                 addInValue: function () {
-                    this.curentFilter.firstPropertyList.push(this.tempFirstFilter);
-                    this.tempFirstFilter = '';
+                    if(this.tempFirstFilter == ''){
+
+                    }else {
+                        this.curentFilter.firstPropertyList.push(this.tempFirstFilter);
+                        this.tempFirstFilter = '';
+                    }
+
                     console.log(this.curentFilter);
+                    console.log(vm.tableColumns)
                 },
                 addFilter: function () {
-                    this.filters.push(angular.copy(this.curentFilter));
+                    debugger
+                    if(this.curentFilter.firstPropertyList.length === 0 ||
+                        this.curentFilter.operation === null){
+                        toastr.error('Please check your filter parameters');
+                    }else{
+                        this.filters.push(angular.copy(this.curentFilter));
+                        console.log('true')
+                        vm.dataSetFilters.curentFilter.secondPropertyList=[];
+                        vm.dataSetFilters.curentFilter.firstPropertyList=[];
+                    }
+                    console.log(this.curentFilter);
+
+                    console.log(vm.tableColumns)
                 }
             };
 
@@ -149,7 +166,6 @@
 
             function settingTableDataFromDataBase() {
                 request.request(url.tableMetadata + vm.selectTableName, 'GET').then(function (data) {
-                    console.log(data,'settingTableDataFromDataBase');
                     vm.tableColumns = data.data;
                     vm.tableColumns.forEach(function (item, i, arr) {
                         item.selected = true;
@@ -169,6 +185,7 @@
                 vm.dataSetFilters.filters = [];
                 vm.dataSetFilters.curentFilter.firstPropertyList = [];
                 vm.dataSetFilters.curentFilter.secondPropertyList = [];
+                vm.dataSetFilters.filters = [];
                 // vm.joinDataSet = [{
                 //     firstTable: null,
                 //     secondTable: null,
@@ -182,7 +199,6 @@
 
                 request.request(url.getConfigJoin, 'GET').then(function (data) {
                     vm.fromJoinTablesList = data.data;
-                    console.log('aaaaaaaaaaaaaaaaaaa', data.data)
                     addNewJoin();
                 });
                 vm.template = vm.templates[3];
@@ -245,7 +261,6 @@
                             item.checked = false;
                             item.type = 'AND';
                         });
-                        console.log(vm.columnsJoin,'qweqweqe');
                     } else {
                         vm.joinPopapMainData[mainKey].fieldsData = '';
                     }
@@ -255,7 +270,6 @@
             }
 
             function changeJoinColumn(mainKey, index, checked) {
-                console.log(mainKey, index,checked )
                 if(checked){
                     vm.joinDataSet[mainKey].selectColumns.push(vm.joinPopapMainData[mainKey].fieldsData[index]);
                 }else{
@@ -385,9 +399,30 @@
                 //vm.dataset = dataServices.dataSet;
             }
 
+            vm.setFiltersArr = setFiltersArr;
+            vm.filtersTab = filtersTab;
 
+
+            function filtersTab() {
+                vm.curentFilter = vm.tableColumns[0];
+                setFiltersArr ()
+            }
+
+            function setFiltersArr () {
+                vm.dataSetFilters.curentFilter.operation = null;
+                vm.dataSetFilters.tempFirstFilter = null;
+                if (vm.curentFilter.columnType === 'CHAR' ){
+                    vm.dataSetFilters.filterList = ['in', 'eq'];
+                    vm.charOnly = false;
+                }else {
+                    vm.dataSetFilters.filterList = ['between', 'in', 'bottom-percent', 'bottom-n', 'eq'];
+                    vm.charOnly = true;
+                }
+                vm.dataSetFilters.curentFilter.expression = vm.curentFilter.columnName
+            }
 
 
         }
+
     }
 })();

@@ -7,6 +7,12 @@
     top: 0;
     left: 0;
 }
+ .blue-headder {
+     background-color: #56529e;
+ }
+ .navbar-inverse {
+     border-color: #56529e;
+ }
  .header-navbar-fixed ul {
     list-style-type: none;
     margin: 0;
@@ -51,5 +57,9 @@
     line-height: 50px;
 }
  .nav-right-report > li > a{
+     color: white;
      padding: 0 15px 0 5px;
+ }
+ .navbar-inverse .navbar-nav>li>a {
+     color: white;
  }

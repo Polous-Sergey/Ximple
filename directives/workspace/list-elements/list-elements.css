@@ -1,6 +1,6 @@
 .container-list-elements{
     height: 100%;
-    background: #080808;
+    background: #ccc;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
