@@ -81,6 +81,15 @@
                 }
             };
 
+            vm.sortableOptionsFirstTable = {
+                connectWith: ".first-table-container",
+                'ui-floating': true
+            };
+            vm.sortableOptionsSecondTable = {
+                connectWith: ".second-table-container",
+                'ui-floating': true
+            };
+
             vm.addLabel = addLabel;
             vm.openGridPopup = openGridPopup;
             vm.addGrid = addGrid;

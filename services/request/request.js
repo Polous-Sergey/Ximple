@@ -24,6 +24,7 @@
                 console.log('result', dataResult);
                 defer.resolve(dataResult);
             }, function (dataError) {
+                console.log('err',dataError);
                 if(dataError.status == 401){
                     $state.go('login');
                 }

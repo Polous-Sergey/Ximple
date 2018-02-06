@@ -25,7 +25,10 @@
             joinDataSet: server + 'report/joinDataSet',
             getConfigJoin: server + 'metadata/joinTables',
             tableMetadata: server + 'metadata/columns?schemaName=CAPWD_DTA&tableName=',
-            saveReport: server + 'report/save',
+            // saveReport: server + 'report/save',
+            saveReport: function (name) {
+                return server + 'report/save?reportName=' + name
+            },
             createLabel: server + 'report/label',
             createGrid: server + 'report/grid',
             loadReport: server + 'report/open',
@@ -66,7 +69,10 @@
                 return server + 'report/table/' + id + '/columns';
             },
             addColumns: function (id) {
-                return server + 'report/table/'+ id + '/columns';
+                return server + 'report/table/' + id + '/columns';
+            },
+            openReport: function (name) {
+                return server + 'report/open?reportName='+ name;
             }
         };
     }
