@@ -7,7 +7,8 @@
         "angular-loading-bar",
         "ngAnimate",
         "toastr",
-        "ngStorage"
+        "ngStorage",
+        'ui.sortable'
     ]);
 
 })();

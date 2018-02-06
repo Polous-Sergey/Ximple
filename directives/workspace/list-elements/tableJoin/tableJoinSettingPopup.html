@@ -25,97 +25,49 @@
                         </button>
                     </div>
                     <div class="table-scroll">
-                        <div ng-repeat=" (key,item) in vm.joinDataSet ">
-                            <!--<p>Table {{key + 1}}</p>-->
-                            <table class="table table-hover">
+                        <div ng-repeat=" item in vm.joinDataSet ">
 
-                                <tr>
-                                    <th class="col-sm-1">Table 1</th>
-                                    <th class="col-sm-4"></th>
-                                    <th class="col-sm-7"></th>
-                                </tr>
-
-                                <tr>
-                                    <th class="col-sm-1">Position</th>
-                                    <th class="col-sm-4">Selected</th>
-                                    <th class="col-sm-7">Name</th>
-                                </tr>
-
-                                <tr ng-repeat="row in item.firstColumns track by $index">
-                                    <td>
-                                        <div class="position-container">
-                                            <div class="up-position" ng-click="vm.upRowPosition($index)"
-                                                 ng-hide="$first">
-                                                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="down-position" ng-click="vm.downRowPosition($index)"
-                                                 ng-hide="$last">
-                                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input
-                                                        type="checkbox" ng-model="row.selected">
-                                                {{::row.displayName}}
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <input type="text" class="form-control"
-                                                   ng-model="row.displayName">
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th class="col-sm-1">Table 2</th>
-                                    <th class="col-sm-4"></th>
-                                    <th class="col-sm-7"></th>
-                                </tr>
-
-                                <tr>
-                                    <th class="col-sm-1">Position</th>
-                                    <th class="col-sm-4">Selected</th>
-                                    <th class="col-sm-7">Name</th>
-                                </tr>
+                            <div class="table-heder">
+                                <span class="selected-header">Selected</span>
+                                <span class="name-header">Name</span>
+                            </div>
 
 
 
-                                <tr ng-repeat="row in item.secondColumns track by $index">
-                                    <td>
-                                        <div class="position-container">
-                                            <div class="up-position" ng-click="vm.upRowPosition($index)"
-                                                 ng-hide="$first">
-                                                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="down-position" ng-click="vm.downRowPosition($index)"
-                                                 ng-hide="$last">
-                                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input
-                                                        type="checkbox" ng-model="row.selected">
-                                                {{::row.displayName}}
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <input type="text" class="form-control"
-                                                   ng-model="row.displayName">
-                                        </div>
-                                    </td>
-                                </tr>
+                            <div ui-sortable="vm.sortableOptionsFirstTable" ng-model="item.firstColumns" class="first-table-container">
+                                <div ng-repeat="row in  item.firstColumns" class="column-table, row">
+                                    <div class="col-md-4 checkbox-table">
+                                        <label>
+                                            <input type="checkbox" ng-model="row.selected">
+                                            {{item.firstTable.tableName}}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" ng-model="row.displayName">
+                                    </div>
+                                </div>
+                            </div>
 
-                            </table>
+
+                            <div>
+                                <div>Selected</div>
+                                <div>Name</div>
+                            </div>
+
+                            <div ui-sortable="vm.sortableOptionsSecondTable" ng-model="item.secondColumns" class="second-table-container">
+                                <div ng-repeat="(firstTableKey, row) in  item.secondColumns" class="column-table, row">
+                                    <div class="col-md-4 checkbox-table">
+                                        <label>
+                                            <input type="checkbox" ng-model="row.selected">
+                                            {{item.secondTable.tableName}}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" ng-model="row.displayName">
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
