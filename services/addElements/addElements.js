@@ -73,9 +73,11 @@
 
                 function showTable(table) {
                     if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
+                        console.log('her if start (from data base)');
                         settingHelper.element.childrens.push(table);
                     }
                     else {
+                        console.log('her else start (from data base)');
                         for (var i = 0; i < modelReport.models.container.length; i++) {
                             if (modelReport.models.container[i].selected) {
                                 modelReport.models.container[i].elements.push(table);

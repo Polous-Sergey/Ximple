@@ -65,13 +65,11 @@
                     console.log(vm.tableColumns)
                 },
                 addFilter: function () {
-                    debugger
                     if(this.curentFilter.firstPropertyList.length === 0 ||
                         this.curentFilter.operation === null){
                         toastr.error('Please check your filter parameters');
                     }else{
                         this.filters.push(angular.copy(this.curentFilter));
-                        console.log('true')
                         vm.dataSetFilters.curentFilter.secondPropertyList=[];
                         vm.dataSetFilters.curentFilter.firstPropertyList=[];
                     }
@@ -110,6 +108,8 @@
             vm.selectNoneRow = selectNoneRow;
 
             vm.backPopup = backPopup;
+
+            vm.localSave = localSave;
 
             vm.table = {
                 column: '',
@@ -419,6 +419,10 @@
                     vm.charOnly = true;
                 }
                 vm.dataSetFilters.curentFilter.expression = vm.curentFilter.columnName
+            }
+
+            function localSave() {
+                console.log('local save is work')
             }
 
 

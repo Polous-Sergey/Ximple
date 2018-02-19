@@ -5,8 +5,8 @@
         .module('app')
         .controller('settingBarCtrl', settingBarCtrl);
 
-    settingBarCtrl.$inject = ['reportList', 'request', 'url', 'modelReport'];
-    function settingBarCtrl(reportList, request, url, modelReport) {
+    settingBarCtrl.$inject = ['reportList', 'request', 'url', 'modelReport', '$localStorage', 'settingHelper', '$rootScope'];
+    function settingBarCtrl(reportList, request, url, modelReport, $localStorage, settingHelper, $rootScope) {
         var vm = this;
         vm.templates = [
             'directives/workspace/setting-bar/reportList/reportList.html',
@@ -18,6 +18,8 @@
         vm.loadReport = loadReport;
         vm.saveReportJsonModal = saveReportJsonModal;
         vm.saveReportJson = saveReportJson;
+        vm.localSave = localSave;
+        vm.localLoad = localLoad;
 
         function showReportList() {
             vm.selectedItem = null;
@@ -49,11 +51,23 @@
             var obj = {
                 reportName: vm.reportingJsonName,
                 report:modelReport.models
-            }
+            };
             request.request(url.saveReportJson, 'POST', obj, null, headers).then(function (data) {
                 reportList.addReportName(obj.reportName);
                 $('#settingBarModal').modal('hide');
             })
+        }
+
+        function localSave() {
+            $localStorage.settingHelper = settingHelper;
+            $localStorage.modelReport = modelReport;
+        }
+        function localLoad() {
+            if($localStorage.settingHelper !== undefined && $localStorage.modelReport !== undefined){
+                settingHelper = $localStorage.settingHelper;
+                modelReport = $localStorage.modelReport;
+                $rootScope.$emit('loadStructure', $localStorage.modelReport);
+            }
         }
     }
 })(); 

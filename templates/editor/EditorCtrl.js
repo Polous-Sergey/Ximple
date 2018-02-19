@@ -15,6 +15,7 @@
         $scope.$watch(function () {
             return elementHelper.element
         }, function (table, oldTable) {
+            console.log('him wacher started');
             if (table !== null) {
                 for (var i = 0; i < vm.models.container.length; i++) {
                     if (vm.models.container[i].selected) {
@@ -49,9 +50,13 @@
 
         active();
         function active()  {
-            //vm.dataServices = dataServices;
             vm.models = modelReport.models;
-
         }
+
+        $rootScope.$on('loadStructure', function (event, data) {
+            // active();
+            vm.models = data.models;
+            console.log('root scope')
+        });
     }
 })();

@@ -33,7 +33,7 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                    <div class="size-block">
+                    <div class="size-block" ng-if="vm.typeElement == 1 || vm.typeElement == 2 || vm.typeElement == 3">
                         <h4>Size:</h4>
                         <div class="element-margin-block">
                             <div class="row">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="margin-block">
+                    <div class="margin-block" ng-if="vm.typeElement == 1">
                         <h4>Margin:</h4>
                         <div class="element-margin-block">
                             <div class="row">
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="padding-block">
+                    <div class="padding-block" ng-if="vm.typeElement == 1 || vm.typeElement == 2">
                         <h4>Padding:</h4>
                         <div class="element-padding-block">
                             <div class="row">
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border-block">
+                    <div class="border-block" ng-if="vm.typeElement == 1 || vm.typeElement == 2">
                         <h4>Border:</h4>
                         <div class="element-border-block">
                             <div class="row">
@@ -204,7 +204,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="background">
+                    <div class="background" ng-if="vm.typeElement == 1 || vm.typeElement == 2">
                         <div class="row">
                             <label class="col-sm-6">Background color</label>
                             <button class="col-sm-6 btn btn-xs" ng-style="{'background': vm.style['background-color']}"

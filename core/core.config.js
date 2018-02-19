@@ -15,7 +15,7 @@
                 url: '/login',
                 templateUrl: 'templates/login/login.html',
                 controller: 'LoginCtrl',
-                controllerAs: 'vm',
+                controllerAs: 'vm'
                 // resolve: {
                 //     initialData: function (initializeData) {
                 //         return initializeData.createNewReport();

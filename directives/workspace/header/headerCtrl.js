@@ -96,7 +96,7 @@
             }
 
             function saveReportFinish() {
-                // saveQueue.saveLastElement();
+                saveQueue.saveLastElement();
                 // var dataForSend = {
                 //     reportName: vm.fileName
                 //     // report:

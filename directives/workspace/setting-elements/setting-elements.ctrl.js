@@ -5,9 +5,9 @@
         .module('app')
         .controller('SettingCtrl', SettingCtrl);
 
-    SettingCtrl.$inject = ['$scope', 'settingHelper', 'deleteFac', 'request', 'url', 'saveQueue'];
+    SettingCtrl.$inject = ['$scope', '$rootScope', 'settingHelper', 'deleteFac', 'request', 'url', 'saveQueue'];
 
-    function SettingCtrl($scope, settingHelper, deleteFac, request, url, saveQueue) {
+    function SettingCtrl($scope, $rootScope, settingHelper, deleteFac, request, url, saveQueue) {
         var vm = this;
         vm.elements = {
             textAlign: [
@@ -22,6 +22,8 @@
         $scope.$watch(function () {
             return settingHelper
         }, function (newVal, oldVal) {
+            console.log('Setting halper wacher');
+            console.log('Setting halper wacher', newVal, oldVal);
             if (newVal.element !== null) {
                 vm.style = newVal.element.style;
             }
@@ -34,20 +36,36 @@
 
             if (newVal.element === null) return;
             saveQueue.saveElement(newVal, oldVal);
+
+
+            switch (settingHelper.container.type) {
+                case 'label':
+                    vm.typeElement = 1;
+                    break;
+                case 'grid':
+                    vm.typeElement = 2;
+                    break;
+                case 'table':
+                    vm.typeElement = 3;
+                    break;
+            }
+
+
         }, true);
 
 
-        $scope.$watch(function () {
-            return settingHelper.element
-        }, function (newVal, oldVal) {
-            // if(newVal.element.style !== oldVal.element.style && oldVal.element !== null){
-            //     console.warn('save data');
-            //     console.log(newVal.element);
-            //     console.log(oldVal.element);
-            // }
-            // console.log(newVal);
-            // console.log(oldVal);
-        });
+        // $scope.$watch(function () {
+        //     return settingHelper.element
+        // }, function (newVal, oldVal) {
+        //     console.log('setting helper element wacher');
+        //     // if(newVal.element.style !== oldVal.element.style && oldVal.element !== null){
+        //     //     console.warn('save data');
+        //     //     console.log(newVal.element);
+        //     //     console.log(oldVal.element);
+        //     // }
+        //     // console.log(newVal);
+        //     // console.log(oldVal);
+        // });
 
 
         function deleteElement() {
