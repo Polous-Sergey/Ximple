@@ -50,6 +50,9 @@
                 case 'grid':
                     gridCheck(newVal, oldVal);
                     break;
+                case 'table':
+                    tableCheck(newVal, oldVal);
+                    break;
             }
         }
 
@@ -113,6 +116,49 @@
             });
         }
 
+        // function tableSave(gridData) {
+        //     var copy = angular.copy(gridData.container);
+        //     var grid = {
+        //         id: copy.id,
+        //         children: []
+        //     };
+        //     copy.gridStructure.column.forEach(function (col) {
+        //         var colTemp = {
+        //             id: col.id,
+        //             properties: col.style
+        //         };
+        //         colTemp.properties['width'] += colTemp.properties['widthUnit'];
+        //         delete colTemp.properties['widthUnit'];
+        //         grid.children.push(colTemp);
+        //     });
+        //     copy.gridStructure.rows.forEach(function (row) {
+        //         var rowTemp = {
+        //             id: row.id,
+        //             properties: row.style
+        //         };
+        //         rowTemp.properties['height'] += rowTemp.properties['heightUnit'];
+        //         delete rowTemp.properties['heightUnit'];
+        //         grid.children.push(rowTemp);
+        //     });
+        //     copy.gridStructure.rows.forEach(function (row) {
+        //         row.cells.forEach(function (row) {
+        //             var cellTemp = {
+        //                 id: row.id,
+        //                 properties: row.style
+        //             };
+        //             cellTemp.properties['paddingTop'] += 'px';
+        //             cellTemp.properties['paddingRight'] += 'px';
+        //             cellTemp.properties['paddingBottom'] += 'px';
+        //             cellTemp.properties['paddingLeft'] += 'px';
+        //             grid.children.push(cellTemp);
+        //         });
+        //     });
+        //     return request.request(url.createGrid, "PUT", grid).then(function (data) {
+        //         console.log(data);
+        //         return data;
+        //     });
+        // }
+
         function labelCheck(newVal, oldVal) {
             if (newVal.element !== null) {
                 if (newVal.element.id === oldVal.element.id) return false;
@@ -126,6 +172,14 @@
                 if (newVal.container.id === oldVal.container.id) return false;
             }
             gridSave(oldVal);
+            tempElement = newVal;
+        }
+
+        function tableCheck(newVal, oldVal) {
+            if (newVal.element !== null) {
+                if (newVal.container.id === oldVal.container.id) return false;
+            }
+            tableSave(oldVal);
             tempElement = newVal;
         }
     }

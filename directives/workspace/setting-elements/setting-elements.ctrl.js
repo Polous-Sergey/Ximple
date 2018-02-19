@@ -35,6 +35,7 @@
             }
 
             if (newVal.element === null) return;
+            console.log('save started');
             saveQueue.saveElement(newVal, oldVal);
 
 

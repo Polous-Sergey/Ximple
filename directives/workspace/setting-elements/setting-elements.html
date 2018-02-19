@@ -23,6 +23,26 @@
                     </div>
                 </div>
             </div>
+            <div class="size-element" ng-if="vm.typeElement == 3">
+                <h4>Size:</h4>
+                <div class="element-margin-block">
+                    <div class="row">
+                        <label class="label-margin col-sm-6" for="width">Width: </label>
+                        <input type="number" class="col-sm-6"
+                               ng-model="vm.style['width']">
+                    </div>
+                </div>
+            </div>
+            <div class="size-element" ng-if="vm.typeElement == 3">
+                <h4>Size:</h4>
+                <div class="element-margin-block">
+                    <div class="row">
+                        <label class="label-margin col-sm-6" for="width">Width: </label>
+                        <input type="number" class="col-sm-6"
+                               ng-model="vm.style['width']">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion"
@@ -33,7 +53,7 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                    <div class="size-block" ng-if="vm.typeElement == 1 || vm.typeElement == 2 || vm.typeElement == 3">
+                    <div class="size-block" ng-if="vm.typeElement == 1 || vm.typeElement == 2">
                         <h4>Size:</h4>
                         <div class="element-margin-block">
                             <div class="row">
