@@ -64,18 +64,19 @@
                                 <label class="control-label">Rows</label>
 
                                 <select class="form-control input-sm"
-                                        ng-init="vm.dataSetFilters.curentFilter.expression = vm.tableColumns[0].columnName"
-                                        ng-model="vm.dataSetFilters.curentFilter.expression"
-                                        ng-options="row.columnName as  row.columnName for row in vm.tableColumns">
+                                        ng-model="vm.curentFilter"
+                                        ng-options="row as  row.columnName for row in vm.tableColumns"
+                                        ng-change="vm.setFiltersArr()">
                                 </select>
                             </div>
                             <div class="form-group form-group-sm col-sm-6">
                                 <label class="control-label">Operator</label>
                                 <select class="form-control input-sm"
-                                        ng-init="vm.dataSetFilters.curentFilter.operation = vm.dataSetFilters.filterList"
+                                        ng-init="vm.dataSetFilters.curentFilter.operation = null"
                                         ng-model="vm.dataSetFilters.curentFilter.operation"
                                         ng-options="operation for operation in vm.dataSetFilters.filterList"
                                         ng-change="vm.dataSetFilters.changeOperator()">
+                                    <option value="" disabled selected>Select operator</option>
                                 </select>
                             </div>
                             <div class="form-group form-group-sm col-sm-12">
@@ -88,25 +89,71 @@
                         <div class="col-sm-4" ng-if="vm.dataSetFilters.flagTemplateValue === 0">
                             <div class="form-group form-group-sm">
                                 <label class="control-label">Value</label>
-                                <input class="form-control" type="text"
-                                       ng-model="vm.dataSetFilters.curentFilter.firstPropertyList[0]"
-                                       placeholder="Value 1">
+
+
+
+                                <input
+                                        ng-if="!vm.charOnly && vm.curentFilter.columnType !== 'DATE' "
+                                        class="form-control" type="text"
+                                        ng-model="vm.dataSetFilters.curentFilter.firstPropertyList[0]"
+                                        placeholder="Value 1">
+
+                                <input
+                                        ng-if="vm.curentFilter.columnType === 'DATE'"
+                                        class="form-control" type="date"
+                                        ng-model="vm.dataSetFilters.curentFilter.firstPropertyList[0]"
+                                        placeholder="Value 1">
+
+                                <input
+                                        ng-if="vm.charOnly && vm.curentFilter.columnType !== 'DATE' "
+                                        type="number"
+                                        class="form-control"
+                                        ng-model="vm.dataSetFilters.curentFilter.firstPropertyList[0]"
+                                        placeholder="Value 1">
                             </div>
                             <div class="form-group form-group-sm">
-                                <input class="form-control" type="text"
-                                       ng-model="vm.dataSetFilters.curentFilter.secondPropertyList[0]"
-                                       placeholder="Value 2">
+                                <input
+                                        ng-if="!vm.charOnly && vm.curentFilter.columnType !== 'DATE'"
+                                        class="form-control" type="text"
+                                        ng-model="vm.dataSetFilters.curentFilter.secondPropertyList[0]"
+                                        placeholder="Value 2">
+
+                                <input
+                                        ng-if="vm.curentFilter.columnType === 'DATE'"
+                                        class="form-control" type="date"
+                                        ng-model="vm.dataSetFilters.curentFilter.secondPropertyList[0]"
+                                        placeholder="Value 2">
+
+                                <input
+                                        ng-if="vm.charOnly && vm.curentFilter.columnType !== 'DATE' "
+                                        type="number"
+                                        class="form-control"
+                                        ng-model="vm.dataSetFilters.curentFilter.secondPropertyList[0]"
+                                        placeholder="Value 2">
                             </div>
                         </div>
                         <div class="col-sm-4" ng-if="vm.dataSetFilters.flagTemplateValue === 1">
                             <div class="form-group form-group-sm">
                                 <label class="control-label">Value</label>
-                                <input class="form-control" type="text"
+                                <input
+                                        ng-if="!vm.charOnly && vm.curentFilter.columnType !== 'DATE'"
+                                        class="form-control" type="text"
+                                        ng-model="vm.dataSetFilters.tempFirstFilter"
+                                        placeholder="Value">
+
+                                <input ng-if="vm.charOnly && vm.curentFilter.columnType !== 'DATE' "
+                                       class="form-control" type="number"
+                                       ng-model="vm.dataSetFilters.tempFirstFilter"
+                                       placeholder="Value">
+
+                                <input ng-if="vm.curentFilter.columnType === 'DATE'"
+                                       class="form-control" type="date"
                                        ng-model="vm.dataSetFilters.tempFirstFilter"
                                        placeholder="Value">
                             </div>
                             <div class="form-group form-group-sm">
-                                <button type="button" class="btn btn-default" ng-click="vm.dataSetFilters.addInValue()">
+                                <button type="button" class="btn btn-default"
+                                        ng-click="vm.dataSetFilters.addInValue()">
                                     Add value
                                 </button>
                             </div>
@@ -119,7 +166,7 @@
                         </div>
                     </div>
                     <div class="row" ng-if="vm.dataSetFilters.filters.length > 0">
-
+                        <div class="table-scroll" style="max-height: 300px; padding: 0 20px;">
                             <table class="table">
                                 <caption>List of filters</caption>
                                 <thead>
@@ -135,11 +182,11 @@
                                     <th>{{filter.expression}}</th>
                                     <td>{{filter.operation}}</td>
                                     <td>{{filter.firstPropertyList}}</td>
-                                    <td>{{filter.secondPropertyList}}</td>
+                                    <td><span ng-if="filter.secondPropertyList.length > 0">{{filter.secondPropertyList}}</span></td>
                                 </tr>
                                 </tbody>
                             </table>
-
+                        </div>
                     </div>
                 </div>
             </div>
