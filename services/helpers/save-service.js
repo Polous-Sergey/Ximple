@@ -51,7 +51,7 @@
                     gridCheck(newVal, oldVal);
                     break;
                 case 'table':
-                    tableCheck(newVal, oldVal);
+                    // tableCheck(newVal, oldVal);
                     break;
             }
         }

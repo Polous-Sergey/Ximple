@@ -56,6 +56,7 @@
 
         function labelStyleModel() {
             return {
+                'width': 100,
                 'marginLeft': 0,
                 'marginTop': 0,
                 'marginRight': 0,

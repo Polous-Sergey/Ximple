@@ -112,6 +112,8 @@
 
         function foreacerFunc2(data) {
 
+            standartFilters =[];
+
             var companyId =  user.getUser().userCompany;
 
             var values = {
@@ -141,7 +143,7 @@
 
         function tableJoin(joinData, filters) {
 
-            standartFilters = [];
+            // standartFilters = [];
 
             joinData.forEach(function (item) {
                 foreacerFunc2(item.firstTable.tableName);

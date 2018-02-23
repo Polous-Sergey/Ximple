@@ -36,8 +36,6 @@
 
             if (newVal.element === null) return;
             console.log('save started');
-            saveQueue.saveElement(newVal, oldVal);
-
 
             switch (settingHelper.container.type) {
                 case 'label':
@@ -51,6 +49,9 @@
                     break;
             }
 
+            console.log('vm.typeElement', vm.typeElement);
+
+            saveQueue.saveElement(newVal, oldVal);
 
         }, true);
 

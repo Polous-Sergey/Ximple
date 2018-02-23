@@ -18,61 +18,61 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="DataSetColumns">
-                    <div class="container-button-select-all">
-                        <button type="button" ng-click="vm.selectAllRow(true)" class="btn btn-default">Select All
-                        </button>
-                        <button type="button" ng-click="vm.selectNoneRow(true)" class="btn btn-default">Select
-                            None
-                        </button>
-                    </div>
-                    <div class="table-scroll">
-                        <div ng-repeat=" item in vm.joinDataSet ">
-
-                            <div class="table-heder">
-                                <span class="selected-header">Selected</span>
-                                <span class="name-header">Name</span>
-                            </div>
-
-
-
-                            <div ui-sortable="vm.sortableOptionsFirstTable" ng-model="item.firstColumns" class="first-table-container">
-                                <div ng-repeat="row in  item.firstColumns" class="column-table, row">
-                                    <div class="col-md-4 checkbox-table">
-                                        <label>
-                                            <input type="checkbox" ng-model="row.selected">
-                                            {{item.firstTable.tableName}}
-                                        </label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" ng-model="row.displayName">
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div>
-                                <div>Selected</div>
-                                <div>Name</div>
-                            </div>
-
-                            <div ui-sortable="vm.sortableOptionsSecondTable" ng-model="item.secondColumns" class="second-table-container">
-                                <div ng-repeat="(firstTableKey, row) in  item.secondColumns" class="column-table, row">
-                                    <div class="col-md-4 checkbox-table">
-                                        <label>
-                                            <input type="checkbox" ng-model="row.selected">
-                                            {{item.secondTable.tableName}}
-                                        </label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" ng-model="row.displayName">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
+                <div class="container-button-select-all">
+                    <button type="button" ng-click="vm.selectAllRow(true)" class="btn btn-default">Select All
+                    </button>
+                    <button type="button" ng-click="vm.selectNoneRow(true)" class="btn btn-default">Select
+                        None
+                    </button>
                 </div>
+                <div class="table-scroll">
+                    <div ng-repeat=" item in vm.joinDataSet ">
+
+                        <div class="table-heder">
+                            <span class="selected-header">Selected</span>
+                            <span class="name-header">Name</span>
+                        </div>
+
+
+
+                        <div ui-sortable="vm.sortableOptionsFirstTable" ng-model="item.firstColumns" class="first-table-container">
+                            <div ng-repeat="row in  item.firstColumns" class="column-table, row">
+                                <div class="col-md-4 checkbox-table">
+                                    <label>
+                                        <input type="checkbox" ng-model="row.selected">
+                                        {{item.firstTable.tableName}}
+                                    </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="row.displayName">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div>Selected</div>
+                            <div>Name</div>
+                        </div>
+
+                        <div ui-sortable="vm.sortableOptionsSecondTable" ng-model="item.secondColumns" class="second-table-container">
+                            <div ng-repeat="(firstTableKey, row) in  item.secondColumns" class="column-table, row">
+                                <div class="col-md-4 checkbox-table">
+                                    <label>
+                                        <input type="checkbox" ng-model="row.selected">
+                                        {{item.secondTable.tableName}}
+                                    </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="row.displayName">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
                 <div role="tabpanel" class="tab-pane" id="DataSetFilters">
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-sm-8">

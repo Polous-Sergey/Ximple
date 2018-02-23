@@ -4,7 +4,7 @@
     <input class="label-input" ng-class="vm.element.selected ? 'selectedContainer' : ''" ng-model="vm.element.value"
            type="text"
            ng-style="{
-                'width':'100%',
+                'width': vm.element.style['width'] + '%',
                 'margin-top': vm.element.style['marginTop'] + 'px',
                 'margin-right': vm.element.style['marginRight'] + 'px',
                 'margin-bottom': vm.element.style['marginBottom'] + 'px',

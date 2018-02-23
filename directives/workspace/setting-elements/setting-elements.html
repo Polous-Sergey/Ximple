@@ -4,36 +4,36 @@
         <!--<button class="btn btn-info" type="submit" ng-click="vm.saveStyle()">Save changes</button>-->
     <!--</div>-->
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" class="collapsed" role="button" data-toggle="collapse"
-                 data-parent="#accordion"
-                 href="#collapseElement" aria-expanded="false" aria-controls="collapseElement">
-                <h4 class="panel-title">
-                    Element
-                </h4>
-            </div>
-            <div id="collapseElement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                    <div class="font-color">
-                        <div class="row">
-                            <p class="col-sm-6">Delete:</p>
-                            <button class="col-sm-6 btn btn-xs" ng-click="vm.deleteElement()" type="button">Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="size-element" ng-if="vm.typeElement == 3">
-                <h4>Size:</h4>
-                <div class="element-margin-block">
-                    <div class="row">
-                        <label class="label-margin col-sm-6" for="width">Width: </label>
-                        <input type="number" class="col-sm-6"
-                               ng-model="vm.style['width']">
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading" role="tab" class="collapsed" role="button" data-toggle="collapse"-->
+                 <!--data-parent="#accordion"-->
+                 <!--href="#collapseElement" aria-expanded="false" aria-controls="collapseElement">-->
+                <!--<h4 class="panel-title">-->
+                    <!--Element-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div id="collapseElement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="panel-body">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="font-color">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<p class="col-sm-6">Delete:</p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<button class="col-sm-6 btn btn-xs" ng-click="vm.deleteElement()" type="button">Delete&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="size-element" ng-if="vm.typeElement == 3 || vm.typeElement == 1">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h4>Size:</h4>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="element-margin-block">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<label class="label-margin col-sm-6" for="width">Width: </label>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="number" class="col-sm-6"&ndash;&gt;-->
+                               <!--&lt;!&ndash;ng-model="vm.style['width']">&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion"
                  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -43,7 +43,7 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                    <div class="size-block" ng-if="vm.typeElement == 1 || vm.typeElement == 2">
+                    <div class="size-block" ng-if="vm.typeElement == 2">
                         <h4>Size:</h4>
                         <div class="element-margin-block">
                             <div class="row">
@@ -55,6 +55,16 @@
                                 <label class="label-margin col-sm-6" for="height">Height:</label>
                                 <input id="height" type="number" class="col-sm-6"
                                        ng-model="vm.rowStyle['height']">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="size-block" ng-if="vm.typeElement == 1 ||vm.typeElement ==3">
+                        <h4>Size:</h4>
+                        <div class="element-margin-block">
+                            <div class="row">
+                                <label class="label-margin col-sm-6" for="width">Width: </label>
+                                <input id="width" type="number" class="col-sm-6"
+                                       ng-model="vm.style['width']">
                             </div>
                         </div>
                     </div>
