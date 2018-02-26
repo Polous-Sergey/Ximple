@@ -72,6 +72,7 @@
                 }
 
                 function showTable(table) {
+                    console.log(table);
                     if (data.structure.parentId !== null && data.structure.parentId !== undefined) {
                         console.log('her if start (from data base)');
                         settingHelper.element.childrens.push(table);

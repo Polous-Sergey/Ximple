@@ -59,8 +59,14 @@
         }
 
         function tableModelDataSet(obj, dataSetId, tableColumns) {
+            console.log('obj', obj);
+            console.log('dataSetId', dataSetId);
+            console.log('tableColumns', tableColumns);
+
             var deleteColumns = [];
+            debugger;
             function createTable() {
+                console.log('Create table function is start (element-model.js)');
                 var tableStructure = {
                     head: [],
                     body: [],
@@ -107,7 +113,7 @@
                         var columnItem = {
                             id: cell.id,
                             rowType: 'body',
-                            value: '',
+                            value: '<' + cell.childrens[0].resultSetColumn + '>',
                             style: defaultStyleModel.tableCellModel()
                         };
                         rowBlock.row.push(columnItem);

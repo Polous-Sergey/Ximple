@@ -38,11 +38,61 @@
             <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion"
                  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <h4 class="panel-title">
-                    Container
+                    Style for {{vm.typeElement}}
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
+                    <div class="font-align-block" ng-if="vm.typeElement == 1 || vm.typeElement == 3">
+                        <h4>Font-align:</h4>
+                        <div class="row" ng-if="vm.typeElement == 1">
+                            <label class="radio-inline" ng-repeat="item in vm.elements.textAlign">
+                                <input type="radio" ng-model="vm.style['textAlign']" ng-value="item"
+                                       name="inlineRadioOptions" id="inlineRadio1"> {{item}}
+                            </label>
+                        </div>
+                        <div class="row" ng-if="vm.typeElement == 3">
+                            <label class="radio-inline" ng-repeat="item in vm.elements.textAlign">
+                                <input type="radio" ng-model="vm.style['text-align']" ng-value="item"
+                                       name="inlineRadioOptions" id="inlineRadio1"> {{item}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="font-color" ng-if="vm.typeElement == 1 || vm.typeElement == 3">
+                        <div class="row">
+                            <label class="col-sm-6">Color:</label>
+                            <input class="col-sm-6 btn btn-xs" style="background: {{vm.style['color']}}" colorpicker
+                                   type="text" colorpicker-position="bottom" ng-model="vm.style['color']">
+                            </input>
+                        </div>
+                    </div>
+                    <div class="font-size-block" ng-if="vm.typeElement == 1 || vm.typeElement == 3">
+                        <div class="row" ng-if="vm.typeElement == 1">
+                            <label class="col-sm-6" for="font-size">Font-size</label>
+                            <input type="number" class="col-sm-6" id="font-size"
+                                   ng-model="vm.style['fontSize']">
+                        </div>
+                        <div class="row" ng-if="vm.typeElement == 3">
+                            <label class="col-sm-6" for="font-size">Font-size</label>
+                            <input type="number" class="col-sm-6" id="font-size"
+                                   ng-model="vm.style['font-size']">
+                        </div>
+                    </div>
+                    <div class="font-weight-block" ng-if="vm.typeElement == 1 || vm.typeElement == 3">
+                        <div class="row">
+                            <label class="col-sm-6">Font-weight</label>
+                            <button type="button" class="btn btn-default" aria-label="Left Align"
+                                    ng-click="vm.style['fontWeight'] === 'bold'? vm.style['fontWeight'] = 'normal': vm.style['fontWeight'] = 'bold'"
+                                    ng-class="vm.style['fontWeight'] === 'bold'? 'active': ''">
+                                <span class="glyphicon glyphicon glyphicon-bold" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" aria-label="Left Align"
+                                    ng-click="vm.style['fontStyle'] === 'italic'? vm.style['fontStyle'] = 'normal': vm.style['fontStyle'] = 'italic'"
+                                    ng-class="vm.style['fontStyle'] === 'italic'? 'active': ''">
+                                <span class="glyphicon glyphicon glyphicon-italic" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
                     <div class="size-block" ng-if="vm.typeElement == 2">
                         <h4>Size:</h4>
                         <div class="element-margin-block">
@@ -236,57 +286,57 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingTwo" class="collapsed" role="button" data-toggle="collapse"
-                 data-parent="#accordion"
-                 href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <h4 class="panel-title">
-                    Font
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                    <div class="font-align-block">
-                        <h4>Font-align:</h4>
-                        <div class="row">
-                            <label class="radio-inline" ng-repeat="item in vm.elements.textAlign">
-                                <input type="radio" ng-model="vm.style['textAlign']" ng-value="item"
-                                       name="inlineRadioOptions" id="inlineRadio1"> {{item}}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="font-color">
-                        <div class="row">
-                            <label class="col-sm-6">Color:</label>
-                            <input class="col-sm-6 btn btn-xs" style="background: {{vm.style['color']}}" colorpicker
-                                   type="text" colorpicker-position="bottom" ng-model="vm.style['color']">
-                            </input>
-                        </div>
-                    </div>
-                    <div class="font-size-block">
-                        <div class="row">
-                            <label class="col-sm-6" for="font-size">Font-size</label>
-                            <input type="number" class="col-sm-6" id="font-size"
-                                   ng-model="vm.style['fontSize']">
-                        </div>
-                    </div>
-                    <div class="font-weight-block">
-                        <div class="row">
-                            <label class="col-sm-6">Font-weight</label>
-                            <button type="button" class="btn btn-default" aria-label="Left Align"
-                                    ng-click="vm.style['fontWeight'] === 'bold'? vm.style['fontWeight'] = 'normal': vm.style['fontWeight'] = 'bold'"
-                                    ng-class="vm.style['fontWeight'] === 'bold'? 'active': ''">
-                                <span class="glyphicon glyphicon glyphicon-bold" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default" aria-label="Left Align"
-                                    ng-click="vm.style['fontStyle'] === 'italic'? vm.style['fontStyle'] = 'normal': vm.style['fontStyle'] = 'italic'"
-                                    ng-class="vm.style['fontStyle'] === 'italic'? 'active': ''">
-                                <span class="glyphicon glyphicon glyphicon-italic" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading" role="tab" id="headingTwo" class="collapsed" role="button" data-toggle="collapse"-->
+                 <!--data-parent="#accordion"-->
+                 <!--href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
+                <!--<h4 class="panel-title">-->
+                    <!--Font-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">-->
+                <!--<div class="panel-body">-->
+                    <!--&lt;!&ndash;<div class="font-align-block">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<h4>Font-align:</h4>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<label class="radio-inline" ng-repeat="item in vm.elements.textAlign">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="radio" ng-model="vm.style['textAlign']" ng-value="item"&ndash;&gt;-->
+                                       <!--&lt;!&ndash;name="inlineRadioOptions" id="inlineRadio1"> {{item}}&ndash;&gt;-->
+                            <!--&lt;!&ndash;</label>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="font-color">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<label class="col-sm-6">Color:</label>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input class="col-sm-6 btn btn-xs" style="background: {{vm.style['color']}}" colorpicker&ndash;&gt;-->
+                                   <!--&lt;!&ndash;type="text" colorpicker-position="bottom" ng-model="vm.style['color']">&ndash;&gt;-->
+                            <!--&lt;!&ndash;</input>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="font-size-block">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<label class="col-sm-6" for="font-size">Font-size</label>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="number" class="col-sm-6" id="font-size"&ndash;&gt;-->
+                                   <!--&lt;!&ndash;ng-model="vm.style['fontSize']">&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="font-weight-block">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<label class="col-sm-6">Font-weight</label>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<button type="button" class="btn btn-default" aria-label="Left Align"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;ng-click="vm.style['fontWeight'] === 'bold'? vm.style['fontWeight'] = 'normal': vm.style['fontWeight'] = 'bold'"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;ng-class="vm.style['fontWeight'] === 'bold'? 'active': ''">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon glyphicon-bold" aria-hidden="true"></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<button type="button" class="btn btn-default" aria-label="Left Align"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;ng-click="vm.style['fontStyle'] === 'italic'? vm.style['fontStyle'] = 'normal': vm.style['fontStyle'] = 'italic'"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;ng-class="vm.style['fontStyle'] === 'italic'? 'active': ''">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon glyphicon-italic" aria-hidden="true"></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>
