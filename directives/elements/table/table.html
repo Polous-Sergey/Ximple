@@ -22,7 +22,9 @@
                        ng-click="vm.focusContainer(cell, vm.element); $event.stopPropagation();"
                        ng-style="{'text-align': cell.style['text-align'],
                               'color': cell.style['color'],
-                              'font-size': cell.style['font-size']}"/>
+                              'font-size': cell.style['font-size'],
+                              'font-weight': cell.style['fontWeight'],
+                              'font-style': cell.style['fontStyle']}"/>
             </th>
         </tr>
         <!--Table Body -->
@@ -42,7 +44,9 @@
                 <input ng-model="cell.value" type="text"
                        ng-style="{ 'text-align': cell.style['text-align'],
                                'color': cell.style['color'],
-                               'font-size': cell.style['font-size']}" ng-disabled="true" disabled="true"/>
+                               'font-size': cell.style['font-size'],
+                               'font-weight': cell.style['fontWeight'],
+                               'font-style': cell.style['fontStyle']}" ng-disabled="true" disabled="true"/>
             </td>
         </tr>
     </table>

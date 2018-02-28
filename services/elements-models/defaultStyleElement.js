@@ -29,7 +29,9 @@
                 'heightUnit': 'px',
                 'font-size': 14,
                 'color': '#000000',
-                'text-align': 'center'
+                'text-align': 'center',
+                'fontWeight': 'normal',
+                'fontStyle': 'normal'
             }
         }
 

@@ -27,4 +27,9 @@
     height: calc(100vh - 50px);
 }
 
-
+/*Header nav style*/
+.header-main-style a {
+    font-size: 18px;
+    /*padding: px;*/
+}
+/*//////////////////////*/

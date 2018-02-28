@@ -1,20 +1,55 @@
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top header-main-style">
         <div class="container-fluid blue-headder">
+
             <div class="navbar-header">
-                <!--<a class="navbar-brand" href="#">Reporting.</a>-->
-                <img src="content/logo.gif" alt="" style="width: 100px">
+                <img src="content/logo.gif" alt="" style="width: 100px;">
+                <!--<a class="navbar-brand" href="#">Brand</a>-->
             </div>
 
-            <ul class="nav navbar-nav navbar-right nav-right-report">
-                <li ng-click="vm.logout()" style="float:right"><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-                <li ng-click="vm.openReport()" style="float:right"><a href="#"><i class="fa fa-folder-open" aria-hidden="true"></i></a></li>
-                <li ng-click="vm.saveReport()" style="float:right"><a href="#"><i class="fa fa-floppy-o" aria-hidden="true"></i></a></li>
-                <li ng-click="vm.showSaveReportPopup()" style="float:right"><a href="#"><i class="fa fa-eye"  aria-hidden="true"></i></a></li>
-            </ul>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" ng-click="vm.showSaveReportPopup()">Preview report</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Save report</a></li>
+                            <li><a href="#">Load report</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">New report</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a>{{vm.user.userName}}</a>
+                    </li>
+                    <li ng-click="vm.logout()" style="float:right">
+                        <a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!--<div class="navbar-header">-->
+                <!--&lt;!&ndash;<a class="navbar-brand" href="#">Reporting.</a>&ndash;&gt;-->
+                <!--<img src="content/logo.gif" alt="" style="width: 100px">-->
+            <!--</div>-->
+
+            <!--<ul class="nav navbar-nav navbar-right nav-right-report">-->
+                <!--<li ng-click="vm.logout()" style="float:right"><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>-->
+                <!--<li ng-click="vm.openReport()" style="float:right"><a href="#"><i class="fa fa-folder-open" aria-hidden="true"></i></a></li>-->
+                <!--<li ng-click="vm.saveReport()" style="float:right"><a href="#"><i class="fa fa-floppy-o" aria-hidden="true"></i></a></li>-->
+                <!--<li ng-click="vm.showSaveReportPopup()" style="float:right"><a href="#"><i class="fa fa-eye"  aria-hidden="true"></i></a></li>-->
+            <!--</ul>-->
         </div>
     </nav>
 
-<div id="DataSetTablesModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-     aria-labelledby="gridSystemModalLabel">
-    <div class="dive" ng-include="vm.template"></div>
-</div>
+<!--<div id="DataSetTablesModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"-->
+     <!--aria-labelledby="gridSystemModalLabel">-->
+    <!--<div class="dive" ng-include="vm.template"></div>-->
+<!--</div>-->

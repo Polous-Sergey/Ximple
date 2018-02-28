@@ -10,6 +10,8 @@
     function headerCtrl(request, url, $window, saveQueue, user) {
         this.$onInit = function () {
             var vm = this;
+            vm.user = user.getUser();
+            console.log('user', vm.user);
             vm.fileName = '';
             vm.selectedTableName = '';
             vm.selectedTable = {};
@@ -25,52 +27,6 @@
             vm.showReports = showReports;
             vm.showSaveReportPopup = showSaveReportPopup;
             vm.logout = logout;
-
-
-
-            // vm.dataSetFilters = {
-            //     filterList: ['between', 'in', 'bottom-percent', 'bottom-n'],
-            //     filters: [],
-            //     flagTemplateValue: 0,
-            //     tempFirstFilter: '',
-            //     curentFilter: {
-            //         operation: '',
-            //         expression: '',
-            //         firstPropertyList: [],
-            //         secondPropertyList: []
-            //     },
-            //     changeOperator: function () {
-            //         switch (this.curentFilter.operation) {
-            //             case this.filterList[0]:
-            //                 this.flagTemplateValue = 0;
-            //                 console.log(1);
-            //                 break;
-            //             case this.filterList[1]:
-            //                 this.flagTemplateValue = 1;
-            //                 this.curentFilter.secondPropertyList = [];
-            //                 this.curentFilter.firstPropertyList = [];
-            //                 break;
-            //             case this.filterList[2]:
-            //                 this.flagTemplateValue = 0;
-            //                 console.log(3);
-            //                 break;
-            //             case this.filterList[3]:
-            //                 this.flagTemplateValue = 0;
-            //                 console.log(4);
-            //                 break;
-            //         }
-            //         console.log(vm.dataSetFilters);
-            //     },
-            //     addInValue: function () {
-            //         this.curentFilter.firstPropertyList.push(this.tempFirstFilter);
-            //         this.tempFirstFilter = '';
-            //         console.log(this.curentFilter);
-            //     },
-            //     addFilter: function () {
-            //         this.filters.push(angular.copy(this.curentFilter));
-            //     }
-            // };
-
 
             vm.reportFormatType = ['html', 'xlsx', 'xls', 'pdf'];
             vm.saveReportObj = {
