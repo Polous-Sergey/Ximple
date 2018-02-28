@@ -227,7 +227,7 @@
         }
 
         function gridModel(data) {
-            console.log(data);
+            console.log('grid data from server', data);
 
             function createGrid() {
                 var gridStructure = {
@@ -244,6 +244,7 @@
                     }
                 }
 
+                console.log('Grid Structure', gridStructure);
                 return gridStructure;
             }
 
